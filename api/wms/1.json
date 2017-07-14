@@ -1,0 +1,64 @@
+{
+    "orderCode":"JD20170712600305100521",
+    "ticketNum":"12",
+    "warehouseCode":"6369",
+    "goodsList":[
+        {
+           "goodsCode":"1001123",
+           "quantity":4,
+           "price":25.6     
+        },
+        {
+           "goodsCode":"1005749",
+           "quantity":5,
+           "price":12.5     
+        }
+    ]
+}
+
+{
+    "orderCode":"JD20170712600305100522",
+    "ticketNum":"13",
+    "goodsList":[
+        {
+           "goodsCode":"1001123",
+           "quantity":10     
+        },
+        {
+           "goodsCode":"1005750",
+           "quantity":5    
+        }
+    ]
+}
+
+{
+    "100001":20,
+    "100002":20
+}
+
+
+{
+    "batchNum":"25544",
+    "orderList":[
+        {
+            "orderCode":"JD20170712600305100522",
+            "goodsList":[
+                {
+                    "goodsCode":"10001",
+                    "needQuantity":20,
+                    "realQuantity":12,
+                    "lotList":[
+                        {
+                            "lotNum":"25445",
+                            "stockQty":6
+                        },
+                        {
+                            "lotNum":"25446",
+                            "stockQty":6
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
