@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>API DOC</title>
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
@@ -35,7 +35,7 @@
     //  }
     // },
     alias: {
-    '/changelog': 'https://raw.githubusercontent.com/QingWei-Li/docsify/master/CHANGELOG'
+    '/changelog': 'https://raw.githubusercontent.com/workoss/apidoc/master/CHANGELOG'
     },
     // themeColor: '#3F51B5',
     autoHeader: true,// 同时设置 loadSidebar 和 autoHeader 后，可以根据 _sidebar.md 的内容自动为每个页面增加标题
@@ -61,7 +61,7 @@
     plugins: [
       function(hook, vm) {
         hook.beforeEach(function (html) {
-          var url = 'https://github.com/QingWei-Li/docsify/blob/master/docs/' + vm.route.file
+          var url = 'https://raw.githubusercontent.com/workoss/apidoc/master/' + vm.route.file
           var editHtml = '[:memo: Edit Document](' + url + ')\n'
           return html
             + '\n----\n'
