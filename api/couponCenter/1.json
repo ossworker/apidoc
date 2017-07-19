@@ -1,0 +1,13 @@
+{
+    "channelCodes":[
+        "WXM_6369","DZG_6369"
+    ],
+    "customerCode":"15dd20b21b3742889456d378932b7647",
+    "source":"mobile-wechat",
+    "callUrl":"https://weixin.yifengx.com/JkrOauth2Servlet?serverNumber=gh_e1ecec31ee0e&backUrl=https://wx-oss.yifengx.com/wxshop/index.html?app=weixin?route?/goods/1014164"
+}
+
+{
+    "coupon":{"beginDate":1499875201000,"desc":"全场商品可用","endDate":1501516799000,"ruleDesc":"","templateId":"596719e647422336a255ea58","title":"满100减99","type":"ALL","value":99.00}
+}
+

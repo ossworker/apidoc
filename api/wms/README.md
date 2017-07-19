@@ -31,6 +31,7 @@ version 1.0.0
 |goodsList[i].goodsCode|string|是|商品编码|
 |goodsList[i].quantity|string|是|商品数量|
 |goodsList[i].price|number|是|商品单价|
+|goodsList[i].orderQuantity|number|是|订单商品数量|
 
 
 - **响应结果**
@@ -65,11 +66,13 @@ version 1.0.0
         {
            "goodsCode":"1001123",
            "quantity":4,
+           "orderQuantity":4,
            "price":25.6     
         },
         {
            "goodsCode":"1005749",
            "quantity":5,
+           "orderQuantity":6,
            "price":12.5     
         }
     ]
@@ -114,8 +117,9 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----:|:----:|:----:|:----:|
-|map.key|string|10001|商品编码|
-|map.value|number|20|库存数量|
+|warehouseCode|string|c018|仓库编码|
+|goodsCodes.key|string|10001|商品编码|
+|goodsCodes.value|number|20|库存数量|
 
 
 
@@ -133,19 +137,22 @@ version 1.0.0
 入参示例: 
 ```json
 {
-	"warehouseCode":"C108",
+	"warehouseCode":"C018",
 	"goodsCodes":[
-        "100001","100002"
-    ]
+	"1001123","1010360"
+	]
 }
 ```
 
 返回结果
 ```json
 
- {
-    "100001":20,
-    "100002":20
+{
+    "warehouseCode": "C018",
+    "goodsCodes": {
+        "1001123": 47814,
+        "1010360": 6330
+    }
 }
 
 ```
