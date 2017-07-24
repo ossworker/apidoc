@@ -15,7 +15,7 @@ version 1.0.0
   
 
 - **接口信息**  
-> **接口地址：** 
+> **接口地址：**  
 > **提交方式：** POST,GET  
 > **方法名称：**   
   
@@ -26,7 +26,7 @@ version 1.0.0
 |:----:|:----:|:----:|:----:|
 |orderCode|string|是|订单编号|
 |ticketNum|string|是|小票号|
-|warehouseCode|string|是|仓库编号6369|
+|warehouseCode|string|是|仓库编号C018|
 |goodsList|array|是|订单商品列表|
 |goodsList[i].goodsCode|string|是|商品编码|
 |goodsList[i].quantity|string|是|商品数量|
@@ -61,7 +61,7 @@ version 1.0.0
 {
     "orderCode":"JD20170712600305100521",
     "ticketNum":"12",
-    "warehouseCode":"C108",
+    "warehouseCode":"C018",
     "goodsList":[
         {
            "goodsCode":"1001123",
@@ -117,7 +117,7 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----:|:----:|:----:|:----:|
-|warehouseCode|string|c018|仓库编码|
+|warehouseCode|string|C018|仓库编码|
 |goodsCodes.key|string|10001|商品编码|
 |goodsCodes.value|number|20|库存数量|
 
@@ -172,9 +172,9 @@ version 1.0.0
   
 
 - **接口信息**  
-> **接口地址：** 
+> **接口地址：** http://192.168.7.35:8082/openx/wms/wmsService/notifiedWmsBatchInfo  
 > **提交方式：** POST,GET  
-> **方法名称：**   
+> **方法名称：** notifiedWmsBatchInfo  
   
 
 - **请求参数**
@@ -182,14 +182,14 @@ version 1.0.0
 |名称|类型|是否必须|描述|
 |:----:|:----:|:----:|:----:|
 |batchNum|string|是|批次号|
-|warehouseCode|string|是|仓库编号|
+|warehouseCode|string|是|仓库编号C018|
 |orderList|array|是|订单列表|
 |orderList[i].orderCode|string|是|订单编号|
 |orderList[i].ticketNum|string|是|小票号|
 |orderList[i].orderCode|string|是|订单编号|
 |orderList[i].goodsList|array|是|订单商品列表|
 |orderList[i].goodsList[i].goodsCode|string|是|商品编号|
-|orderList[i].goodsList[i].needQuantity|number|是|需要发的商品数量|
+|orderList[i].goodsList[i].quantity|number|是|需要发的商品数量|
 |orderList[i].goodsList[i].realQuantity|number|是|实际发的商品数量|
 |orderList[i].goodsList[i].lotList|array|是|商品的批次信息|
 |orderList[i].goodsList[i].lotList[i].lotNum|string|是|批次号|
@@ -204,8 +204,8 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----:|:----:|:----:|:----:|
-
-
+|code|String|0|正常0; >0 异常|
+|message|String|success|返回描述|
 
  异常
 
@@ -222,37 +222,90 @@ version 1.0.0
 入参示例: 
 ```json
 {
-    "batchNum":"25544",
-    "warehouseCode":"C108",
-    "orderList":[
-        {
-            "orderCode":"JD20170712600305100522",
-            "ticketNum":"12",
-            "goodsList":[
-                {
-                    "goodsCode":"10001",
-                    "needQuantity":20,
-                    "realQuantity":12,
-                    "lotList":[
-                        {
-                            "lotNum":"25445",
-                            "stockQty":6
-                        },
-                        {
-                            "lotNum":"25446",
-                            "stockQty":6
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+    "wmsBatchInfo": {
+        "batchNum": "25544",
+        "warehouseCode": "C018",
+        "orderList": [
+            {
+                "orderCode": "JD20170712600305100522",
+                "ticketNum": "12",
+                "goodsList": [
+                    {
+                        "goodsCode": "10001",
+                        "quantity": 20,
+                        "realQuantity": 12,
+                        "lotList": [
+                            {
+                                "lotNum": "25445",
+                                "stockQty": 6
+                            },
+                            {
+                                "lotNum": "25446",
+                                "stockQty": 6
+                            }
+                        ]
+                    },{
+                        "goodsCode": "10003",
+                        "quantity": 20,
+                        "realQuantity": 12,
+                        "lotList": [
+                            {
+                                "lotNum": "25448",
+                                "stockQty": 6
+                            },
+                            {
+                                "lotNum": "25456",
+                                "stockQty": 6
+                            }
+                        ]
+                    }
+                ]
+            },{
+            	"orderCode": "JD20170712600305100535",
+                "ticketNum": "12",
+                "goodsList": [
+                    {
+                        "goodsCode": "10001",
+                        "quantity": 20,
+                        "realQuantity": 12,
+                        "lotList": [
+                            {
+                                "lotNum": "25445",
+                                "stockQty": 6
+                            },
+                            {
+                                "lotNum": "25446",
+                                "stockQty": 6
+                            }
+                        ]
+                    },{
+                        "goodsCode": "10003",
+                        "quantity": 20,
+                        "realQuantity": 12,
+                        "lotList": [
+                            {
+                                "lotNum": "25448",
+                                "stockQty": 6
+                            },
+                            {
+                                "lotNum": "25456",
+                                "stockQty": 6
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }
 ```
 
 返回结果
 ```json
-
+{
+    "code": "0",
+    "message": "success"  
+}
 ```
 
 !> **NOTICE**  
