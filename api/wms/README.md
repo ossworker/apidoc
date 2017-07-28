@@ -15,7 +15,7 @@ version 1.0.0
   
 
 - **接口信息**  
-> **接口地址：**  
+> **接口地址：** http://one.yfdyf.cn/IF/WMSO2O/Sale.aspx   
 > **提交方式：** POST,GET  
 > **方法名称：**   
   
@@ -97,7 +97,7 @@ version 1.0.0
   
 
 - **接口信息**  
-> **接口地址：**  
+> **接口地址：** http://one.yfdyf.cn/IF/WMSO2O/Stock.aspx     
 > **提交方式：** POST,GET  
 > **方法名称：**  
   
