@@ -206,6 +206,7 @@ version 1.0.0
 |:----:|:----:|:----:|:----:|
 |code|String|0|正常0; >0 异常|
 |message|String|success|返回描述|
+|success| boolean|true|成功|
 
  异常
 
@@ -213,6 +214,7 @@ version 1.0.0
 |:----:|:----:|:----:|:----:|
 | code | String |  |  |
 | message | String | | |
+| success | boolean|true | 成功|
 
 
 
@@ -223,79 +225,41 @@ version 1.0.0
 ```json
 {
     "wmsBatchInfo": {
-        "batchNum": "25544",
-        "warehouseCode": "C018",
+        "batchNum": "111111",
         "orderList": [
             {
-                "orderCode": "JD20170712600305100522",
-                "ticketNum": "12",
                 "goodsList": [
                     {
-                        "goodsCode": "10001",
-                        "quantity": 20,
-                        "realQuantity": 12,
+                        "goodsCode": "2003329",
                         "lotList": [
                             {
-                                "lotNum": "25445",
-                                "stockQty": 6
-                            },
-                            {
-                                "lotNum": "25446",
-                                "stockQty": 6
+                                "lotNum": "11111",
+                                "stockQty": 1
                             }
-                        ]
-                    },{
-                        "goodsCode": "10003",
-                        "quantity": 20,
-                        "realQuantity": 12,
-                        "lotList": [
-                            {
-                                "lotNum": "25448",
-                                "stockQty": 6
-                            },
-                            {
-                                "lotNum": "25456",
-                                "stockQty": 6
-                            }
-                        ]
-                    }
-                ]
-            },{
-            	"orderCode": "JD20170712600305100535",
-                "ticketNum": "12",
-                "goodsList": [
+                        ],
+                        "realQuantity": 1
+                    },
                     {
-                        "goodsCode": "10001",
-                        "quantity": 20,
-                        "realQuantity": 12,
+                        "goodsCode": "2003324",
                         "lotList": [
                             {
-                                "lotNum": "25445",
-                                "stockQty": 6
+                                "lotNum": "22222",
+                                "stockQty": 1
                             },
                             {
-                                "lotNum": "25446",
-                                "stockQty": 6
+                                "lotNum": "33333",
+                                "stockQty": 1
                             }
-                        ]
-                    },{
-                        "goodsCode": "10003",
-                        "quantity": 20,
-                        "realQuantity": 12,
-                        "lotList": [
-                            {
-                                "lotNum": "25448",
-                                "stockQty": 6
-                            },
-                            {
-                                "lotNum": "25456",
-                                "stockQty": 6
-                            }
-                        ]
+                        ],
+                        "realQuantity": 2
                     }
-                ]
+                ],
+                "orderCode": "XR20161118585710100011",
+                "ticketNum": "1",
+                "warehouseCode": "C018"
             }
-        ]
+        ],
+        "warehouseCode": "C018"
     }
 }
 ```
@@ -304,7 +268,8 @@ version 1.0.0
 ```json
 {
     "code": "0",
-    "message": "success"  
+    "message": "success",
+    "success": true  
 }
 ```
 

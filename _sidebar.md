@@ -1,9 +1,11 @@
 
 - 业务
   - [领券中心](api/couponCenter/)
+  - [积分商城](api/integralMall/)
 
 - o2o-wms
   - [wms对接](api/wms/)   
+  
 
 - 中台
   - [测试](test/guide)
