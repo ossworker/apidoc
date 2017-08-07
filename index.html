@@ -1,76 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>API DOC</title>
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
-  <link rel="stylesheet" href="//unpkg.com/vuep/dist/vuep.css">
+    <meta charset="UTF-8">
+    <title>API DOC</title>
+    <meta name="description" content="Description">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+    <link rel="stylesheet" href="//unpkg.com/vuep/dist/vuep.css">
 </head>
+
 <body>
-  <div id="app"></div>
+    <div id="app"></div>
 </body>
 <script>
-  window.$docsify = {
-    repo: 'https://git.oschina.net/workoss/apidoc/',
-    basePath: 'https://raw.githubusercontent.com/workoss/apidoc/master/',//文档加载的根路径，可以是二级路径或者是其他域名的路径
-    homepage: 'README.md',//设置首页文件加载路径
-    // coverpage: '_coverpage.md',//启用封面页。开启后是加载 _coverpage.md 文件
-    maxLevel: 4,//最大支持渲染的标题层级
-    loadNavbar: '_navbar.md',  //加载自定义导航栏 true 时加载_navbar.md
-    loadSidebar: '_sidebar.md', //加载自定义侧边栏 true  _sidebar.md
-    subMaxLevel: 0, //自定义侧边栏后默认不会再生成目录
-    auto2top: true, //切换页面后是否自动跳转到页面顶部
-    name: 'API',
-    nameLink: {
-    '/': '/apidoc'
-    },
-    // markdown: {
-    //  smartypants: true,
-    //  renderer: {
-    //   link: function() {
-    //     // ...
-    //   }
-    //  }
-    // },
-    alias: {
-    '/changelog': 'https://raw.githubusercontent.com/workoss/apidoc/master/CHANGELOG'
-    },
-    // themeColor: '#3F51B5',
-    autoHeader: true,// 同时设置 loadSidebar 和 autoHeader 后，可以根据 _sidebar.md 的内容自动为每个页面增加标题
-    executeScript: true, //执行文档里的 script 标签里的脚本，只执行第一个 script (demo)。 如果 Vue 存在，则自动开启
-    noEmoji: false,//不禁用 emoji 解析
-    mergeNavbar: true, //小屏设备下合并导航栏到侧边栏
-    formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',
-    externalLinkTarget: '_blank', // default: '_self'
+    window.$docsify = {
+        repo: 'https://git.oschina.net/workoss/apidoc/',
+        basePath: 'https://raw.githubusercontent.com/workoss/apidoc/master/', //文档加载的根路径，可以是二级路径或者是其他域名的路径
+        homepage: 'README.md', //设置首页文件加载路径
+        // coverpage: '_coverpage.md',//启用封面页。开启后是加载 _coverpage.md 文件
+        maxLevel: 4, //最大支持渲染的标题层级
+        loadNavbar: '_navbar.md', //加载自定义导航栏 true 时加载_navbar.md
+        loadSidebar: '_sidebar.md', //加载自定义侧边栏 true  _sidebar.md
+        subMaxLevel: 0, //自定义侧边栏后默认不会再生成目录
+        auto2top: true, //切换页面后是否自动跳转到页面顶部
+        name: 'API',
+        nameLink: {
+            '/': '/apidoc'
+        },
+        // markdown: {
+        //  smartypants: true,
+        //  renderer: {
+        //   link: function() {
+        //     // ...
+        //   }
+        //  }
+        // },
+        alias: {
+            '/changelog': 'https://raw.githubusercontent.com/workoss/apidoc/master/CHANGELOG'
+        },
+        // themeColor: '#3F51B5',
+        autoHeader: true, // 同时设置 loadSidebar 和 autoHeader 后，可以根据 _sidebar.md 的内容自动为每个页面增加标题
+        executeScript: true, //执行文档里的 script 标签里的脚本，只执行第一个 script (demo)。 如果 Vue 存在，则自动开启
+        noEmoji: false, //不禁用 emoji 解析
+        mergeNavbar: true, //小屏设备下合并导航栏到侧边栏
+        formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',
+        externalLinkTarget: '_blank', // default: '_self'
 
-    search: {
-      maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-      placeholder: 'Type to search',  //Type to search
-      noData: {
-        '/': '没有结果!',
-        '/en-us': 'No results!'
-      },
-      paths: 'auto',
-      placeholder: {
-        '/': '搜索',
-        '/en-us': 'Search'
-      }
-    },
-    plugins: [
-      function(hook, vm) {
-        hook.beforeEach(function (html) {
-          var url = 'https://raw.githubusercontent.com/workoss/apidoc/master/' + vm.route.file
-          var editHtml = '[:memo: Edit Document](' + url + ')\n'
-          return html
-            + '\n----\n'
-            //+ 'Last modified {docsify-updated} '  
-        })
-      }
-    ]
+        search: {
+            maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+            placeholder: 'Type to search', //Type to search
+            noData: {
+                '/': '没有结果!',
+                '/en-us': 'No results!'
+            },
+            paths: 'auto',
+            placeholder: {
+                '/': '搜索',
+                '/en-us': 'Search'
+            }
+        },
+        plugins: [
+            function(hook, vm) {
+                hook.beforeEach(function(html) {
+                    var url = 'https://raw.githubusercontent.com/workoss/apidoc/master/' + vm.route.file
+                    var editHtml = '[:memo: Edit Document](' + url + ')\n'
+                    return html +
+                        '\n----\n'
+                        //+ 'Last modified {docsify-updated} '  
+                })
+            }
+        ]
 
-  }
+    }
 </script>
 <script src="//unpkg.com/docsify/lib/docsify.min.js" data-router data-repo="https://workoss.github.io/apidoc/index.html"></script>
 <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
@@ -91,8 +93,10 @@
 <script src="//unpkg.com/vue/dist/vue.min.js"></script>
 <script src="//unpkg.com/vuep/dist/vuep.min.js"></script>
 <script>
-  if (typeof navigator.serviceWorker !== 'undefined') {
-    // navigator.serviceWorker.register('sw.js')
-  }
+    if (typeof navigator.serviceWorker !== 'undefined') {
+        // navigator.serviceWorker.register('sw.js')
+        // navigator.serviceWorker.unregister('sw.js')
+    }
 </script>
+
 </html>
