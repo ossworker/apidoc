@@ -1,0 +1,220 @@
+@startuml
+
+
+class Channel {
+    /** 渠道编号*/
+    private String channelCode;
+    /** 渠道名称*/
+    private String channelName;
+    /** 渠道描述*/
+    private String channelDesc;
+    /** 营业开始时间*/
+    private String openTime;
+    /** 营业结束时间*/
+    private String closeTime;
+    /** 经纬度信息*/
+    private Location location;
+    /** 渠道地址*/
+    private String channelAddress;
+    /** 仓库编号*/
+    private String warehouseCode;
+    /** 渠道配置*/
+    private ChannelConfig channelConfig;
+
+}
+
+
+class ChannelConfig {
+
+    /** 渠道模式 */
+    private String channelMode;
+
+    /** 服务模式*/
+    private String channelServiceMode;
+
+    /** 支付模式*/
+    private String channelPayMode;
+
+    /** 配送模式*/
+    private String channelDeliveryMode;
+
+    /** 是否支持用户自提*/
+    private Boolean customerPickUp;
+
+    /** 是否货到付款 */
+    private Boolean cashOnDelivery;
+
+}
+
+class Location {
+    /** 经度 */
+    private Double longitude;
+    /** 纬度*/
+    private Double latitude;
+}
+
+Channel --> Location
+Channel --> ChannelConfig
+
+
+class IntegralGoods {
+    /** 商品编码*/
+    private String goodsCode;
+    /** 商品名称*/
+    private String goodsName;
+    /** 封面图url*/
+    private String coverUrl;
+    /** 渠道价格*/
+    private BigDecimal channelPrice;
+    /** 兑换价格*/
+    private BigDecimal price;
+    /** 兑换积分数*/
+    private BigDecimal points;
+    /** 库存数*/
+    private BigDecimal stock;
+    /** 兑换数量*/
+    private BigDecimal quantity;
+    
+}
+
+
+class IntegralGoodsDetail {
+    /** 商品编码*/
+    private String goodsCode;
+    /** 商品名称*/
+    private String goodsName;
+    /** 渠道单价*/
+    private BigDecimal channelPrice;
+    /** 兑换单价*/
+    private BigDecimal price;
+    /** 兑换积分数 单个*/
+    private BigDecimal points;
+    /** 库存*/
+    private BigDecimal stock;
+    /** 这个商品的渠道配置（包含定位的渠道和全国渠道）*/
+    private List<Channel> channels;
+
+}
+
+class ExchageData {
+    /** 兑换类型*/
+    private String exchangeType;
+    /** 编码 商品编码或者券模版id*/
+    private String code;
+    /** 交易编码 ： 订单编码或者 券code*/
+    private String tradeCode;
+    /** 兑换单价 金额*/
+    private BigDecimal price;
+    /** 兑换单价  积分*/
+    private BigDecimal points;
+    /** 兑换数量*/
+    private BigDecimal quantity;
+    /** 兑换时间*/
+    private Date createTime;
+}
+
+
+
+
+class IntegralCoupon {
+    /** 模版id*/
+    private String templateId;
+    /** ALL ALL-整单券，GOODS-商品组合，ITEM-单品|券类型*/
+    private String type;
+    /** 券标题*/
+    private String title;
+    /** 券描述*/
+    private String desc;
+    /** 券金额*/
+    private BigDecimal value;
+    /** 券规则描述 */
+    private String ruleDesc;
+    /** 开始日期*/
+    private Date beginDate;
+    /** 结束日期*/
+    private Date endDate;
+    /** 状态   ENABLE-可领，RECEIVED-已领，NONE-已领完*/
+    private String status;
+    /** 兑换积分数*/
+    private BigDecimal points;
+
+}
+
+
+class PageInfo<T> {
+    /** 分页起始位置*/
+    private int offset = 0;
+    /** 每页显示多少行，默认为10*/
+    private int limit = 10;
+    /** 泛型结果集*/
+    private List<T> rows = new ArrayList<T>();
+    /** 当前页*/
+    private int page = 1;
+    /** 排序规则*/
+    private String orderBy;
+    
+}
+
+
+
+class Dict {
+
+    /** 分组id*/
+    private String groupId;
+    /** 关键词*/
+    private String key;
+    /** 值*/
+    private String value;
+    /** 描述*/
+    private String desc;
+
+}
+
+
+
+interface IntegralGoodsService {
+
+    + PageInfo<IntegralGoods> queryGoods(PageInfo pageInfo, IntegralGoods goods,String channelCode) throws IntegralException;  //查询积分兑换的商品列表
+
+    + IntegralGoodsDetail queryGoodsDetail(String channelCode,String goodsCode) throws IntegralException; //根据渠道编号和商品编号查询商品明细
+
+    + boolean calcPointsAndStock(IntegralGoods goods,String channelCode,String customerCode) throws IntegralException; //创建订单 （包含判断积分和库存）
+
+}
+
+
+IntegralGoodsService ..> PageInfo
+IntegralGoodsService ..> IntegralGoods
+IntegralGoodsService ..> IntegralGoodsDetail
+
+
+interface IntegralCouponService {
+    
+    + PageInfo<IntegralCoupon> queryCoupons(PageInfo pageInfo,IntegralCoupon coupon,String customerCode) throws IntegralException; //分页查询兑换的券列表
+
+   
+    + String  exchageCoupon(String templateId,String customerCode) throws IntegralException; //兑换券
+
+}
+
+IntegralCouponService ..> PageInfo
+IntegralCouponService ..> IntegralCoupon
+
+
+interface DictService {
+
+    + List<Dict> queryGroupDictByAppId(String appId,String groupId) throws IntegralException; //查询应用分组字典
+}
+
+DictService ..> Dict
+
+
+
+interface ExchageDataService {
+
+   + List<ExchageData> queryCustomerExchangeDataByTradeCodes(Integer exchageType,String customerCode,List<String> tradeCodes) throws IntegralException; //通过会员编号 兑换类型 和 交易编码查询
+}
+
+ExchageDataService ..> ExchageData
+
+@enduml
