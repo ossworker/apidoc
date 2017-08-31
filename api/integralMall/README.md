@@ -275,7 +275,7 @@ version 1.0.0
 |order.channelCode|string|是|渠道编码|
 |order.channelServiceMode|string|是|服务模式 B2C O2O|
 |order.customerCode|string|是|会员编号|
-|order.deliveryArea|string|否|服务模式B2C 必填 配送区域 country|
+|order.deliveryArea|string|否|服务模式B2C 必填 配送区域 COUNTRY：全国；O2O:self:自提|
 |order.deliveryType|string|否|服务模式B2C 必填 配送方式公司 ytoexpress|
 |order.freightAmount|string|否|服务模式B2C 必填 运费|
 |order.orderNote|string|否|订单备注|
@@ -290,10 +290,12 @@ version 1.0.0
 |order.contact.address.provinceCode|string|是|收货人地址省编码|
 |order.contact.address.provinceName|string|是|收货人地址省名称|
 |order.contact.address.cityCode|string|是|收货人地址市编码|
-|order.contact.address.cityName|string|是|收货人地址市名称|
+|order.contact.address.cityName|string|是|收货人地址市名称|O2O:
 |order.contact.address.districtCode|string|是|收货人地址区编码|
 |order.contact.address.districtName|string|是|收货人地址区名称|
-- **响应结果**
+
+
+-  **响应结果**
 
 
  正常
@@ -321,7 +323,7 @@ version 1.0.0
 	"order":{
 		"channelCode":"JFM_6369",
 		"channelServiceMode":"B2C",
-		"customerCode":"00000738-0E78-4A5E-B9DA-F0617CAB5748",
+		"customerCode":"647958c21f03445a9bb8fbcadfc82f30",
 		"deliveryArea":"country",
 		"deliveryType":"ytoexpress",
 		"freightAmount":0.00,
@@ -344,7 +346,7 @@ version 1.0.0
         },
         "goodsList": [
             {
-                "ruleId": "598806f570b99e2c84e6e60a",
+                "ruleId": "59917cb46b46692c9051c4b2",
                 "quantity": 1
             }
         ],
@@ -355,7 +357,7 @@ version 1.0.0
 
 返回结果
 ```json
-"JFM20170812585702100001"
+"JFM20170816636903100005"
 ```
 
  **NOTICE**  
@@ -377,12 +379,16 @@ version 1.0.0
 > **提交方式：** POST,GET  
 > **方法名称：** queryCustomerExchangeDataByVoucherNumbers 
 
+
 - **请求参数**
 
 |名称|类型|是否必须|描述|
 |:----:|:----:|:----:|:----:|
+|customerCode|string|是|会员编号|
+|voucherNumbers[0]|string|是|订单编号或者券编号|
 
-- **响应结果**
+
+-  **响应结果** 
 
 
  正常
@@ -407,16 +413,27 @@ version 1.0.0
 入参示例: 
 ```json
 {
-	"customerCode":"00000738-0E78-4A5E-B9DA-F0617CAB5748",
+	"customerCode":"647958c21f03445a9bb8fbcadfc82f30",
 	"voucherNumbers":[
-		"111","222"
+		"JFM20170815636903100001"
 		]
 }
 ```
 
 返回结果
 ```json
-
+[
+    {
+        "channelCode": "JFM_6369",
+        "code": "1000971",
+        "createTime": 1502792807000,
+        "points": 101,
+        "price": 7.5,
+        "quantity": 1,
+        "ruleType": 0,
+        "voucherumber": "JFM20170815636903100001"
+    }
+]
 ```
 
  **NOTICE**  

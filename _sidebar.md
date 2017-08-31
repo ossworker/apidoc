@@ -1,4 +1,7 @@
 
+- 公司
+  - [校园招聘](api/recruitment/)
+
 - 业务
   - [领券中心](api/couponCenter/)
   - [积分商城](api/integralMall/)
