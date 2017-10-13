@@ -21,7 +21,7 @@ version 1.0.0
 > 通过渠道编码分页查询商品列表
 
 - **接口信息**  
-> **接口地址：** {{serviceUrl}}/goods/integralGoodsService/queryGoods
+> **接口地址：** {serviceUrl}/goods/integralGoodsService/queryGoods
 > **提交方式：** POST,GET  
 > **方法名称：** queryGoods 
 
@@ -107,7 +107,7 @@ version 1.0.0
 > 通过渠道编码分页查询商品列表
 
 - **接口信息**  
-> **接口地址：** {{serviceUrl}}/goods/integralGoodsService/queryGoodsDetail
+> **接口地址：** {serviceUrl}/goods/integralGoodsService/queryGoodsDetail
 > **提交方式：** POST,GET  
 > **方法名称：** queryGoodsDetail 
 
@@ -191,7 +191,7 @@ version 1.0.0
 > 根据商品编码数量，渠道和会员检查积分和库存
 
 - **接口信息**  
-> **接口地址：** {{serviceUrl}}/order/integralOrderService/calcPointsAndStock
+> **接口地址：** {serviceUrl}/order/integralOrderService/calcPointsAndStock
 > **提交方式：** POST,GET  
 > **方法名称：** calcPointsAndStock 
 
@@ -263,7 +263,7 @@ version 1.0.0
 > 创建订单
 
 - **接口信息**  
-> **接口地址：** {{serviceUrl}}/order/integralOrderService/createGoodsOrder
+> **接口地址：** {serviceUrl}/order/integralOrderService/createGoodsOrder
 > **提交方式：** POST,GET  
 > **方法名称：** createGoodsOrder 
 
@@ -375,7 +375,7 @@ version 1.0.0
 > 通过会员编号和凭证编码查询兑换记录
 
 - **接口信息**  
-> **接口地址：** {{serviceUrl}}/exchange/integralExchangeHistoryService/queryCustomerExchangeDataByVoucherNumbers
+> **接口地址：** {serviceUrl}/exchange/integralExchangeHistoryService/queryCustomerExchangeDataByVoucherNumbers
 > **提交方式：** POST,GET  
 > **方法名称：** queryCustomerExchangeDataByVoucherNumbers 
 

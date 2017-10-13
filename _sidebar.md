@@ -3,6 +3,7 @@
   - [校园招聘](api/recruitment/)
 
 - 业务
+  - [益丰精选](api/silkRoad/)
   - [领券中心](api/couponCenter/)
   - [积分商城](api/integralMall/)
 
