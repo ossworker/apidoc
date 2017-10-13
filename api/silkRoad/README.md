@@ -10,7 +10,7 @@ version 1.0.0
 
 |环境|项目|原HOST|调用HOST|
 |:----:|:----|:----|:----|
-|开发环境|silk-road|http://192.168.7.41:9020|http://192.168.7.41:9020/rest/|
+|开发环境|silk-road|http://192.168.7.41:9020|http://192.168.7.41:9020/rest|
 |开发环境|member-open|http://192.168.7.68:9040|http://192.168.7.41:9020/proxy|
 |开发环境|query|http://192.168.7.67:9060|http://192.168.7.41:9020/proxy|
 |开发环境|trade|http://192.168.7.68:9020|http://192.168.7.41:9020/proxy|
@@ -156,7 +156,25 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----:|:----:|:----|:----|
-|customerId|string|598bc0f542559b20787e62e6|会员编号，唯一标识|
+|{i}.customerId|string|647958c21f03445a9bb8fbcadfc82f30|会员编号|
+|{i}.uuid|string|419338db9358438ab59a7243bed3969c|收货人uuid|
+|{i}.deliverySource|string|来源|顶级渠道|
+|{i}.province|string|430000|省编码|
+|{i}.provinceName|string|湖南省|省名称|
+|{i}.city|string|430100|城市编码|
+|{i}.cityName|string|长沙市|城市名称|
+|{i}.district|string|430104|先/区编码|
+|{i}.districtName|string|岳麓区|县/区名称|
+|{i}.address|string|金洲大道68号|详细地址|
+|{i}.storeCode|string|XINGREN_6369|渠道编码|
+|{i}.idCard|string|130523197610281210||
+|{i}.isDefault|string|1|是否默认收货地址|
+|{i}.latitude|number|39.96583|纬度|
+|{i}.longitude|number|116.391621|经度|
+|{i}.linkPerson|string|xx|收货人姓名|
+|{i}.linkPhone|string|18075389282|收货人联系方式|
+|{i}.streetNumber|string|12343|街道编号|
+|{i}.streetName|string|OTO|街道名称|
 
 
 
@@ -262,296 +280,82 @@ version 1.0.0
         "province": "430000",
         "provinceName": "湖南省",
         "uuid": "75c32160aeb642d9a15bdba62b60402f"
-    },
-    {
-        "address": "杜鹃路12",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1504600238000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WX",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 0,
-        "linkPerson": "张三123",
-        "linkPhone": "13725578963",
-        "longitude": 0,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "17c08238b53c4966a06a143484534b73"
-    },
-    {
-        "address": "杜鹃路fdaafsadf",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1504230914000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WX",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 0,
-        "linkPerson": "张三xfdsa",
-        "linkPhone": "13725578963",
-        "longitude": 0,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "ca7dce3c7cf549baa82f4a3dcc36b3d3"
-    },
-    {
-        "address": "杜鹃路",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1504230830000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WX",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 0,
-        "linkPerson": "张三",
-        "linkPhone": "13725578963",
-        "longitude": 0,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "76e84e9b2f8c4b27b006e9de4d6a1e00"
-    },
-    {
-        "address": "惠福西路合富置业",
-        "city": "440100",
-        "cityName": "广州市",
-        "createDate": 1503987029000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WXM",
-        "district": "440104",
-        "districtName": "越秀区",
-        "isDefault": "0",
-        "latitude": 23.127229,
-        "linkPerson": "信息",
-        "linkPhone": "18873208972",
-        "longitude": 113.260292,
-        "province": "440000",
-        "provinceName": "广东省",
-        "uuid": "1d329269fb4d451ab15e85a2419236c2"
-    },
-    {
-        "address": "杜鹃路保利",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1503307822000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "JFM",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 28.237902,
-        "linkPerson": "杨柳",
-        "linkPhone": "18873208972",
-        "longitude": 112.943282,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "9fff41708cb447ae98f4f113286e611a"
-    },
-    {
-        "address": "桐梓坡西路保利·麓谷体育公园",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1503306166000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "JFM",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 28.22627,
-        "linkPerson": "杨柳",
-        "linkPhone": "18873208972",
-        "longitude": 112.890365,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "151c8672a694458e995b91ba2e0f7179"
-    },
-    {
-        "address": "桐梓坡西路保利·麓谷体育公园",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1503305721000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "JFM",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 28.22627,
-        "linkPerson": "杨柳",
-        "linkPhone": "18873208972",
-        "longitude": 112.890365,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "1bcd6d09aded4cc3ba91159003eeef0f"
-    },
-    {
-        "address": "杜鹃路杨柳",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1503294308000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "JFM",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 28.237902,
-        "linkPerson": "杨柳",
-        "linkPhone": "18873208972",
-        "longitude": 112.943282,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "a9fb3dd936fa4e0a8d205fd49ff2a5f4"
-    },
-    {
-        "address": "杜鹃路啊啊啊啊",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1502950108000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WXM",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 28.237902,
-        "linkPerson": "嘟嘟嘟",
-        "linkPhone": "18873208972",
-        "longitude": 112.943282,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "97c5f8d9d0d941dbb898ce5ca810f07d"
-    },
-    {
-        "address": "杜鹃路三生三世",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1502950045000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WXM",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 28.237902,
-        "linkPerson": "嘟嘟嘟",
-        "linkPhone": "18873208972",
-        "longitude": 112.943282,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "8873eebf2f7643089f8a8837e58f34e1"
-    },
-    {
-        "address": "杜鹃路",
-        "city": "430100",
-        "cityName": "长沙市",
-        "createDate": 1497496161000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "CYYSWX",
-        "district": "430104",
-        "districtName": "岳麓区",
-        "isDefault": "0",
-        "latitude": 0,
-        "linkPerson": "张三",
-        "linkPhone": "13725578963",
-        "longitude": 0,
-        "province": "430000",
-        "provinceName": "湖南省",
-        "uuid": "1e7c6f0ca2264b0fbad5c6989924f49d"
-    },
-    {
-        "address": "文心六路",
-        "city": "440300",
-        "cityName": "深圳市",
-        "createDate": 1495075814000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WXM",
-        "district": "440305",
-        "districtName": "南山区",
-        "isDefault": "0",
-        "latitude": 22.52301,
-        "linkPerson": "cece",
-        "linkPhone": "18873208972",
-        "longitude": 113.945246,
-        "province": "440000",
-        "provinceName": "广东省",
-        "uuid": "cd6411e157324405ad0ed3811c58ae6b"
-    },
-    {
-        "address": "文心六路",
-        "city": "440300",
-        "cityName": "深圳市",
-        "createDate": 1495071603000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WXM",
-        "district": "440305",
-        "districtName": "南山区",
-        "isDefault": "0",
-        "latitude": 22.52301,
-        "linkPerson": "121212",
-        "linkPhone": "18873208972",
-        "longitude": 113.945246,
-        "province": "440000",
-        "provinceName": "广东省",
-        "uuid": "40f3ba273a814ff2ae8781c25cc132aa"
-    },
-    {
-        "address": "文心六路",
-        "city": "440300",
-        "cityName": "深圳市",
-        "createDate": 1495060793000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WXM",
-        "district": "440305",
-        "districtName": "南山区",
-        "isDefault": "0",
-        "latitude": 22.52301,
-        "linkPerson": "cecece",
-        "linkPhone": "18873208972",
-        "longitude": 113.945246,
-        "province": "440000",
-        "provinceName": "广东省",
-        "uuid": "da8d8b55be814ec8bc815b6dd6600701"
-    },
-    {
-        "address": "文心六路",
-        "city": "440300",
-        "cityName": "深圳市",
-        "createDate": 1495001935000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WXM",
-        "district": "440305",
-        "districtName": "南山区",
-        "isDefault": "0",
-        "latitude": 22.52301,
-        "linkPerson": "cece",
-        "linkPhone": "18873208972",
-        "longitude": 113.945246,
-        "province": "440000",
-        "provinceName": "广东省",
-        "uuid": "e044429fcfab4edc83ab1a33644cb242"
-    },
-    {
-        "address": "TENGTEA",
-        "city": "440300",
-        "cityName": "深圳市",
-        "createDate": 1492694910000,
-        "customerId": "647958c21f03445a9bb8fbcadfc82f30",
-        "deliverySource": "WXM",
-        "district": "440305",
-        "districtName": "南山区",
-        "isDefault": "0",
-        "latitude": 22.52301,
-        "linkPerson": "cecece",
-        "linkPhone": "18873208972",
-        "longitude": 113.945246,
-        "province": "440000",
-        "provinceName": "广东省",
-        "uuid": "1ff537f7f6e14877b6a1c7566c5622c2"
     }
 ]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 2. 【收货地址】创建会员收货地址  
+
+- **接口描述**  
+> 创建会员收货地址
+
+- **接口信息**  
+> **接口地址：** /openx/memberopen/deliveryAddressService/createAddress  
+> **提交方式：** POST  
+> **方法名称：** createAddress  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----:|:----:|:----:|:----|
+|customerId|string|是|会员编号|
+|deliverySource|string|是|收货地址来源 顶级渠道名称 YFJX|
+|province|string|是|省编码|
+|city|string|是|市编码|
+|district|string|是|区编码|
+|linkPerson|string|是|联系人姓名|
+|linkPhone|string|是|联系人电话|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----:|:----:|:----|:----|
+|uuid|string|053ee1b930b24f1b83979aedc1ffc653|收货地址主键|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----:|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"deliveryAddr":{
+		 "address": "杜鹃路12",
+    	"city": "430100",
+    	"customerId": "647958c21f03445a9bb8fbcadfc82f30",
+    	"deliverySource": "WX",
+    	"district": "430104",
+    	"linkPerson": "张三",
+    	"linkPhone": "13725578963",
+    	"province": "430000"
+	}
+}
+```
+
+返回结果
+```json
+"92db5a54c0b64d7aa698d9a30fc767e2"
 ```
 
  **NOTICE**  
@@ -663,8 +467,10 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----:|:----:|:----|:----|
-|customerId|string|598bc0f542559b20787e62e6|会员编号，唯一标识|
-
+|{i}.default|boolean|true|是否默认|
+|{i}.deliveryTypeCode|string|NORMAL,REAL_TIME,URGENT|配送类型编码 |
+|{i}.deliveryTypeName|string|普通，实时，加急|配送类型描述|
+|{i}.price|number|5|配送运费|
 
  异常
 
@@ -680,12 +486,35 @@ version 1.0.0
 
 入参示例:  
 ```json
-
+{
+	"topChannelCode":"YFJX",
+	"receiverProvinceCode":"430000",
+	"receiverCityCode":"430100"
+}
 ```
 
 返回结果
 ```json
-
+[
+    {
+        "default": true,
+        "deliveryTypeCode": "NORMAL",
+        "deliveryTypeName": "普通",
+        "price": 6
+    },
+    {
+        "default": false,
+        "deliveryTypeCode": "REAL_TIME",
+        "deliveryTypeName": "实时",
+        "price": 5
+    },
+    {
+        "default": false,
+        "deliveryTypeCode": "URGENT",
+        "deliveryTypeName": "加急",
+        "price": 10
+    }
+]
 ```
 
  **NOTICE**  
