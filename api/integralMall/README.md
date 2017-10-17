@@ -21,22 +21,22 @@ version 1.0.0
 > 通过渠道编码分页查询商品列表
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/goods/integralGoodsService/queryGoods
-> **提交方式：** POST,GET  
+> **接口地址：** {serviceUrl}/goods/integralGoodsService/queryGoods  
+> **提交方式：** POST  
 > **方法名称：** queryGoods 
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----:|:----|
 |channelCode|string|是|渠道编码 JFM_6369|
 |pageInfo|object|是|分页对象|
 |pageInfo.page|int|否|分页页码|
 |pageInfo.limit|int|是|每页大小|
 |pageInfo.lastId|string|是|最后一个值id 第一页不填|
 |goods|object|是|过滤参数|
-|goods.price|number(9,2)|是|商品价格大于|
-|goods.points|number(9,2)|是|积分大于*的商品|
+|goods.price|number|是|商品价格大于|
+|goods.points|number|是|积分大于*的商品|
 
 
 
@@ -55,7 +55,7 @@ version 1.0.0
 |名称|类型|示例值|描述|
 |:----:|:----:|:----:|:----:|
 | code | String | 11000000 |  |
-| message | String | | |
+| message | String | |异常信息|
 
 
 
@@ -107,14 +107,14 @@ version 1.0.0
 > 通过渠道编码分页查询商品列表
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/goods/integralGoodsService/queryGoodsDetail
-> **提交方式：** POST,GET  
+> **接口地址：** {serviceUrl}/goods/integralGoodsService/queryGoodsDetail  
+> **提交方式：** POST  
 > **方法名称：** queryGoodsDetail 
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----:|:----|
 |channelCode|string|是|渠道编码 JFM_5857|
 |ruleId|string|是|规则id|
 
@@ -136,7 +136,7 @@ version 1.0.0
 |名称|类型|示例值|描述|
 |:----:|:----:|:----:|:----:|
 | code | String | 11000000 |  |
-| message | String | | |
+| message | String | |异常信息|
 
 
 
@@ -185,20 +185,20 @@ version 1.0.0
 
 ## 交易
 
-### 1. 判断积分和库存是否足够
+### 1. 判断积分和商品库存是否足够
 
 - **接口描述**  
 > 根据商品编码数量，渠道和会员检查积分和库存
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/order/integralOrderService/calcPointsAndStock
+> **接口地址：** {serviceUrl}/order/integralOrderService/calcPointsAndStock  
 > **提交方式：** POST,GET  
 > **方法名称：** calcPointsAndStock 
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----:|:----|
 |goods|object|是|商品对象|
 |goods.ruleId|string|是|规则编码|
 |goods.quantity|string|是|商品数量|
@@ -221,7 +221,7 @@ version 1.0.0
 |名称|类型|示例值|描述|
 |:----:|:----:|:----:|:----:|
 | code | String | 11000000 |  |
-| message | String | | |
+| message | String | |异常信息|
 
 
 
@@ -263,14 +263,14 @@ version 1.0.0
 > 创建订单
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/order/integralOrderService/createGoodsOrder
-> **提交方式：** POST,GET  
+> **接口地址：** {serviceUrl}/order/integralOrderService/createGoodsOrder  
+> **提交方式：** POST  
 > **方法名称：** createGoodsOrder 
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----:|:----|
 |order|object|是|订单对象|
 |order.channelCode|string|是|渠道编码|
 |order.channelServiceMode|string|是|服务模式 B2C O2O|
@@ -279,7 +279,7 @@ version 1.0.0
 |order.deliveryType|string|否|服务模式B2C 必填 配送方式公司 ytoexpress|
 |order.freightAmount|string|否|服务模式B2C 必填 运费|
 |order.orderNote|string|否|订单备注|
-|order.goodsList|[]|是|订单商品列表|
+|order.goodsList|array|是|订单商品列表|
 |order.goodsList[i].ruleId|string|是|订单商品规则id|
 |order.goodsList[i].quantity|number|是|商品数量|
 |order.contact|object|否|服务模式B2C 收货人信息|
@@ -310,7 +310,7 @@ version 1.0.0
 |名称|类型|示例值|描述|
 |:----:|:----:|:----:|:----:|
 | code | String | 11000000 |  |
-| message | String | | |
+| message | String | |异常信息|
 
 
 
@@ -375,8 +375,8 @@ version 1.0.0
 > 通过会员编号和凭证编码查询兑换记录
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/exchange/integralExchangeHistoryService/queryCustomerExchangeDataByVoucherNumbers
-> **提交方式：** POST,GET  
+> **接口地址：** {serviceUrl}/exchange/integralExchangeHistoryService/queryCustomerExchangeDataByVoucherNumbers  
+> **提交方式：** POST  
 > **方法名称：** queryCustomerExchangeDataByVoucherNumbers 
 
 
@@ -385,7 +385,7 @@ version 1.0.0
 |名称|类型|是否必须|描述|
 |:----:|:----:|:----:|:----:|
 |customerCode|string|是|会员编号|
-|voucherNumbers[0]|string|是|订单编号或者券编号|
+|voucherNumbers[i]|string|是|订单编号或者券编号|
 
 
 -  **响应结果** 
@@ -403,7 +403,7 @@ version 1.0.0
 |名称|类型|示例值|描述|
 |:----:|:----:|:----:|:----:|
 | code | String | 11000000 |  |
-| message | String | | |
+| message | String | |异常信息|
 
 
 
