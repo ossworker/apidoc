@@ -183,9 +183,240 @@ version 1.0.0
 ---
 
 
+## 券  
+
+### 1. 券列表  
+
+- **接口描述**  
+> 分页查询券列表 不过滤库存 不实时过滤状态
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/order/goods/integralCouponService/queryCoupons  
+> **提交方式：** POST  
+> **方法名称：** queryCoupons  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|pageInfo|object|是|分页对象|
+|pageInfo.page|int|否|分页页码|
+|pageInfo.limit|int|是|每页大小|
+|coupon|object|是|券过滤对象|
+|coupon.points|number|否|大于积分的券|
+|customerCode|string|否|会员编号|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|limit|number|10|每页大小|
+|page|number|1|当前页|
+|rows|array|[]|分页数据|
+|rows[i].beginDate|number|1503676801000|券开始日期|
+|rows[i].endDate|number|1514735999000|券结束日期|
+|rows[i].points|number|14|积分|
+|rows[i].ruleDesc|string||规则描述|
+|rows[i].ruleId|string||规则id|
+|rows[i].templateId|string||券模版id|
+|rows[i].title|string||券title|
+|rows[i].type|string||券类型 GOODS/ITEM/ALL|
+|rows[i].value|number|1|券面值|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+{
+	"pageInfo":{
+		"page":1,
+		"limit":10
+	},
+	"coupon":null,
+	"customerCode":"111111"
+}
+```
+
+返回结果
+```json
+{
+    "limit": 10,
+    "offset": 0,
+    "page": 1,
+    "rows": [
+        {
+            "beginDate": 1503504001000,
+            "desc": "",
+            "endDate": 1504281599000,
+            "points": 6,
+            "ruleDesc": "活动推广单品券，当日生效，无限制",
+            "ruleId": "59e5a2116b46697bce372cb6",
+            "templateId": "599fc7e947422338d16ab313",
+            "title": "活动推广单品券",
+            "type": "ITEM",
+            "value": 1
+        },
+        {
+            "beginDate": 1503676801000,
+            "desc": "",
+            "endDate": 1514735999000,
+            "points": 14,
+            "ruleDesc": "每人限领1张，",
+            "ruleId": "59e5a2436b46697bce372cb7",
+            "templateId": "59a0cdd7474223625e7f9b01",
+            "title": "线下活动推广品类糖尿病券满100减90",
+            "type": "GOODS",
+            "value": 90
+        },
+        {
+            "beginDate": 1503676801000,
+            "desc": "",
+            "endDate": 1514735999000,
+            "points": 20,
+            "ruleDesc": "唤醒单品券",
+            "ruleId": "59e5a2946b46697bce372cb9",
+            "templateId": "59a113bd474223625e7f9b10",
+            "title": "唤醒单品券",
+            "type": "ITEM",
+            "value": 2
+        },
+        {
+            "beginDate": 1503676801000,
+            "desc": "",
+            "endDate": 1514735999000,
+            "points": 25,
+            "ruleDesc": "长沙门店单品券",
+            "ruleId": "59e5a2c66b46697bce372cba",
+            "templateId": "59a4b569474223168adf963a",
+            "title": "长沙门店单品券",
+            "type": "ITEM",
+            "value": 2
+        },
+        {
+            "beginDate": 1503676801000,
+            "desc": "",
+            "endDate": 1514735999000,
+            "points": 55,
+            "ruleDesc": "唤醒整单券",
+            "ruleId": "59e5a2776b46697bce372cb8",
+            "templateId": "59a113f1474223625e7f9b11",
+            "title": "唤醒整单券",
+            "type": "ALL",
+            "value": 10
+        }
+    ]
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+
+### 2. 券详情  
+
+- **接口描述**  
+> 根据规则id和会员编号查询券详细信息
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/order/goods/integralCouponService/queryCouponDetail   
+> **提交方式：** POST  
+> **方法名称：** queryCouponDetail  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|ruleId|string|是|规则id|
+|customerCode|string|是|会员编号|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----:|:----:|:----:|:----:|
+|beginDate|number|1503676801000|券开始日期|
+|endDate|number|1514735999000|券结束日期|
+|points|number|14|积分|
+|ruleDesc|string||规则描述|
+|ruleId|string||规则id|
+|templateId|string||券模版id|
+|title|string||券title|
+|type|string||券类型 GOODS/ITEM/ALL|
+|value|number|1|券面值|
+|status|string|INVALID,AVAILABLE,UNAVAILABLE,NONE|过期，可用，已领，已领完|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+{
+	"ruleId":"59e5a2436b46697bce372cb7",
+	"customerCode":"00000738-0E78-4A5E-B9DA-F0617CAB5748"
+}
+```
+
+返回结果
+```json
+{
+    "beginDate": 1503676801000,
+    "endDate": 1514735999000,
+    "points": 14,
+    "ruleDesc": "每人限领1张，",
+    "ruleId": "59e5a2436b46697bce372cb7",
+    "status": "AVAILABLE",
+    "templateId": "59a0cdd7474223625e7f9b01",
+    "title": "线下活动推广品类糖尿病券满100减90",
+    "type": "GOODS",
+    "value": 90
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
 ## 交易
 
-### 1. 判断积分和商品库存是否足够
+### 1. 【商品】判断商品积分库存
 
 - **接口描述**  
 > 根据商品编码数量，渠道和会员检查积分和库存
@@ -257,7 +488,7 @@ version 1.0.0
 
 
 
-### 2. 创建订单
+### 2. 【商品】创建订单
 
 - **接口描述**  
 > 创建订单
@@ -367,9 +598,73 @@ version 1.0.0
 ---
 
 
+### 3. 【券】创建订单
+
+- **接口描述**  
+> 创建积分兑券订单（不实际创建订单）
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/order/integralOrderService/createCouponOrder  
+> **提交方式：** POST  
+> **方法名称：** createCouponOrder 
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|order|object|是|订单对象|
+|order.channelCode|string|是|渠道编码|
+|order.customerCode|string|是|会员编号|
+|order.ruleIds|array|是|规则id列表|
+
+
+
+
+-  **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----:|:----:|:----:|:----:|
+||string|true|正常的返回结果|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+
+```
+
+返回结果
+```json
+
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+
+
+
 ## 历史记录
 
-### 1. 查询兑换记录 
+### 1. 【商品】查询兑换记录 
 
 - **接口描述**  
 > 通过会员编号和凭证编码查询兑换记录
@@ -434,6 +729,64 @@ version 1.0.0
         "voucherumber": "JFM20170815636903100001"
     }
 ]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 2. 【券】查询兑换记录 
+
+- **接口描述**  
+> 通过会员编号查询券兑换记录
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/exchange/integralExchangeHistoryService/  
+> **提交方式：** POST  
+> **方法名称：**  
+
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----:|:----:|:----:|:----:|
+|customerCode|string|是|会员编号|
+
+
+
+-  **响应结果** 
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----:|:----:|:----:|:----:|
+||string|true|正常的返回结果|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+
+```
+
+返回结果
+```json
+
 ```
 
  **NOTICE**  
