@@ -2,7 +2,7 @@
 Java API
 标签: 【integral-mall】【栾锋】
 
-version 1.0.0
+version 1.1.0
 
 
 
@@ -46,14 +46,14 @@ version 1.0.0
  正常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 
 
 
  异常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 | code | String | 11000000 |  |
 | message | String | |异常信息|
 
@@ -127,14 +127,14 @@ version 1.0.0
  正常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 
 
 
  异常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 | code | String | 11000000 |  |
 | message | String | |异常信息|
 
@@ -191,7 +191,7 @@ version 1.0.0
 > 分页查询券列表 不过滤库存 不实时过滤状态
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/order/goods/integralCouponService/queryCoupons  
+> **接口地址：** {serviceUrl}/coupon/integralCouponService/queryCoupons  
 > **提交方式：** POST  
 > **方法名称：** queryCoupons  
 
@@ -339,7 +339,7 @@ version 1.0.0
 > 根据规则id和会员编号查询券详细信息
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/order/goods/integralCouponService/queryCouponDetail   
+> **接口地址：** {serviceUrl}/coupon/integralCouponService/queryCouponDetail   
 > **提交方式：** POST  
 > **方法名称：** queryCouponDetail  
 
@@ -358,7 +358,7 @@ version 1.0.0
  正常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 |beginDate|number|1503676801000|券开始日期|
 |endDate|number|1514735999000|券结束日期|
 |points|number|14|积分|
@@ -443,14 +443,14 @@ version 1.0.0
  正常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 ||string|true|正常的返回结果|
 
 
  异常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 | code | String | 11000000 |  |
 | message | String | |异常信息|
 
@@ -532,14 +532,14 @@ version 1.0.0
  正常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 ||string|true|正常的返回结果|
 
 
  异常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 | code | String | 11000000 |  |
 | message | String | |异常信息|
 
@@ -644,12 +644,20 @@ version 1.0.0
 
 入参示例: 
 ```json
-
+{
+   "order":{
+       "customerCode":"00000738-0E78-4A5E-B9DA-F0617CAB5748",
+       "channelCode":"JFM_6369",
+       "ruleIds":[
+           "59e5a2436b46697bce372cb7"
+       ]
+   }
+}
 ```
 
 返回结果
 ```json
-
+"59e7fb24cff77324ec356c0b"
 ```
 
  **NOTICE**  
@@ -678,7 +686,7 @@ version 1.0.0
 - **请求参数**
 
 |名称|类型|是否必须|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----:|:----|
 |customerCode|string|是|会员编号|
 |voucherNumbers[i]|string|是|订单编号或者券编号|
 
@@ -689,14 +697,14 @@ version 1.0.0
  正常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 ||string|true|正常的返回结果|
 
 
  异常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----|:----|
 | code | String | 11000000 |  |
 | message | String | |异常信息|
 
@@ -744,16 +752,18 @@ version 1.0.0
 > 通过会员编号查询券兑换记录
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/exchange/integralExchangeHistoryService/  
+> **接口地址：** {serviceUrl}/exchange/integralExchangeHistoryService/queryCouponExchangeHistory  
 > **提交方式：** POST  
-> **方法名称：**  
+> **方法名称：** queryCouponExchangeHistory  
 
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
-|:----:|:----:|:----:|:----:|
+|:----|:----:|:----:|:----|
 |customerCode|string|是|会员编号|
+|page|int|是|当前页|
+|size|int|是|每页大小|
 
 
 
@@ -763,8 +773,24 @@ version 1.0.0
  正常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----:|:----:|
-||string|true|正常的返回结果|
+|:----|:----:|:----|:----|
+|[i].beginDate|number|1508428801000|开始时间|
+|[i].endDate|number|1508221508000|结束时间|
+|[i].createTime|number|1508221508000|领取时间|
+|[i].ruleId|string|59e5a2436b46697bce372cb7|规则id|
+|[i].templateId|string|59a0cdd7474223625e7f9b01|券模版id|
+|[i].couponCode|string|309257548417|券号|
+|[i].points|number||单个积分|
+|[i].quantity|number|1|兑换数量|
+|[i].redirectUrl|string|http://www.baidu.com|券跳转url|
+|[i].title|string|满100减90|标题|
+|[i].ruleDesc|string||规则描述|
+|[i].desc|string||描述|
+|[i].type|string|ALL,GOODS,ITEM,BATCH_ITEM|整单券,组合,单品,批量单品|
+|[i].status|string|AVAILABLE,LOCKED,USED,EXPIRED|可用,锁定,已使用,失效|
+|[i].ruleType|string|COUPON|券|
+|[i].value|number|90|券面值|
+
 
 
  异常
@@ -781,12 +807,45 @@ version 1.0.0
 
 入参示例: 
 ```json
-
+{
+	"customerCode":"00000738-0E78-4A5E-B9DA-F0617CAB5748",
+	"page":1,
+	"size":10
+}
 ```
 
 返回结果
 ```json
-
+[
+    {
+        "beginDate": 1508428801000,
+        "channelCode": "JFM_6369",
+        "createTime": 1508221508000,
+        "desc": "每人限领1张，",
+        "endDate": 1508687999000,
+        "points": 14,
+        "quantity": 1,
+        "redirectUrl": "http://www.baidu.com",
+        "ruleDesc": "",
+        "ruleId": "59e5a2436b46697bce372cb7",
+        "ruleType": "COUPON",
+        "status": "AVAILABLE",
+        "templateId": "59a0cdd7474223625e7f9b01",
+        "title": "线下活动推广品类糖尿病券满100减90",
+        "type": "GOODS",
+        "value": 90
+    },
+    {
+        "channelCode": "JFM_6369",
+        "createTime": 1508221508000,
+        "points": 14,
+        "quantity": 1,
+        "redirectUrl": "http://www.baidu.com",
+        "ruleId": "59e5a2436b46697bce372cb7",
+        "ruleType": "COUPON",
+        "title": "线下活动推广品类糖尿病券满100减90"
+    }
+]
 ```
 
  **NOTICE**  
