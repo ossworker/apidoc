@@ -466,7 +466,7 @@ version 1.1.0
 {
 	"goods":{
 		"ruleId":"598806f570b99e2c84e6e60a",
-		"quantity":200
+		"quantity":2
 	},
 	"channelCode":"JFM_5857",
 	"customerCode":"00000738-0E78-4A5E-B9DA-F0617CAB5748"
