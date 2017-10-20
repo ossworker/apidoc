@@ -369,6 +369,7 @@ version 1.1.0
 |type|string||券类型 GOODS/ITEM/ALL|
 |value|number|1|券面值|
 |status|string|INVALID,AVAILABLE,UNAVAILABLE,NONE|过期，可用，已领，已领完|
+|redirectUrl|string||跳转url|
 
 
  异常
@@ -397,6 +398,7 @@ version 1.1.0
     "beginDate": 1503676801000,
     "endDate": 1514735999000,
     "points": 14,
+    "redirectUrl": "http://www.baidu.com",
     "ruleDesc": "每人限领1张，",
     "ruleId": "59e5a2436b46697bce372cb7",
     "status": "AVAILABLE",
