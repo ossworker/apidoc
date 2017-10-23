@@ -933,7 +933,8 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----|:----:|:----|:----|
-
+|[i].goodsCode|string|1012396|商品编码|
+|[i].quantity|int|1|商品数量|
 
  异常
 
@@ -957,7 +958,12 @@ version 1.0.0
 
 返回结果
 ```json
-
+[
+    {
+        "goodsCode": "1012396",
+        "quantity": 1
+    }
+]
 ```
 
  **NOTICE**  
@@ -969,19 +975,22 @@ version 1.0.0
 ### 3. 【购物车】添加商品/增加商品数量  
 
 - **接口描述**  
-
+新增商品到购物车或者新增商品数量  
 
 - **接口信息**  
-> **接口地址：**     
+> **接口地址：** /openx/customer/shopcartService/addGoods    
 > **提交方式：** POST  
-> **方法名称：**   
+> **方法名称：** addGoods  
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
-
-
+|customerId|string|是|会员编号|
+|channel|string|是|顶级渠道编号|
+|goodsList|array|是|商品列表|
+|goodsList[i].goodsCode|string|是|商品编码|
+|goodsList[i].quantity|int|是|商品数量|
 
 
 - **响应结果**
@@ -1007,7 +1016,14 @@ version 1.0.0
 
 入参示例:  
 ```json
-
+{
+	"customerId":"647958c21f03445a9bb8fbcadfc82f30",
+	"channel":"WXM",
+	"goodsList":[{
+		"goodsCode":"1012396",
+		"quantity":1
+	}]
+}
 ```
 
 返回结果
