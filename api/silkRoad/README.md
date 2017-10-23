@@ -787,7 +787,7 @@ version 1.0.0
  正常
 
 |名称|类型|示例值|描述|
-|:----:|:----:|:----|:----|
+|:----|:----:|:----|:----|
 |[i].default|boolean|true|是否默认|
 |[i].deliveryTypeCode|string|NORMAL,REAL_TIME,URGENT|配送类型编码 |
 |[i].deliveryTypeName|string|普通，实时，加急|配送类型描述|
@@ -1107,7 +1107,7 @@ version 1.0.0
 ### 5. 【购物车】删除购物车商品  
 
 - **接口描述**  
-购物车商品删除
+购物车商品删除  
 
 - **接口信息**  
 > **接口地址：** /openx/customer/shopcartService/deleteGoods    
