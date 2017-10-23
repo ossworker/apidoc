@@ -48,7 +48,9 @@ version 1.0.0
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
 |comeFrom|string|是|会员来源，对应业务中的顶级渠道|
-|refId|string|是|关联ID，微信中对应为openid或unionid，杏仁为患者ID|
+|relateFrom|string|是|MINIPG|
+|refId|string|是|关联ID，微信中对应为openid，杏仁为患者ID|
+|refId2|string|否|unionid|
 
 
 
@@ -767,7 +769,7 @@ version 1.0.0
 - **接口信息**  
 > **接口地址：** /openx/query/logisticsQueryService/listDeliveryType    
 > **提交方式：** POST  
-> **方法名称：** listDeliveryType 
+> **方法名称：** listDeliveryType  
 
 - **请求参数**
 
