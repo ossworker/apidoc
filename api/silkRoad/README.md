@@ -1040,7 +1040,7 @@ version 1.0.0
 ### 4. 【购物车】减少商品数量  
 
 - **接口描述**  
-
+购物车中商品数量减少
 
 - **接口信息**  
 > **接口地址：**     
@@ -1051,7 +1051,11 @@ version 1.0.0
 
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
-
+|customerId|string|是|会员编号|
+|channel|string|是|顶级渠道编号|
+|goodsList|array|是|商品列表|
+|goodsList[i].goodsCode|string|是|商品编码|
+|goodsList[i].quantity|int|是|商品数量|
 
 
 
@@ -1078,7 +1082,76 @@ version 1.0.0
 
 入参示例:  
 ```json
+{
+	"customerId":"647958c21f03445a9bb8fbcadfc82f30",
+	"channel":"WXM",
+	"goodsList":[{
+		"goodsCode":"1012396",
+		"quantity":1
+	}]
+}
+```
 
+返回结果
+```json
+
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 5. 【购物车】删除购物车商品  
+
+- **接口描述**  
+购物车商品删除
+
+- **接口信息**  
+> **接口地址：** /openx/customer/shopcartService/deleteGoods    
+> **提交方式：** POST  
+> **方法名称：** deleteGoods  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerId|string|是|会员编号|
+|channel|string|是|顶级渠道编号|
+|goodsCodeList|array|是|商品编码列表|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"customerId":"647958c21f03445a9bb8fbcadfc82f30",
+	"channel":"WXM",
+	"goodsCodeList":["1012396"]
+}
 ```
 
 返回结果
