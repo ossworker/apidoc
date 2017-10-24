@@ -846,7 +846,7 @@ version 1.0.0
 ### 5. 【订单】统计订单数目
 
 - **接口描述**  
-
+根据顶级渠道和用户编码查询各状态下的订单数目
 
 - **接口信息**  
 > **接口地址：** /openx/query/orderQueryService/listOrderStatisticsByCustomer      
@@ -924,7 +924,490 @@ version 1.0.0
  
 ---
 
+### 6. 【订单】查询所有订单
 
+- **接口描述**  
+查询所有订单
+
+- **接口信息**  
+> **接口地址：** /openx/query/orderQueryService/listAllCustomerOrder          
+> **提交方式：** POST  
+> **方法名称：** listAllCustomerOrder    
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|topChannelCode|string|是|顶级渠道|
+|customerCode|string|是|会员编号|
+|pageNo|int|是|当前页|
+|pageSize|int|是|每页大小|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|[i].topChannelCode|string|WXM|顶级渠道编号|
+|[i].channelCode|string|WXM_6369|渠道编号|
+|[i].createTime|number|1504858027000|创建时间|
+|[i].customerCode|string|S00001|会员编号|
+|[i].orderCode|string|WXM_63692017090801100010|订单编号|
+|[i].orderState|string|29|会员支付金额|
+|[i].ordonnanceId|string|000000001||
+|[i].outTradeCode|string|BD000001|三方交易号|
+|[i].parentOrderCode|string|WXM_63692017090801100010|父订单编号|
+|[i].payee|string|PAYEE_YIFENG|收款类型 益丰收款|
+|[i].deliveryServiceType|string|DELIVERY_YIFENG|物流类型|
+|[i].warehouseCode|string|6369|仓库编码|
+|[i].goodsTotalAmount|number|22|商品金额|
+|[i].customerNeedPayAmount|number|29|会员支付金额|
+|[i].subsidyTotalAmount|number|2||
+|[i].remark|string||备注|
+|[i].goods|array|[{}]|订单商品|
+|[i].goods[i].goodsCode|string|1000000|商品编码|
+|[i].goods[i].goodsName|string|东阿阿胶|商品名称|
+|[i].goods[i].gift|boolean|false|是否礼品|
+|[i].goods[i].exercisePrice|number|10|执行价|
+|[i].goods[i].quantity|number|1|数量|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"topChannelCode":"WXM",
+	"customerCode":"S00001",
+	"pageNo":1,
+	"pageSize":10
+}
+```
+
+返回结果
+```json
+[
+    {
+        "channelCode": "WXM_6399",
+        "createTime": 1508116725000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "116000",
+                "goodsName": "东阿阿胶",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "116001",
+                "goodsName": "小阿胶",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM2017101601100001",
+        "orderState": "PAYMENT_WAITING",
+        "ordonnanceId": "00000w0001",
+        "outTradeCode": "OUT000w01",
+        "parentOrderCode": "WXM2017101601100001",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6399",
+        "createTime": 1506504993000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM2017092701100010",
+        "orderState": "PAYMENT_WAITING",
+        "ordonnanceId": "00000w0001",
+        "outTradeCode": "OUT000w01",
+        "parentOrderCode": "WXM2017092701100010",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6399",
+        "createTime": 1506504161000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM2017092701100009",
+        "orderState": "PAYMENT_WAITING",
+        "ordonnanceId": "00000w0001",
+        "outTradeCode": "OUT000w01",
+        "parentOrderCode": "WXM2017092701100009",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6399",
+        "createTime": 1506504134000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "116000",
+                "goodsName": "东阿阿胶",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "116001",
+                "goodsName": "小阿胶",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM2017092701100008",
+        "orderState": "PAYMENT_WAITING",
+        "ordonnanceId": "00000w0001",
+        "outTradeCode": "OUT000w01",
+        "parentOrderCode": "WXM2017092701100008",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6399",
+        "createTime": 1506502524000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM2017092701100007",
+        "orderState": "PAYMENT_WAITING",
+        "ordonnanceId": "00000w0001",
+        "outTradeCode": "OUT000w01",
+        "parentOrderCode": "WXM2017092701100007",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6399",
+        "createTime": 1506502503000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM2017092701100006",
+        "orderState": "PAYMENT_WAITING",
+        "ordonnanceId": "00000w0001",
+        "outTradeCode": "OUT000w01",
+        "parentOrderCode": "WXM2017092701100006",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6399",
+        "createTime": 1506502451000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "116000",
+                "goodsName": "东阿阿胶",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "116001",
+                "goodsName": "小阿胶",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM2017092701100005",
+        "orderState": "PAYMENT_WAITING",
+        "ordonnanceId": "00000w0001",
+        "outTradeCode": "OUT000w01",
+        "parentOrderCode": "WXM2017092701100005",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6399",
+        "createTime": 1506500324000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goodsTotalAmount": 22,
+        "orderCode": "null2017092701100004",
+        "orderState": "PAYMENT_WAITING",
+        "ordonnanceId": "00000w0001",
+        "outTradeCode": "OUT000w01",
+        "parentOrderCode": "null2017092701100004",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6369",
+        "createTime": 1505295731000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000000",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000001",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM_63692017091301100009_1",
+        "orderState": "SHIPMENT_WAITING",
+        "ordonnanceId": "000000001",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "WXM_63692017091301100009",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6369",
+        "createTime": 1505295266000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000000",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000001",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM_63692017091301100009",
+        "orderState": "ORDER_CLOSE",
+        "ordonnanceId": "000000001",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "WXM_63692017091301100009",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 7. 【订单】查询订单状态下订单
+
+- **接口描述**  
+查询各状态下订单
+
+- **接口信息**  
+> **接口地址：** /openx/query/orderQueryService/listCustomerOrderByState        
+> **提交方式：** POST  
+> **方法名称：** listCustomerOrderByState    
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|topChannelCode|string|是|顶级渠道|
+|customerCode|string|是|会员编号|
+|orderState|string|是|订单状态|
+|pageNo|int|是|当前页|
+|pageSize|int|是|每页大小|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|[i].topChannelCode|string|WXM|顶级渠道编号|
+|[i].channelCode|string|WXM_6369|渠道编号|
+|[i].createTime|number|1504858027000|创建时间|
+|[i].customerCode|string|S00001|会员编号|
+|[i].orderCode|string|WXM_63692017090801100010|订单编号|
+|[i].orderState|string|29|会员支付金额|
+|[i].ordonnanceId|string|000000001||
+|[i].outTradeCode|string|BD000001|三方交易号|
+|[i].parentOrderCode|string|WXM_63692017090801100010|父订单编号|
+|[i].payee|string|PAYEE_YIFENG|收款类型 益丰收款|
+|[i].deliveryServiceType|string|DELIVERY_YIFENG|物流类型|
+|[i].warehouseCode|string|6369|仓库编码|
+|[i].goodsTotalAmount|number|22|商品金额|
+|[i].customerNeedPayAmount|number|29|会员支付金额|
+|[i].subsidyTotalAmount|number|2||
+|[i].remark|string||备注|
+|[i].goods|array|[{}]|订单商品|
+|[i].goods[i].goodsCode|string|1000000|商品编码|
+|[i].goods[i].goodsName|string|东阿阿胶|商品名称|
+|[i].goods[i].gift|boolean|false|是否礼品|
+|[i].goods[i].exercisePrice|number|10|执行价|
+|[i].goods[i].quantity|number|1|数量|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"topChannelCode":"WXM",
+	"customerCode":"S00001",
+	"orderState":"RECEIVE_WAITING",
+	"pageNo":1,
+	"pageSize":10
+}
+```
+
+返回结果
+```json
+[
+    {
+        "channelCode": "WXM_6369",
+        "createTime": 1504858027000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000000",
+                "goodsName": "东阿阿胶",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000001",
+                "goodsName": "小阿胶",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "WXM_63692017090801100010",
+        "orderState": "RECEIVE_WAITING",
+        "ordonnanceId": "000000001",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "WXM_63692017090801100010",
+        "payee": "PAYEE_YIFENG",
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "WXM"
+    },
+    {
+        "channelCode": "WXM_6369",
+        "createTime": 1504844345000,
+        "customerCode": "S00001",
+        "customerNeedPayAmount": 19.75,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000000",
+                "goodsName": "东阿阿胶",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 10,
+        "orderCode": "WXM_63692017090801100005_1",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "WXM_63692017090801100005",
+        "payee": "PAYEE_YIFENG",
+        "remark": "请送最近日期的货品",
+        "subsidyTotalAmount": 0.9,
+        "topChannelCode": "WXM",
+        "warehouseCode": "5026"
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
 
 
 
