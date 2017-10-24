@@ -1411,6 +1411,160 @@ version 1.0.0
 
 ### 8. 【订单】查询订单详情
 
+- **接口描述**  
+查询订单详情
+
+- **接口信息**  
+> **接口地址：** /openx/query/orderQueryService/getOrderDetail          
+> **提交方式：** POST  
+> **方法名称：** getOrderDetail    
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|orderCode|string|是|渠道编码|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|topChannelCode|string|WXM|顶级渠道编号|
+|channelCode|string|WXM_6369|渠道编号|
+|createTime|number|1504858027000|创建时间|
+|customerCode|string|S00001|会员编号|
+|orderCode|string|WXM_63692017090801100010|订单编号|
+|orderState|string|29|会员支付金额|
+|ordonnanceId|string|000000001||
+|outTradeCode|string|BD000001|三方交易号|
+|parentOrderCode|string|WXM_63692017090801100010|父订单编号|
+|payee|string|PAYEE_YIFENG|收款类型 益丰收款|
+|deliveryServiceType|string|DELIVERY_YIFENG|物流类型|
+|warehouseCode|string|6369|仓库编码|
+|goodsTotalAmount|number|22|商品金额|
+|customerNeedPayAmount|number|29|会员支付金额|
+|subsidyTotalAmount|number|2||
+|remark|string||备注|
+|goods|array|[{}]|订单商品|
+|goods[i].goodsCode|string|1000000|商品编码|
+|goods[i].goodsName|string|东阿阿胶|商品名称|
+|goods[i].gift|boolean|false|是否礼品|
+|goods[i].accountPrice|number|10|下账金额|
+|goods[i].exercisePrice|number|10|执行价|
+|goods[i].quantity|number|1|数量|
+|charges|array|[{}]|费用|
+|charges[i].chargeType|string|DEDUCT,FREIGHT,NORMAL,PREFERENTIAL,SUBSIDY|费用类型:运费,补贴,打包费,优惠|
+|charges[i].chargeCode|string|freight,PACKING,preferitial,subsidy|费用编码|
+|charges[i].amount|number|9|金额|
+|charges[i].remark|string||备注|
+|referrer|object|{}||
+|referrer.referrerId|string|referid1||
+|referrer.referrerName|string|refername||
+|additionalInfo|array|[{}]|额外信息|
+|additionalInfo[i].infoCode|string|小票号|额外信息key|
+|additionalInfo[i].infoValue|string|BD000001|额外信息value|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"orderCode":"WXM_63692017090801100005_1"
+}
+```
+
+返回结果
+```json
+{
+    "additionalInfo": [
+        {
+            "infoCode": "小票号",
+            "infoValue": "BD000001"
+        }
+    ],
+    "channelCode": "WXM_6369",
+    "charges": [
+        {
+            "amount": 9,
+            "chargeCode": "freight",
+            "chargeType": "DEDUCT",
+            "remark": "运费"
+        },
+        {
+            "amount": 9,
+            "chargeCode": "freight",
+            "chargeType": "FREIGHT",
+            "remark": "补贴"
+        },
+        {
+            "amount": 3,
+            "chargeCode": "PACKING",
+            "chargeType": "NORMAL",
+            "remark": "打包费"
+        },
+        {
+            "amount": 2.25,
+            "chargeCode": "preferitial",
+            "chargeType": "PREFERENTIAL",
+            "remark": "优惠"
+        },
+        {
+            "amount": 0.9,
+            "chargeCode": "subsidy",
+            "chargeType": "SUBSIDY"
+        }
+    ],
+    "createTime": 1504844345000,
+    "customerCode": "S00001",
+    "customerNeedPayAmount": 19.75,
+    "deliveryServiceType": "DELIVERY_YIFENG",
+    "goods": [
+        {
+            "accountPrice": 10,
+            "exercisePrice": 10,
+            "gift": false,
+            "goodsCode": "1000000",
+            "goodsName": "东阿阿胶",
+            "quantity": 1
+        }
+    ],
+    "goodsTotalAmount": 10,
+    "orderCode": "WXM_63692017090801100005_1",
+    "orderState": "RECEIVE_WAITING",
+    "outTradeCode": "BD000001",
+    "parentOrderCode": "WXM_63692017090801100005",
+    "payee": "PAYEE_YIFENG",
+    "referrer": {
+        "referrerId": "referid1",
+        "referrerName": "refername"
+    },
+    "remark": "请送最近日期的货品",
+    "subsidyTotalAmount": 0.9,
+    "topChannelCode": "WXM",
+    "warehouseCode": "5026"
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
 
 
 ## 【customer】个人中心  
