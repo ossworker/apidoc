@@ -759,8 +759,6 @@ version 1.0.0
 
 
 
-
-
 ### 4. 【物流】根据渠道查询可用物流方式
 
 - **接口描述**  
@@ -843,6 +841,91 @@ version 1.0.0
 
  
 ---
+
+
+### 5. 【订单】统计订单数目
+
+- **接口描述**  
+
+
+- **接口信息**  
+> **接口地址：** /openx/query/orderQueryService/listOrderStatisticsByCustomer      
+> **提交方式：** POST  
+> **方法名称：** listOrderStatisticsByCustomer    
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|topChannelCode|string|是|顶级渠道|
+|customerCode|string|是|会员编号|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|[i].orderState|string|ORDER_CANCEL|订单状态|
+|[i].quantity|int|8|订单数目|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"topChannelCode":"WXM",
+	"customerCode":"S00001"
+}
+```
+
+返回结果
+```json
+[
+    {
+        "orderState": "ORDER_CANCEL",
+        "quantity": 4
+    },
+    {
+        "orderState": "ORDER_CLOSE",
+        "quantity": 2
+    },
+    {
+        "orderState": "PAYMENT_WAITING",
+        "quantity": 8
+    },
+    {
+        "orderState": "RECEIVE_WAITING",
+        "quantity": 2
+    },
+    {
+        "orderState": "SHIPMENT_WAITING",
+        "quantity": 1
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+
 
 
 ## 【customer】个人中心  
@@ -1172,8 +1255,9 @@ version 1.0.0
 
 ### 2. 预支付
 
-### 3. 
 
 
 ## 【coupon】 券服务    
+
+
 
