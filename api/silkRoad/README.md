@@ -31,7 +31,7 @@ version 1.0.0
 
 ---
 
-## 【member-open】 会员   
+## 【member-open】-proxy 会员   
 
 ### 1. 【用户】通过openid/unionid comefrome查询会员  
 
@@ -368,7 +368,7 @@ version 1.0.0
 
 
 
-## 【query】 query服务    
+## 【query】-proxy query服务    
 
 ### 1. 【搜索】联想词  
 
@@ -2002,7 +2002,7 @@ version 1.0.0
 
 
 
-## 【customer】个人中心  
+## 【customer】-proxy 个人中心  
 
 
 ### 1. 【购物车】查询购物车商品数量总和  
@@ -2323,7 +2323,7 @@ version 1.0.0
 ---
 
 
-## 【trade】 交易   
+## 【trade】-proxy 交易   
 
 ### 1. 创建订单  
 
@@ -2331,7 +2331,7 @@ version 1.0.0
 
 
 
-## 【coupon】 券服务    
+## 【coupon】-proxy 券服务    
 
 
 
