@@ -661,11 +661,221 @@ version 1.0.0
  **NOTICE**  
 无
 
+
+### 3. 【渠道】 区域编码获取城市渠道 
+
+- **接口描述**  
+根据城市编码获取城市渠道
+
+- **接口信息**  
+> **接口地址：** /openx/query/channelQueryService/getCityChannelByRegionCode   
+> **提交方式：** POST  
+> **方法名称：** getCityChannelByRegionCode 
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channelCode|string|是|顶级渠道编码|
+|regionCode|string|是|城市编码 必填|
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|name|string|益丰精选长沙城市渠道|城市渠道名称|
+|channelCode|string|YFJX_CS|城市渠道渠道编码|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelCode":"YFJX",
+	"regionCode":"430100"
+}
+```
+
+返回结果
+```json
+{
+    "address": "",
+    "cashOnDelivery": false,
+    "channelCode": "YFJX_CS",
+    "customerPickUp": false,
+    "location": {},
+    "name": "益丰精选长沙",
+    "parentCode": "YFJX",
+    "serviceTime": "",
+    "warehouseCode": "VWC6369"
+}
+```
+
+ **NOTICE**  
+无
+
  
 ---
 
+### 4. 【渠道】 根据城市渠道查询最近门店渠道 
 
-### 3. 【商品】通过渠道编码和商品编码查询商品
+- **接口描述**  
+城市渠道编码 经纬度 范围 过滤渠道
+
+- **接口信息**  
+> **接口地址：** /openx/query/channelQueryService/getChannelByChannelCodeAndLocation    
+> **提交方式：** POST  
+> **方法名称：** getChannelByChannelCodeAndLocation  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelCode":"YFJX_CS",
+	"location":{
+		"longitude":22.1,
+		"latitude":112.2
+	},
+	"range":3000.0
+}
+```
+
+返回结果
+```json
+
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+ 
+
+### 5. 【渠道】 根据渠道编码批量查询渠道 
+
+- **接口描述**  
+
+
+- **接口信息**  
+> **接口地址：** /openx/query/channelQueryService/listChannelByCodes    
+> **提交方式：** listChannelByCodes  
+> **方法名称：**  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channelCodes|array|是|渠道编码列表[""]|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|[i].name|string|益丰精选长沙城市渠道|渠道名称|
+|[i].channelCode|string|XINGREN_6369|渠道编码|
+|[i].serviceTime|string||服务时间|
+|[i].address|string||渠道地址|
+|[i].warehouseCode|string||仓库编码|
+|[i].cashOnDelivery|boolean|false|货到付款|
+|[i].customerPickUp|boolean|false|自提|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelCodes":["XINGREN_6369"]
+}
+```
+
+返回结果
+```json
+[
+    {
+        "address": "湖南省长沙市望城区麓谷街道金洲大道68号",
+        "cashOnDelivery": false,
+        "channelCode": "XINGREN_6369",
+        "customerPickUp": false,
+        "name": "杏仁金洲大道店",
+        "parentCode": "XINGREN",
+        "serviceTime": "",
+        "warehouseCode": "6369+C018+6801+C048"
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+ 
+--- 
+
+
+
+### 6. 【商品】通过渠道编码和商品编码查询商品
 
 - **接口描述**  
 
@@ -757,6 +967,98 @@ version 1.0.0
  **NOTICE**  
 无
 
+---
+
+
+### 7. 【商品】商品编码查询商品说明书
+
+- **接口描述**  
+渠道编码查询商品说明书
+
+- **接口信息**  
+> **接口地址：** /openx/query/goodsQueryService/getGoodsInstructions    
+> **提交方式：** POST  
+> **方法名称：** getGoodsInstructions  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channelCode|string|是|渠道编码|
+|goodsCodes|array|是|商品编码列表|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|genericName|string|奥美拉唑肠溶胶囊|通用名|
+|specifications|string|20毫克*21粒|规格|
+|approvalNumber|string|国药准字H20033444|批准文号|
+|manufacturer|string||生产厂家|
+|composition|string||药品成分|
+|dosage|string||用法用量|
+|dosageForm|string||剂型|
+|adverseReactions|string||不良反应|
+|contraindications|string||禁忌|
+|drugDescription|string||药品性状|
+|indications|string||功能主治|
+|packing|string||包装|
+|interactions|string||药品相互作用|
+|storageCondition|string||贮藏条件|
+|validityTerm|number||有效期|
+|attention|string||注意事项|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelCode":"XINGREN_6369",
+	"goodsCode":"1011252"
+}
+```
+
+返回结果
+```json
+{
+    "adverseReactions": "本品耐受性良好,常见不良反应是腹泻,头痛,恶心,便秘等。",
+    "approvalNumber": "国药准字H20033444",
+    "attention": "使用本品应先排除胃癌的可能，肝肾功能不全者及孕妇，哺乳期妇女慎用。",
+    "composition": "",
+    "contraindications": "对本品过敏者、严重肾功能不全者及婴幼儿禁用。",
+    "dosage": "口服，不可咀嚼。（1）消化性溃疡：一次1粒，一日1－2次。每日晨起吞服或早晚各一次。（2）反流性食管炎：一次1－3粒。一日1－2次。晨起吞服或早晚各一次，（3）卓－艾综合征：一次3粒，一日1次；(4)十二指肠溃疡，疗程为2-4周；胃溃疡，反流性食管炎疗程为4-8周。",
+    "dosageForm": "",
+    "drugDescription": "本品内容物为白色或类白色肠溶小丸或颗粒。",
+    "genericName": "奥美拉唑肠溶胶囊",
+    "indications": "适应用于胃溃疡，十二指肠溃疡，应激性溃疡，反流性食管炎和卓-艾综合症（胃泌素瘤）。",
+    "interactions": "本品可延缓经肝脏代谢药物在体内的消除，如安定、苯妥英钠、华法令、硝苯啶等，当本品和上述药物一起使用时，应减少后者的用量。",
+    "packing": "纸盒",
+    "specifications": "20毫克*21粒",
+    "storageCondition": "常温:10-30℃"
+}
+```
+
+ **NOTICE**  
+无
+
+---
 
 
 ### 4. 【物流】根据渠道查询可用物流方式
@@ -834,6 +1136,138 @@ version 1.0.0
         "price": 10
     }
 ]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 5. 【物流】订单编号查询物流节点信息
+
+- **接口描述**  
+订单编号查询物流跟踪信息
+
+- **接口信息**  
+> **接口地址：** /openx/query/logisticsQueryService/getDeliveryTaskByOrderCode  
+> **提交方式：** POST  
+> **方法名称：** getDeliveryTaskByOrderCode  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|orderCode|string|是|订单编号|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|waybillCode|string|810733629993|快递单号|
+|deliveryStatusCode|string|DELIVERY_FINISHED|配送状态|
+|deliveryStatusDesc|string|配送完成|配送状态描述|
+|deliveryTime|number|1500257047000|配送时间|
+|finishedTime|number|1500446937000|配送完成时间|
+|logisticsId|string|YTO|配送公司标识|
+|logisticsName|string|圆通快递|配送公司名称|
+|traceInfos|array|[{}]|物流节点信息|
+|traceInfos[i].nodeCode|string||物流节点编码|
+|traceInfos[i].nodeDesc|string||物流节点名称|
+|traceInfos[i].nodeTime|string||物流节点时间|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"orderCode":"XR201707176369041000191"
+}
+```
+
+返回结果
+```json
+{
+    "deliveryStatusCode": "DELIVERY_FINISHED",
+    "deliveryStatusDesc": "配送完成",
+    "deliveryTime": 1500257047000,
+    "finishedTime": 1500446937000,
+    "logisticsId": "YTO",
+    "logisticsName": "圆通快递",
+    "traceInfos": [
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【湖南省长沙市岳麓区公司】  已收件",
+            "nodeTime": "2017-7-17 19:27:54"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【湖南省长沙市岳麓区公司】 已收件",
+            "nodeTime": "2017-7-17 21:20:01"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【湖南省长沙市岳麓区公司】 已打包",
+            "nodeTime": "2017-7-17 21:52:59"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【湖南省长沙市岳麓区公司】 已发出 下一站 【长沙转运中心】",
+            "nodeTime": "2017-7-17 22:23:06"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【长沙转运中心】 已收入",
+            "nodeTime": "2017-7-18 1:07:42"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【长沙转运中心】 已发出 下一站 【天津转运中心】",
+            "nodeTime": "2017-7-18 1:11:03"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【天津转运中心】 已收入",
+            "nodeTime": "2017-7-19 2:02:52"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【天津转运中心】 已收入",
+            "nodeTime": "2017-7-19 2:08:16"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【天津转运中心】 已发出 下一站 【天津市河东区万达公司】",
+            "nodeTime": "2017-7-19 2:13:30"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "【天津市河东区万达公司】 派件人 :杨丙 派件中 派件员电话15620269807",
+            "nodeTime": "2017-7-19 9:30:02"
+        },
+        {
+            "nodeCode": "810733629993",
+            "nodeDesc": "客户 签收人 :null 已签收 感谢使用圆通速递，期待再次为您服务",
+            "nodeTime": "2017-7-19 14:48:46"
+        }
+    ],
+    "waybillCode": "810733629993"
+}
 ```
 
  **NOTICE**  
@@ -1565,6 +1999,7 @@ version 1.0.0
 
  
 ---
+
 
 
 ## 【customer】个人中心  
