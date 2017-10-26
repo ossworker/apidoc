@@ -747,7 +747,11 @@ version 1.0.0
 
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
-
+|channelCode|string|是|顶级渠道编码|
+|range|number|是|周边距离单位m|
+|location|object|是|经纬度|
+|location.longitude|number|是|经度|
+|location.latitude|number|是|纬度|
 
 
 - **响应结果**
@@ -757,7 +761,17 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----|:----:|:----|:----|
-
+|name|string|益丰精选长沙城市渠道|城市渠道名称|
+|channelCode|string|YFJX_CSZD|城市渠道渠道编码|
+|status|string|ENABLE|状态|
+|type|string|OWNED|自营|
+|location|object|{}|经纬度|
+|location.longitude|112.88512|是|经度|
+|location.latitude|28.2267|是|纬度|
+|address|string||地址|
+|cashOnDelivery|boolean|false|货到付款|
+|customerPickUp|boolean|false|自提|
+|remark|string||备注|
 
 
 
@@ -777,18 +791,32 @@ version 1.0.0
 入参示例:  
 ```json
 {
-	"channelCode":"YFJX_CS",
-	"location":{
-		"longitude":22.1,
-		"latitude":112.2
-	},
-	"range":3000.0
+    "channelCode": "YFJX_CS",
+    "location": {
+        "longitude": "112.88512",
+        "latitude": "28.2267"
+    },
+    "range": "30000"
 }
 ```
 
 返回结果
 ```json
-
+{
+    "address": "益丰精选长沙城市渠道1",
+    "cashOnDelivery": false,
+    "channelCode": "YFJX_CSZD",
+    "customerPickUp": false,
+    "location": {
+        "latitude": 28.2267,
+        "longitude": 112.88512
+    },
+    "name": "益丰精选长沙城市渠道",
+    "parentCode": "YFJX_CS",
+    "remark": "益丰精选长沙城市渠道",
+    "status": "ENABLE",
+    "type": "OWNED"
+}
 ```
 
  **NOTICE**  
