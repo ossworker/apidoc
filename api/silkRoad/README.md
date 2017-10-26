@@ -901,9 +901,67 @@ version 1.0.0
  
 --- 
 
+### 6. 【渠道】 根据渠道编码查询渠道路径 
+
+- **接口描述**  
+根据渠道编码查询渠道路径
+
+- **接口信息**  
+> **接口地址：** /openx/query/channelQueryService/getChannelPath    
+> **提交方式：** getChannelPath  
+> **方法名称：**  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channelCode|string|是|渠道编码|
 
 
-### 6. 【商品】通过渠道编码和商品编码查询商品
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||string|YFJX,YFJX_CS,YFJX_CSZD|渠道路径|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelCode":"YFJX_CSZD"
+}
+```
+
+返回结果
+```json
+"YFJX,YFJX_CS,YFJX_CSZD"
+```
+
+ **NOTICE**  
+无
+
+ 
+--- 
+
+
+
+### 7. 【商品】通过渠道编码和商品编码查询商品
 
 - **接口描述**  
 
@@ -998,7 +1056,7 @@ version 1.0.0
 ---
 
 
-### 7. 【商品】商品编码查询商品说明书
+### 8. 【商品】商品编码查询商品说明书
 
 - **接口描述**  
 渠道编码查询商品说明书
@@ -1305,6 +1363,91 @@ version 1.0.0
 ---
 
 
+### 5. 【物流】查询物流收货人信息
+
+- **接口描述**  
+订单编号查询收货人信息
+
+- **接口信息**  
+> **接口地址：** /openx/query/logisticsQueryService/getReceiver  
+> **提交方式：** POST  
+> **方法名称：** getReceiver  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|orderCode|string|是|订单编号|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|name|string|刘佳梅|姓名|
+|phone|string||收货人电话|
+|location|object|{}|收货人地址经纬度|
+|location.longitude|number||经度|
+|location.longitude|number||纬度|
+|provinceCode|string|120000|省级编码|
+|provinceName|string|天津|省级名称|
+|cityCode|string|120100|市级编码|
+|cityName|string|天津市|市级名称|
+|districtCode|string|120102|县级编码|
+|districtName|string|河东区|县级名称|
+|detailAddress|string||详细地址|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"orderCode":"XR201707176369041000191"
+}
+```
+
+返回结果
+```json
+{
+    "cityCode": "120100",
+    "cityName": "天津市",
+    "districtCode": "120102",
+    "districtName": "河东区",
+    "location": {
+        "latitude": 27.9878,
+        "longitude": 86.925
+    },
+    "name": "刘佳美",
+    "phone": "15510828460",
+    "provinceCode": "120000",
+    "provinceName": "天津",
+    "detailAddress":"xx路"
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+
 ### 5. 【订单】统计订单数目
 
 - **接口描述**  
@@ -1349,7 +1492,7 @@ version 1.0.0
 入参示例:  
 ```json
 {
-	"topChannelCode":"WXM",
+	"topChannelCode":"XINGREN",
 	"customerCode":"S00001"
 }
 ```
@@ -1358,24 +1501,36 @@ version 1.0.0
 ```json
 [
     {
+        "orderState": "AUDIT_WAITING",
+        "quantity": 1
+    },
+    {
+        "orderState": "DELIVERY_WAITING",
+        "quantity": 7
+    },
+    {
         "orderState": "ORDER_CANCEL",
-        "quantity": 4
+        "quantity": 32
     },
     {
         "orderState": "ORDER_CLOSE",
-        "quantity": 2
+        "quantity": 12
+    },
+    {
+        "orderState": "ORDER_FINISH",
+        "quantity": 5
     },
     {
         "orderState": "PAYMENT_WAITING",
-        "quantity": 8
+        "quantity": 4
     },
     {
         "orderState": "RECEIVE_WAITING",
-        "quantity": 2
+        "quantity": 10
     },
     {
         "orderState": "SHIPMENT_WAITING",
-        "quantity": 1
+        "quantity": 4
     }
 ]
 ```
@@ -1435,7 +1590,8 @@ version 1.0.0
 |[i].goods[i].gift|boolean|false|是否礼品|
 |[i].goods[i].exercisePrice|number|10|执行价|
 |[i].goods[i].quantity|number|1|数量|
-
+|[i].goods[i].channelPrice|number||渠道商品价格|
+|[i].goods[i].guidePrice|number||原价|
 
 
  异常
@@ -1453,10 +1609,10 @@ version 1.0.0
 入参示例:  
 ```json
 {
-	"topChannelCode":"WXM",
-	"customerCode":"S00001",
-	"pageNo":1,
-	"pageSize":10
+  "topChannelCode":"XINGREN",
+  "customerCode":"3daa789d5165408f84fa706a5fd24c64",
+  "pageNo":1,
+  "pageSize":10
 }
 ```
 
@@ -1464,254 +1620,377 @@ version 1.0.0
 ```json
 [
     {
-        "channelCode": "WXM_6399",
-        "createTime": 1508116725000,
-        "customerCode": "S00001",
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508988633000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
         "customerNeedPayAmount": 29,
         "deliveryServiceType": "DELIVERY_YIFENG",
         "goods": [
             {
+                "channelPrice": 2.5,
                 "exercisePrice": 10,
                 "gift": false,
-                "goodsCode": "116000",
-                "goodsName": "东阿阿胶",
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "guidePrice": 2.5,
                 "quantity": 1
             },
             {
+                "channelPrice": 23.8,
                 "exercisePrice": 12,
                 "gift": false,
-                "goodsCode": "116001",
-                "goodsName": "小阿胶",
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "guidePrice": 23.8,
                 "quantity": 1
             }
         ],
         "goodsTotalAmount": 22,
-        "orderCode": "WXM2017101601100001",
+        "orderCode": "XR2017102601100002",
         "orderState": "PAYMENT_WAITING",
-        "ordonnanceId": "00000w0001",
-        "outTradeCode": "OUT000w01",
-        "parentOrderCode": "WXM2017101601100001",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017102601100002",
         "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
         "remark": "Remark",
         "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
+        "topChannelCode": "XINGREN"
     },
     {
-        "channelCode": "WXM_6399",
-        "createTime": 1506504993000,
-        "customerCode": "S00001",
-        "customerNeedPayAmount": 29,
-        "deliveryServiceType": "DELIVERY_YIFENG",
-        "goodsTotalAmount": 22,
-        "orderCode": "WXM2017092701100010",
-        "orderState": "PAYMENT_WAITING",
-        "ordonnanceId": "00000w0001",
-        "outTradeCode": "OUT000w01",
-        "parentOrderCode": "WXM2017092701100010",
-        "payee": "PAYEE_YIFENG",
-        "remark": "Remark",
-        "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
-    },
-    {
-        "channelCode": "WXM_6399",
-        "createTime": 1506504161000,
-        "customerCode": "S00001",
-        "customerNeedPayAmount": 29,
-        "deliveryServiceType": "DELIVERY_YIFENG",
-        "goodsTotalAmount": 22,
-        "orderCode": "WXM2017092701100009",
-        "orderState": "PAYMENT_WAITING",
-        "ordonnanceId": "00000w0001",
-        "outTradeCode": "OUT000w01",
-        "parentOrderCode": "WXM2017092701100009",
-        "payee": "PAYEE_YIFENG",
-        "remark": "Remark",
-        "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
-    },
-    {
-        "channelCode": "WXM_6399",
-        "createTime": 1506504134000,
-        "customerCode": "S00001",
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508394038000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
         "customerNeedPayAmount": 29,
         "deliveryServiceType": "DELIVERY_YIFENG",
         "goods": [
             {
+                "channelPrice": 2.5,
                 "exercisePrice": 10,
                 "gift": false,
-                "goodsCode": "116000",
-                "goodsName": "东阿阿胶",
-                "quantity": 1
-            },
-            {
-                "exercisePrice": 12,
-                "gift": false,
-                "goodsCode": "116001",
-                "goodsName": "小阿胶",
-                "quantity": 1
-            }
-        ],
-        "goodsTotalAmount": 22,
-        "orderCode": "WXM2017092701100008",
-        "orderState": "PAYMENT_WAITING",
-        "ordonnanceId": "00000w0001",
-        "outTradeCode": "OUT000w01",
-        "parentOrderCode": "WXM2017092701100008",
-        "payee": "PAYEE_YIFENG",
-        "remark": "Remark",
-        "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
-    },
-    {
-        "channelCode": "WXM_6399",
-        "createTime": 1506502524000,
-        "customerCode": "S00001",
-        "customerNeedPayAmount": 29,
-        "deliveryServiceType": "DELIVERY_YIFENG",
-        "goodsTotalAmount": 22,
-        "orderCode": "WXM2017092701100007",
-        "orderState": "PAYMENT_WAITING",
-        "ordonnanceId": "00000w0001",
-        "outTradeCode": "OUT000w01",
-        "parentOrderCode": "WXM2017092701100007",
-        "payee": "PAYEE_YIFENG",
-        "remark": "Remark",
-        "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
-    },
-    {
-        "channelCode": "WXM_6399",
-        "createTime": 1506502503000,
-        "customerCode": "S00001",
-        "customerNeedPayAmount": 29,
-        "deliveryServiceType": "DELIVERY_YIFENG",
-        "goodsTotalAmount": 22,
-        "orderCode": "WXM2017092701100006",
-        "orderState": "PAYMENT_WAITING",
-        "ordonnanceId": "00000w0001",
-        "outTradeCode": "OUT000w01",
-        "parentOrderCode": "WXM2017092701100006",
-        "payee": "PAYEE_YIFENG",
-        "remark": "Remark",
-        "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
-    },
-    {
-        "channelCode": "WXM_6399",
-        "createTime": 1506502451000,
-        "customerCode": "S00001",
-        "customerNeedPayAmount": 29,
-        "deliveryServiceType": "DELIVERY_YIFENG",
-        "goods": [
-            {
-                "exercisePrice": 10,
-                "gift": false,
-                "goodsCode": "116000",
-                "goodsName": "东阿阿胶",
-                "quantity": 1
-            },
-            {
-                "exercisePrice": 12,
-                "gift": false,
-                "goodsCode": "116001",
-                "goodsName": "小阿胶",
-                "quantity": 1
-            }
-        ],
-        "goodsTotalAmount": 22,
-        "orderCode": "WXM2017092701100005",
-        "orderState": "PAYMENT_WAITING",
-        "ordonnanceId": "00000w0001",
-        "outTradeCode": "OUT000w01",
-        "parentOrderCode": "WXM2017092701100005",
-        "payee": "PAYEE_YIFENG",
-        "remark": "Remark",
-        "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
-    },
-    {
-        "channelCode": "WXM_6399",
-        "createTime": 1506500324000,
-        "customerCode": "S00001",
-        "customerNeedPayAmount": 29,
-        "deliveryServiceType": "DELIVERY_YIFENG",
-        "goodsTotalAmount": 22,
-        "orderCode": "null2017092701100004",
-        "orderState": "PAYMENT_WAITING",
-        "ordonnanceId": "00000w0001",
-        "outTradeCode": "OUT000w01",
-        "parentOrderCode": "null2017092701100004",
-        "payee": "PAYEE_YIFENG",
-        "remark": "Remark",
-        "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
-    },
-    {
-        "channelCode": "WXM_6369",
-        "createTime": 1505295731000,
-        "customerCode": "S00001",
-        "customerNeedPayAmount": 29,
-        "deliveryServiceType": "DELIVERY_YIFENG",
-        "goods": [
-            {
-                "exercisePrice": 10,
-                "gift": false,
-                "goodsCode": "1000000",
+                "goodsCode": "1000013",
                 "goodsName": "阿莫西林分散片 (利莎林)",
                 "quantity": 1
             },
             {
+                "channelPrice": 23.8,
                 "exercisePrice": 12,
                 "gift": false,
-                "goodsCode": "1000001",
+                "goodsCode": "1000008",
                 "goodsName": "阿莫西林分散片 (阿林新)",
                 "quantity": 1
             }
         ],
         "goodsTotalAmount": 22,
-        "orderCode": "WXM_63692017091301100009_1",
-        "orderState": "SHIPMENT_WAITING",
-        "ordonnanceId": "000000001",
+        "orderCode": "XR2017101901100001",
+        "orderState": "ORDER_CANCEL",
         "outTradeCode": "BD000001",
-        "parentOrderCode": "WXM_63692017091301100009",
+        "parentOrderCode": "XR2017101901100001",
         "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
         "remark": "Remark",
         "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
+        "topChannelCode": "XINGREN"
     },
     {
-        "channelCode": "WXM_6369",
-        "createTime": 1505295266000,
-        "customerCode": "S00001",
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508232206000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
         "customerNeedPayAmount": 29,
         "deliveryServiceType": "DELIVERY_YIFENG",
         "goods": [
             {
+                "channelPrice": 2.5,
                 "exercisePrice": 10,
                 "gift": false,
-                "goodsCode": "1000000",
+                "goodsCode": "1000013",
                 "goodsName": "阿莫西林分散片 (利莎林)",
                 "quantity": 1
             },
             {
+                "channelPrice": 23.8,
                 "exercisePrice": 12,
                 "gift": false,
-                "goodsCode": "1000001",
+                "goodsCode": "1000008",
                 "goodsName": "阿莫西林分散片 (阿林新)",
                 "quantity": 1
             }
         ],
         "goodsTotalAmount": 22,
-        "orderCode": "WXM_63692017091301100009",
-        "orderState": "ORDER_CLOSE",
-        "ordonnanceId": "000000001",
+        "orderCode": "XR2017101701100011",
+        "orderState": "ORDER_CANCEL",
         "outTradeCode": "BD000001",
-        "parentOrderCode": "WXM_63692017091301100009",
+        "parentOrderCode": "XR2017101701100011",
         "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
         "remark": "Remark",
         "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
+        "topChannelCode": "XINGREN"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225435000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000101",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100010",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225426000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000091",
+        "orderState": "ORDER_FINISH",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100009",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225415000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000081",
+        "orderState": "ORDER_FINISH",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100008",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225406000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000071",
+        "orderState": "ORDER_FINISH",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100007",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225397000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000061",
+        "orderState": "ORDER_FINISH",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100006",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225388000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000051",
+        "orderState": "ORDER_FINISH",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100005",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225378000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000041",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100004",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
     }
 ]
 ```
@@ -1773,6 +2052,8 @@ version 1.0.0
 |[i].goods[i].gift|boolean|false|是否礼品|
 |[i].goods[i].exercisePrice|number|10|执行价|
 |[i].goods[i].quantity|number|1|数量|
+|[i].goods[i].channelPrice|number||渠道商品价格|
+|[i].goods[i].guidePrice|number||原价|
 
 
 
@@ -1791,11 +2072,11 @@ version 1.0.0
 入参示例:  
 ```json
 {
-	"topChannelCode":"WXM",
-	"customerCode":"S00001",
-	"orderState":"RECEIVE_WAITING",
-	"pageNo":1,
-	"pageSize":10
+  "topChannelCode":"XINGREN",
+  "customerCode":"3daa789d5165408f84fa706a5fd24c64",
+  "orderState":"RECEIVE_WAITING",
+  "pageNo":1,
+  "pageSize":10
 }
 ```
 
@@ -1803,9 +2084,187 @@ version 1.0.0
 ```json
 [
     {
-        "channelCode": "WXM_6369",
-        "createTime": 1504858027000,
-        "customerCode": "S00001",
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225435000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000101",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100010",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225378000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000041",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100004",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225370000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000031",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100003",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1508225355000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 10,
+                "channelPrice": 2.5,
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000013",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "accountPrice": 12,
+                "channelPrice": 23.8,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000008",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XR20171017011000021",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XR2017101701100002",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1505890159000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 0.12,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 0.01,
+                "gift": false,
+                "goodsCode": "1000000",
+                "goodsName": "阿莫西林分散片 (利莎林) 0.25克*12片 华北制药股份有限公司",
+                "quantity": 2
+            }
+        ],
+        "goodsTotalAmount": 0.02,
+        "orderCode": "XINGREN20170920011000041",
+        "orderState": "RECEIVE_WAITING",
+        "parentOrderCode": "XINGREN2017092001100004",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 0,
+        "remark": "",
+        "subsidyTotalAmount": 0,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1505809857000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
         "customerNeedPayAmount": 29,
         "deliveryServiceType": "DELIVERY_YIFENG",
         "goods": [
@@ -1813,54 +2272,158 @@ version 1.0.0
                 "exercisePrice": 10,
                 "gift": false,
                 "goodsCode": "1000000",
-                "goodsName": "东阿阿胶",
+                "goodsName": "阿莫西林分散片 (利莎林)",
                 "quantity": 1
             },
             {
                 "exercisePrice": 12,
                 "gift": false,
                 "goodsCode": "1000001",
-                "goodsName": "小阿胶",
+                "goodsName": "阿莫西林分散片 (阿林新)",
                 "quantity": 1
             }
         ],
         "goodsTotalAmount": 22,
-        "orderCode": "WXM_63692017090801100010",
+        "orderCode": "XINGREN2017091901100011_1",
         "orderState": "RECEIVE_WAITING",
-        "ordonnanceId": "000000001",
         "outTradeCode": "BD000001",
-        "parentOrderCode": "WXM_63692017090801100010",
+        "parentOrderCode": "XINGREN2017091901100011",
         "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
         "remark": "Remark",
         "subsidyTotalAmount": 2,
-        "topChannelCode": "WXM"
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
     },
     {
-        "channelCode": "WXM_6369",
-        "createTime": 1504844345000,
-        "customerCode": "S00001",
-        "customerNeedPayAmount": 19.75,
+        "channelCode": "XINGREN_6369",
+        "createTime": 1505808246000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
         "deliveryServiceType": "DELIVERY_YIFENG",
         "goods": [
             {
-                "accountPrice": 10,
                 "exercisePrice": 10,
                 "gift": false,
                 "goodsCode": "1000000",
-                "goodsName": "东阿阿胶",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000001",
+                "goodsName": "阿莫西林分散片 (阿林新)",
                 "quantity": 1
             }
         ],
-        "goodsTotalAmount": 10,
-        "orderCode": "WXM_63692017090801100005_1",
+        "goodsTotalAmount": 22,
+        "orderCode": "XINGREN2017091901100010_1",
         "orderState": "RECEIVE_WAITING",
         "outTradeCode": "BD000001",
-        "parentOrderCode": "WXM_63692017090801100005",
+        "parentOrderCode": "XINGREN2017091901100010",
         "payee": "PAYEE_YIFENG",
-        "remark": "请送最近日期的货品",
-        "subsidyTotalAmount": 0.9,
-        "topChannelCode": "WXM",
-        "warehouseCode": "5026"
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1505807667000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000000",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000001",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XINGREN2017091901100009_1",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XINGREN2017091901100009",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1505805276000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "exercisePrice": 10,
+                "gift": false,
+                "goodsCode": "1000000",
+                "goodsName": "阿莫西林分散片 (利莎林)",
+                "quantity": 1
+            },
+            {
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1000001",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XINGREN2017091901100008_1",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XINGREN2017091901100008",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
+    },
+    {
+        "channelCode": "XINGREN_6369",
+        "createTime": 1505798849000,
+        "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+        "customerNeedPayAmount": 29,
+        "deliveryServiceType": "DELIVERY_YIFENG",
+        "goods": [
+            {
+                "accountPrice": 12,
+                "exercisePrice": 12,
+                "gift": false,
+                "goodsCode": "1007566",
+                "goodsName": "阿莫西林分散片 (阿林新)",
+                "quantity": 1
+            }
+        ],
+        "goodsTotalAmount": 22,
+        "orderCode": "XINGREN2017091901100006_1",
+        "orderState": "RECEIVE_WAITING",
+        "outTradeCode": "BD000001",
+        "parentOrderCode": "XINGREN2017091901100006",
+        "payee": "PAYEE_YIFENG",
+        "preferentialTotalAmount": 5,
+        "remark": "Remark",
+        "subsidyTotalAmount": 2,
+        "topChannelCode": "XINGREN",
+        "warehouseCode": "6369"
     }
 ]
 ```
@@ -1910,6 +2473,7 @@ version 1.0.0
 |goodsTotalAmount|number|22|商品金额|
 |customerNeedPayAmount|number|29|会员支付金额|
 |subsidyTotalAmount|number|2||
+|preferentialTotalAmount|number|5|优惠总金额|
 |remark|string||备注|
 |goods|array|[{}]|订单商品|
 |goods[i].goodsCode|string|1000000|商品编码|
@@ -1918,6 +2482,8 @@ version 1.0.0
 |goods[i].accountPrice|number|10|下账金额|
 |goods[i].exercisePrice|number|10|执行价|
 |goods[i].quantity|number|1|数量|
+|goods[i].channelPrice|number||渠道商品价格|
+|goods[i].guidePrice|number||原价|
 |charges|array|[{}]|费用|
 |charges[i].chargeType|string|DEDUCT,FREIGHT,NORMAL,PREFERENTIAL,SUBSIDY|费用类型:运费,补贴,打包费,优惠|
 |charges[i].chargeCode|string|freight,PACKING,preferitial,subsidy|费用编码|
@@ -1946,7 +2512,7 @@ version 1.0.0
 入参示例:  
 ```json
 {
-	"orderCode":"WXM_63692017090801100005_1"
+	"orderCode":"XR2017102601100002"
 }
 ```
 
@@ -1959,8 +2525,14 @@ version 1.0.0
             "infoValue": "BD000001"
         }
     ],
-    "channelCode": "WXM_6369",
+    "channelCode": "XINGREN_6369",
     "charges": [
+        {
+            "amount": 5,
+            "chargeCode": "couponId",
+            "chargeType": "PREFERENTIAL",
+            "remark": "优惠"
+        },
         {
             "amount": 9,
             "chargeCode": "freight",
@@ -1980,45 +2552,55 @@ version 1.0.0
             "remark": "打包费"
         },
         {
-            "amount": 2.25,
-            "chargeCode": "preferitial",
-            "chargeType": "PREFERENTIAL",
-            "remark": "优惠"
-        },
-        {
-            "amount": 0.9,
+            "amount": 2,
             "chargeCode": "subsidy",
             "chargeType": "SUBSIDY"
         }
     ],
-    "createTime": 1504844345000,
-    "customerCode": "S00001",
-    "customerNeedPayAmount": 19.75,
+    "createTime": 1508988633000,
+    "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+    "customerNeedPayAmount": 29,
     "deliveryServiceType": "DELIVERY_YIFENG",
     "goods": [
         {
-            "accountPrice": 10,
+            "channelPrice": 2.5,
             "exercisePrice": 10,
             "gift": false,
-            "goodsCode": "1000000",
-            "goodsName": "东阿阿胶",
+            "goodsCode": "1000013",
+            "goodsName": "阿莫西林分散片 (利莎林)",
+            "guidePrice": 2.5,
+            "quantity": 1
+        },
+        {
+            "channelPrice": 23.8,
+            "exercisePrice": 12,
+            "gift": false,
+            "goodsCode": "1000008",
+            "goodsName": "阿莫西林分散片 (阿林新)",
+            "guidePrice": 23.8,
             "quantity": 1
         }
     ],
-    "goodsTotalAmount": 10,
-    "orderCode": "WXM_63692017090801100005_1",
-    "orderState": "RECEIVE_WAITING",
+    "goodsTotalAmount": 22,
+    "invoice": {
+        "content": "comtent",
+        "invoiceCode": "ddddd",
+        "orderCode": "XR2017102601100002",
+        "title": "个人发票"
+    },
+    "orderCode": "XR2017102601100002",
+    "orderState": "PAYMENT_WAITING",
     "outTradeCode": "BD000001",
-    "parentOrderCode": "WXM_63692017090801100005",
+    "parentOrderCode": "XR2017102601100002",
     "payee": "PAYEE_YIFENG",
+    "preferentialTotalAmount": 5,
     "referrer": {
         "referrerId": "referid1",
         "referrerName": "refername"
     },
-    "remark": "请送最近日期的货品",
-    "subsidyTotalAmount": 0.9,
-    "topChannelCode": "WXM",
-    "warehouseCode": "5026"
+    "remark": "Remark",
+    "subsidyTotalAmount": 2,
+    "topChannelCode": "XINGREN"
 }
 ```
 
@@ -2361,5 +2943,116 @@ version 1.0.0
 
 ## 【coupon】-proxy 券服务    
 
+### 1. 【我的券】 查询用户有效券的数量
+
+- **接口描述**  
+查询用户有效券的数量   
+
+- **接口信息**  
+> **接口地址：** /coupon/useCouponService/queryCouponCount    
+> **提交方式：** POST  
+> **方法名称：** queryCouponCount  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerCode|string|是|会员编号|
+|channelPath|string|是|渠道路径YFJX,YFJX_CS,YFJX_CSZD|
 
 
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||number|0|用户可用券数目|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"customerCode":"S00001",
+	"channelPath":"YFJX,YFJX_CS,YFJX_CSZD"
+}
+```
+
+返回结果
+```json
+0
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 2. 【我的券】查询用户可用券  
+
+- **接口描述**  
+查询用户有效券   
+
+- **接口信息**  
+> **接口地址：** /coupon/useCouponService/listCouponByPage    
+> **提交方式：** POST  
+> **方法名称：** listCouponByPage  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+
+```
+
+返回结果
+```json
+
+```
+
+ **NOTICE**  
+无
+
+ 
+---
