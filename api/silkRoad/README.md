@@ -1071,7 +1071,7 @@ version 1.0.0
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
 |channelCode|string|是|渠道编码|
-|goodsCodes|array|是|商品编码列表|
+|goodsCode|string|是|商品编码|
 
 
 
@@ -1138,6 +1138,138 @@ version 1.0.0
     "packing": "纸盒",
     "specifications": "20毫克*21粒",
     "storageCondition": "常温:10-30℃"
+}
+```
+
+ **NOTICE**  
+无
+
+---
+
+
+### 9. 【商品】商品编码查询商品详情
+
+- **接口描述**  
+渠道编码查询商品详情 包括说明书
+
+- **接口信息**  
+> **接口地址：** /openx/query/goodsQueryService/getChannelGoodsDetail    
+> **提交方式：** POST  
+> **方法名称：** getChannelGoodsDetail  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channelCode|string|是|渠道编码|
+|goodsCodes|string|是|商品编码|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|channelCode|string|YFJX_5742|渠道编码|
+|goodsCode|string|1000001|商品编码|
+|goodsName|string|阿莫西 ... 石药集团中(石家庄)有限公|商品名称|
+|channelGoodsCode|string|YF1000001|渠道商品编码|
+|channelGoodsName|string|大写的药品名|渠道商品名称|
+|channelGoodsStatus|string|ON_LINE|渠道商品状态|
+|channelPrice|number|3.6|渠道商品价格|
+|guidePrice|number|2.8|渠道商品原价|
+|commonName|string|阿莫西林分散片||
+|goodsMark|string|角标66|角标|
+|imageUrl|array|[""]|商品图片|
+|recommendIndex|int|2|推荐指数|
+|standard|string||规格|
+|manufacturer|string||生产企业|
+|ingredients|string||成份|
+|dosage|string||用法用量|
+|dosageForm|string||剂型|
+|adr|string||不良反应|
+|taboo|string|对青霉素类药物过敏者禁用|禁忌|
+|drugTrait|string||性状|
+|effect|string||功能作用|
+|packagingMaterial|string||包装|
+|drugInteraction|string||药品相互作用|
+|storageCondition|string||储藏条件|
+|approvalNumber|string|国药准字H20033444|批准文号|
+|expiryDate|number||有效期|
+|attention|string||注意事项|
+|drugCategory|string|1|药品类型|
+
+drugCategory
+
+|value|desc|
+|:---|:---|
+|1|单轨处方药1|
+|2|单轨处方药2|
+|3|双轨处方药|
+|4|甲类非处方|
+|5|乙类非处方|
+|6|非药品|
+|7|配方饮片|
+|8|精制饮片|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelCode":"YFJX_5742",
+	"goodsCodes":"1000001"
+}
+```
+
+返回结果
+```json
+{
+    "adr": "少数患者可出现恶心、呕吐、食欲减退、腹泻等消化道反应，一般不影响治疗。偶可出现皮疹、斑疹、紫癜等，应立即停药。",
+    "approvalNumber": "国药准字H10980075",
+    "attention": "1．用药前必须进行青霉素皮内敏感试验，阳性反应者禁用。\r\n2．伴有单核细胞增多和淋巴细胞增多的患者，出现皮疹的机会多一些。3．与青霉素类和头孢菌素类之间存在交叉过敏性和交叉耐药性。4．类似其它广谱抗生素，有可能发生由白念珠菌等非敏感微生物引起的二重感染。尤其是慢性病患者和自身免疫功能失调者。",
+    "channelCode": "YFJX_5742",
+    "channelGoodsCode": "YF1000001",
+    "channelGoodsName": "大写的药品名",
+    "channelGoodsStatus": "ON_LINE",
+    "channelPrice": 3.6,
+    "commonName": "阿莫西林分散片",
+    "dosage": "本品既可直接用水吞服，也可放入牛奶或果汁中，搅拌至混悬状态后服用。口服：1.成人一次0.5～1g，一日3～4次；小儿每日按体重50～100mg/kg，分3～4次服用。2.治疗无并发症的急性尿路感染可予以单次口服3g即可，也可于10～12小时后再增加一次3g剂量。单次3g剂量也可用以预防感染性心内膜炎或治疗淋病，前者于口腔内手术(如拔牙)前1小时给予，后者常加用丙磺舒1g。",
+    "dosageForm": "",
+    "drugCategory": "1",
+    "drugInteraction": "如与其他药物同时使用可能会发生药物相互作用，详情请咨询医师或药师。",
+    "drugTrait": "本品为白色或类白色片 \r\n",
+    "effect": "抗生素，其抗菌谱与氨苄青霉素相同，\r\n对敏感的革兰氏阳性球菌和杆菌及革兰氏阴性菌均有明显的抑制作用。适用于敏感菌所致呼吸道感染、尿路感染、胃肠道感染、败血症、皮肤及软组织感染等症。",
+    "goodsCode": "1000001",
+    "goodsMark": "角标66",
+    "goodsName": "阿莫西林分散片 (阿林新) 0.25克*12片 石药集团中诺药业(石家庄)有限公",
+    "guidePrice": 3.8,
+    "imageUrl": [
+        "https://img.yifengx.com/product/1000001/1000001a1.jpg!f120",
+        "https://img.yifengx.com/product/1000001/1000001a2.jpg!f120",
+        "https://img.yifengx.com/product/1000001/1000001a3.jpg!f120"
+    ],
+    "ingredients": "",
+    "manufacturer": "石药集团中诺药业(石家庄)有限公司(石药集团欧意药业有限公司",
+    "packagingMaterial": "纸盒",
+    "recommendIndex": 2,
+    "standard": "0.25克*12片",
+    "storageCondition": "常温:10-30℃",
+    "taboo": "对青霉素类药物过敏者禁用"
 }
 ```
 
@@ -2958,7 +3090,7 @@ version 1.0.0
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
 |customerCode|string|是|会员编号|
-|channelPath|string|是|渠道路径YFJX,YFJX_CS,YFJX_CSZD|
+|channelPath|string|是|渠道路径YFJX,YFJX_CS,YFJX_CSZD  这里业务为YFJX 顶级渠道|
 
 
 - **响应结果**
@@ -2968,7 +3100,7 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----|:----:|:----|:----|
-||number|0|用户可用券数目|
+||number|1|用户可用券数目|
 
  异常
 
@@ -2985,14 +3117,14 @@ version 1.0.0
 入参示例:  
 ```json
 {
-	"customerCode":"S00001",
-	"channelPath":"YFJX,YFJX_CS,YFJX_CSZD"
+	"customerCode":"3daa789d5165408f84fa706a5fd24c64",
+	"channelPath":"YFJX"
 }
 ```
 
 返回结果
 ```json
-0
+1
 ```
 
  **NOTICE**  
@@ -3006,6 +3138,127 @@ version 1.0.0
 
 - **接口描述**  
 查询用户有效券   
+
+- **接口信息**  
+> **接口地址：** /coupon/useCouponService/listCouponByPage    
+> **提交方式：** POST  
+> **方法名称：** listCouponByPage  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+
+```
+
+返回结果
+```json
+
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+
+### . 【券】领券  
+
+- **接口描述**  
+用户领券   
+
+- **接口信息**  
+> **接口地址：** /coupon/useCouponService/autoGetCoupon    
+> **提交方式：** POST  
+> **方法名称：** autoGetCoupon  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerCode|string|是|会员编号|
+|phone|string|否|手机号码|
+|channelPath|string|YFJX,YFJX_CS,YFJX_CSZD|渠道路径|
+|templateId|string||券模版id|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||string|"300135566398"|领取到的券的密码|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"customerCode":"3daa789d5165408f84fa706a5fd24c64",
+	"channelPath":"YFJX,YFJX_CS,YFJX_CSZD",
+	"phone":null,
+	"templateId":"59f2a8e84f89b21ae9ded24d"
+}
+```
+
+返回结果
+```json
+"300135566398"
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### . 【券】查询用户可以领用的券  
+
+- **接口描述**  
+查询用户可以领用的券    
 
 - **接口信息**  
 > **接口地址：** /coupon/useCouponService/listCouponByPage    
