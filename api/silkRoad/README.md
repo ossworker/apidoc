@@ -89,8 +89,8 @@ version 1.0.0
 {
     "comeFrom":"YFJX",
     "relateFrom":"MINIPG",
-    "refId":"xxxxXXXX",
-    "refId2":null
+    "refId":"o3F_q0FWoE-wQFRvvbDTtx88XsGU",
+    "refId2":"oXZ0xwUEgUFZDfegCyjAd17_CYf0"
 }
 ```
 
@@ -98,29 +98,29 @@ version 1.0.0
 ```json
 {
     "atStore": "5144",
-    "cMobile": "13569863169",
-    "cardCode": "M171011172604017",
+    "cMobile": "15116451260",
+    "cardCode": "M171031142852489",
     "comeFrom": "YFJX",
     "companyCode": "100B",
-    "createTime": 1507713964000,
+    "createTime": 1509431332000,
     "creator": "sys",
     "creatorName": "系统自动",
-    "customerId": "3f0e26708e25434582fe098888c94569",
-    "mobile": "13569863169",
+    "customerId": "ac1bf6b19ddf40619b9a4fc54d428153",
+    "mobile": "15116451260",
     "modifier": "sys",
     "modifierName": "系统自动",
-    "modifyTime": 1507713964000,
+    "modifyTime": 1509431332000,
     "name": "未知",
     "name1": "未知",
     "relateAccountModel": {
         "comeFrom": "MINIPG",
-        "createTime": 1507714765000,
-        "creator": "系统自动",
-        "customerId": "3f0e26708e25434582fe098888c94569",
-        "id": "59dde6cc06776508e8cd1113",
+        "createTime": 1509431332000,
+        "creator": "sys",
+        "customerId": "ac1bf6b19ddf40619b9a4fc54d428153",
+        "id": "59f8182406776508e8cd114f",
         "isDelete": "0",
-        "refId": "xxxxXXXX",
-        "refId2": "fdsafsfa",
+        "refId": "o3F_q0FWoE-wQFRvvbDTtx88XsGU",
+        "refId2": "oXZ0xwUEgUFZDfegCyjAd17_CYf0",
         "relateFrom": "YFJX"
     },
     "state": "EFC",
@@ -772,6 +772,7 @@ version 1.0.0
 |cashOnDelivery|boolean|false|货到付款|
 |customerPickUp|boolean|false|自提|
 |remark|string||备注|
+|serviceModel|string||服务模式 O2O B2C|
 
 
 
@@ -814,6 +815,7 @@ version 1.0.0
     "name": "益丰精选长沙城市渠道",
     "parentCode": "YFJX_CS",
     "remark": "益丰精选长沙城市渠道",
+    "serviceModel": "O2O",
     "status": "ENABLE",
     "type": "OWNED"
 }
@@ -1279,7 +1281,72 @@ drugCategory
 ---
 
 
-### 4. 【物流】根据渠道查询可用物流方式
+### 10. 【商品】计算商品合计
+
+- **接口描述**  
+根据渠道和商品 计算价格合计
+
+- **接口信息**  
+> **接口地址：** /openx/query/goodsQueryService/calGoodsPrice    
+> **提交方式：** POST  
+> **方法名称：** calGoodsPrice  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channelCode|string|是|城市渠道/价格渠道 YFJX_CS|
+|goodsList|array|是|[{}]|
+|goodsList[i].goodsCode|string|是|商品编码|
+|goodsList[i].quantity|int|是|商品数量|
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||number|10|合计金额|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelCode":"YFJX_CS",
+	"goodsList":[{
+		"goodsCode":"1000001",
+		"quantity":20000
+	}]
+}
+```
+
+返回结果
+```json
+72000
+```
+
+ **NOTICE**  
+无
+
+---
+
+
+### 10. 【物流】根据渠道查询可用物流方式
 
 - **接口描述**  
 根据收发城市信息及渠道信息、获取可用的物流信息  规则：①、在未拆单的情况下，直接去load可用物流信息。 ②、拆单情况下获取可用物流取2个城市的并集信息中价格最低物流。
@@ -1363,7 +1430,7 @@ drugCategory
 ---
 
 
-### 5. 【物流】订单编号查询物流节点信息
+### 11. 【物流】订单编号查询物流节点信息
 
 - **接口描述**  
 订单编号查询物流跟踪信息
@@ -1495,7 +1562,7 @@ drugCategory
 ---
 
 
-### 5. 【物流】查询物流收货人信息
+### 12. 【物流】查询物流收货人信息
 
 - **接口描述**  
 订单编号查询收货人信息
@@ -1580,7 +1647,7 @@ drugCategory
 
 
 
-### 5. 【订单】统计订单数目
+### 13. 【订单】统计订单数目
 
 - **接口描述**  
 根据顶级渠道和用户编码查询各状态下的订单数目
@@ -1673,7 +1740,7 @@ drugCategory
  
 ---
 
-### 6. 【订单】查询所有订单
+### 14. 【订单】查询所有订单
 
 - **接口描述**  
 查询所有订单
@@ -2134,7 +2201,7 @@ drugCategory
 ---
 
 
-### 7. 【订单】查询订单状态下订单
+### 15. 【订单】查询订单状态下订单
 
 - **接口描述**  
 查询各状态下订单
@@ -2566,7 +2633,7 @@ drugCategory
  
 ---
 
-### 8. 【订单】查询订单详情
+### 16. 【订单】查询订单详情
 
 - **接口描述**  
 查询订单详情
@@ -3067,11 +3134,478 @@ drugCategory
 
 ## 【trade】-proxy 交易   
 
-### 1. 创建订单  
+### 1. 【订单】创建订单  
 
-### 2. 预支付
+- **接口描述**  
+购物车商品删除  
+
+- **接口信息**  
+> **接口地址：** /proxy/openx/trade/orderService/submitNormalOrder    
+> **提交方式：** POST  
+> **方法名称：** submitNormalOrder   
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|orderRequest|object|true|订单请求对象|
+|orderRequest.order|object|是|订单对象|
+|orderRequest.order.topChannelCode|string|是|顶级渠道编码|
+|orderRequest.order.channelCode|string|是|渠道编码|
+|orderRequest.order.customerCode|string|是|会员编号|
+|orderRequest.order.customerNeedPayAmount|number|是|会员实付|
+|orderRequest.order.goodsTotalAmount|number|是|商品总额|
+|orderRequest.order.deliveryServiceType|string|是|物流配送类型 DELIVERY_YIFENG|
+|orderRequest.order.payee|string|是|支付方式 PAYEE_YIFENG|
+|orderRequest.order.remark|string|是|订单备注|
+|orderRequest.order.goods|array|是|订单商品|
+|orderRequest.order.goods[i].exercisePrice|number|是|订单商品执行价 这里 channelPrice|
+|orderRequest.order.goods[i].gift|boolean|是|订单商品是否礼品 false|
+|orderRequest.order.goods[i].goodsCode|string|是|订单商品编码|
+|orderRequest.order.goods[i].goodsName|string|是|订单商品名称|
+|orderRequest.order.goods[i].quantity|number|是|订单商品数量|
+|orderRequest.order.charges|array|是|订单各项费用|
+|orderRequest.order.charges[i].amount|string|是|费用金额|
+|orderRequest.order.charges[i].chargeCode|string|是|费用编码这里券可以用Q+券编码|
+|orderRequest.order.charges[i].chargeType|string|是|费用类型 PREFERENTIAL:券优惠 FREIGHT:运费 |
+|orderRequest.order.charges[i].remark|string|是|费用备注|
+|orderRequest.order.invoice|object|是|发票|
+|orderRequest.order.invoice.title|string|是|发票抬头|
+|orderRequest.order.invoice.content|string|是|发票内容|
+|orderRequest.couponCodes|array|否|券编码列表[""]|
+|orderRequest.logisticInfo|object|是|物流对象|
+|orderRequest.logisticInfo.deliveryType|string|是|物流类型|
+|orderRequest.logisticInfo.receiver|object|是|收货人信息|
+|orderRequest.logisticInfo.receiver.name|string|是|收货人姓名|
+|orderRequest.logisticInfo.receiver.phone|string|是|收货人电话|
+|orderRequest.logisticInfo.receiver.provinceCode|string|是|收货人省级编码|
+|orderRequest.logisticInfo.receiver.provinceName|string|是|收货人市级编码|
+|orderRequest.logisticInfo.receiver.cityCode|string|是|收货人市级编码|
+|orderRequest.logisticInfo.receiver.cityName|string|是|收货人市级名称|
+|orderRequest.logisticInfo.receiver.districtCode|string|是|收货人地区编码|
+|orderRequest.logisticInfo.receiver.districtName|string|是|收货人地区名称|
+|orderRequest.logisticInfo.receiver.detailAddress|string|是|收货人详细地址|
 
 
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||string|YFJX2017103001100006|订单编号|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+    "orderRequest": {
+        "couponCodes": [
+            "301382552066"
+        ],
+        "logisticInfo": {
+            "deliveryType": "NORMAL",
+            "receiver": {
+                "cityCode": "430100",
+                "cityName": "长沙市",
+                "detailAddress": "金洲大道68号",
+                "districtCode": "430104",
+                "districtName": "岳麓区",
+                "name": "测试",
+                "phone": "13392460103",
+                "provinceCode": "430000",
+                "provinceName": "湖南省"
+            }
+        },
+        "order": {
+            "channelCode": "YFJX_5742",
+            "charges": [
+                {
+                    "amount": 10,
+                    "chargeCode": "Q300135566398",
+                    "chargeType": "PREFERENTIAL",
+                    "remark": "券优惠"
+                },
+                {
+                    "amount": 6,
+                    "chargeCode": "freight",
+                    "chargeType": "FREIGHT",
+                    "remark": "运费"
+                }
+            ],
+            "customerCode": "3daa789d5165408f84fa706a5fd24c64",
+            "customerNeedPayAmount": 50.3,
+            "deliveryServiceType": "DELIVERY_YIFENG",
+            "goods": [
+                {
+                    "exercisePrice": 13.3,
+                    "gift": false,
+                    "goodsCode": "1000013",
+                    "goodsName": "阿莫西林分散片 (利莎林)",
+                    "quantity": 3
+                },
+                {
+                    "exercisePrice": 3.6,
+                    "gift": false,
+                    "goodsCode": "1000001",
+                    "goodsName": "大写的药品名",
+                    "quantity": 4
+                }
+            ],
+            "goodsTotalAmount": 54.3,
+            "invoice": {
+                "content": "发票内容",
+                "title": "发票抬头"
+            },
+            "payee": "PAYEE_YIFENG",
+            "referrer": {
+                "referrerId": "推荐人ID",
+                "referrerName": "推荐人姓名"
+            },
+            "remark": "测试创建订单备注",
+            "topChannelCode": "YFJX",
+            "goodsChannelCode":"YFJX_CS"
+        }
+    }
+}
+```
+
+返回结果
+```json
+"YFJX2017103001100006"
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 2. 【订单】 取消订单  
+
+- **接口描述**  
+用户取消订单  
+
+- **接口信息**  
+> **接口地址：** /openx/trade/orderService/cancelOrder    
+> **提交方式：** POST  
+> **方法名称：** cancelOrder   
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|orderCode|string|是|订单编号|
+|remark|string|是|取消订单原因备注|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||boolean|true|取消订单结果|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"orderCode":"YFJX2017103001100006",
+	"remark":"测试取消"
+}
+```
+
+返回结果
+```json
+true
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 3. 【订单】 删除订单  
+
+- **接口描述**  
+  
+
+- **接口信息**  
+> **接口地址：** /openx/trade/orderService/deleteOrder    
+> **提交方式：** POST  
+> **方法名称：** deleteOrder  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|order|string|是|订单编号|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||boolean|true|取消订单结果|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"order":"YFJX2017103001100006"
+}
+```
+
+返回结果
+```json
+true
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 4. 【订单】 确认收货订单  
+
+- **接口描述**  
+  
+
+- **接口信息**  
+> **接口地址：** /openx/trade/orderService/confirmReceived    
+> **提交方式：** POST  
+> **方法名称：** confirmReceived   
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|orderCode|string|true|订单编号|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||boolean|true|返回结果|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"orderCode":"YFJX2017103001100006"
+}
+```
+
+返回结果
+```json
+true
+```
+
+ **NOTICE**  
+无
+
+ 
+---.
+
+
+### 5. 【支付】预支付
+
+- **接口描述**  
+  申请预支付 获取调用微信支付api的参数
+
+- **接口信息**  
+> **接口地址：** /openx/trade/paymentService/createPrePayment    
+> **提交方式：** POST  
+> **方法名称：** createPrePayment   
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|prePayment|object|是|预支付对象|
+|prePayment.channelCode|string|是|顶级渠道编码|
+|prePayment.outTradeCode|string|是|订单编码|
+|prePayment.paymentType|string|是|支付类型 WX_H5:公众号H5 WX_WCX:小程序|
+|prePayment.thirdPartyCode|string|是|openid等|
+|prePayment.title|string|是|支付标题|
+|prePayment.amount|number|是|金额|
+|prePayment.remark|string|是|备注|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|paymentCode|string|59f6d2d179290f756d47c3f4|交易流水|
+|tradeCode|string||订单编号|
+|preStr|string||预支付编码|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+    "prePayment": {
+        "amount": 10,
+        "channelCode": "YFJX",
+        "outTradeCode": "YFJX2017103001100002",
+        "paymentType": "WX_H5",
+        "remark": "订单备注",
+        "thirdPartyCode": "oxy7kwI3xBovydQbsDQzKbCwZIl8",
+        "title": "订单给钱"
+    }
+}
+```
+
+返回结果
+```json
+{
+    "paymentCode": "59f6d2d179290f756d47c3f4",
+    "preStr": "{\"appId\":\"wx8df2c1ef060c79fd\",\"timeStamp\":\"1509348049\",\"signType\":\"MD5\",\"package\":\"prepay_id=wx20171030152126f6bc3070940101485356\",\"nonceStr\":\"fvb0p773ycx84vzj15n538nvasnbtd8x\",\"paySign\":\"1114BD49D71BDBB901AFA2EC6C7E05DE\"}",
+    "tradeCode": "YFJX2017103001100002"
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 6. 【支付】 获取支付结果  
+
+- **接口描述**  
+获取支付结果 结果空表示 没有支付 或者 状态为 NOPAY 
+
+- **接口信息**  
+> **接口地址：** /openx/trade/paymentService/getOrderPaymentStatus    
+> **提交方式：** POST  
+> **方法名称：** getOrderPaymentStatus   
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|orderCode|string|true|订单编号|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|paymentStatus|string|NOTPAY|支付状态 NOTPAY:未支付 PAID:已支付 FAILED:失败 REFUND:已退款 CLOSE:关闭|
+|paymentCode|string||支付编码|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"orderCode":"YFJX2017103001100002"
+}
+```
+
+返回结果
+```json
+{
+    "paymentCode": "59f6d2d179290f756d47c3f4",
+    "paymentStatus": "NOTPAY"
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
 
 ## 【coupon】-proxy 券服务    
 
@@ -3134,21 +3668,25 @@ drugCategory
 ---
 
 
-### 2. 【我的券】查询用户可用券  
+### 2. 【我的券】查询用户所有券  
 
 - **接口描述**  
-查询用户有效券   
+查询用户券 按照状态(待用>已用>失效)，类型(整单>品类)，时间倒序)排序  
 
 - **接口信息**  
-> **接口地址：** /coupon/useCouponService/listCouponByPage    
+> **接口地址：** /coupon/useCouponService/queryCouponListPage    
 > **提交方式：** POST  
-> **方法名称：** listCouponByPage  
+> **方法名称：** queryCouponListPage  
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
-
+|customerCode|string|是|会员编号|
+|channelPath|string|是|渠道路径 这里是顶级渠道|
+|status|string|是|AVAILABLE, 可为null|
+|page|int|是|页码|
+|pageSize|int|是|每页大小|
 
 
 
@@ -3159,6 +3697,16 @@ drugCategory
 
 |名称|类型|示例值|描述|
 |:----|:----:|:----|:----|
+|beginDate|number|1509033601000|开始日期|
+|expireDate|number|1512057599000|过期日期|
+|code|string|300135566398|券编码|
+|couponMoney|number|20|券值|
+|createDate|number|1509075398000|创建时间|
+|title|string|益丰精选 满30-20|标题|
+|type|string|ALL|全部|
+|ruleDesc|string|满30-20 全渠道通用|券规则描述|
+|desc|string|益丰精选 满30-20|券描述|
+|status|string|AVAILABLE,USED,EXPIRED,LOCKED|状态 待用 已用 过期 锁定|
 
 
  异常
@@ -3175,12 +3723,44 @@ drugCategory
 
 入参示例:  
 ```json
-
+{
+	"customerCode":"3daa789d5165408f84fa706a5fd24c64",
+	"channelPath":"YFJX",
+	"status":"AVAILABLE",
+	"page":1,
+	"pageSize":10
+	
+}
 ```
 
 返回结果
 ```json
-
+[
+    {
+        "beginDate": 1509033601000,
+        "code": "300135566398",
+        "couponMoney": 20,
+        "createDate": 1509075398000,
+        "desc": "益丰精选 满30-20",
+        "expireDate": 1512057599000,
+        "ruleDesc": "满30-20 全渠道通用",
+        "status": "AVAILABLE",
+        "title": "益丰精选 满30-20 1",
+        "type": "ALL"
+    },
+    {
+        "beginDate": 1509033601000,
+        "code": "301382552066",
+        "couponMoney": 20,
+        "createDate": 1509093462000,
+        "desc": "满30-20 说明",
+        "expireDate": 1512057599000,
+        "ruleDesc": "YFJX_5742 使用",
+        "status": "AVAILABLE",
+        "title": "满30-20 名称",
+        "type": "ALL"
+    }
+]
 ```
 
  **NOTICE**  
@@ -3191,7 +3771,7 @@ drugCategory
 
 
 
-### . 【券】领券  
+### 3. 【券】领券  
 
 - **接口描述**  
 用户领券   
@@ -3255,22 +3835,467 @@ drugCategory
 ---
 
 
-### . 【券】查询用户可以领用的券  
+### 4. 【券】查询用户可以领用的券  
 
 - **接口描述**  
 查询用户可以领用的券    
 
 - **接口信息**  
-> **接口地址：** /coupon/useCouponService/listCouponByPage    
+> **接口地址：** /coupon/useCouponService/listReceivableCouponPage   
 > **提交方式：** POST  
-> **方法名称：** listCouponByPage  
+> **方法名称：** listReceivableCouponPage  
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
+|channelPathList|string|是|渠道路径列表|
+|customerCode|string|是|会员编号|
+|page|int|是|当前页|
+|pageSize|int|是|每页大小|
 
 
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|availableCouponStatus|string|AVAILABLE,UNAVAILABLE,NONE|可用券状态 可领 已领 已领完|
+|availableNumber|number||可用数量|
+|couponDesc|string||券面描述|
+|couponMoney|number||券面值|
+|couponName|string||方案名称|
+|couponRuleDesc|string||券规则描述|
+|couponTakeStartDate|string||券领取开始时间|
+|couponTakeStopDate|string||券领取结束时间|
+|couponTitle|string||券面名称|
+|couponType|string||券类型|
+|maxValidityDate|number||券有效期|
+|maxValidityDateType|string||时间类型|
+|scopeList|string||券适用范围|
+|takeEffectType|string||生效方式|
+|templateStartDate|number||模板生效开始时间|
+|templateStopDate|number||模板生效结束时间|
+|useCondition|string||满减条件|
+|uuid|string||券模板编码|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelPathList":["YFJX,YFJX_CS,YFJX_5742"],
+	"customerCode":"3daa789d5165408f84fa706a5fd24c64",
+	"page":1,
+	"pageSize":10
+}
+```
+
+返回结果
+```json
+[
+    {
+        "availableCouponStatus": "AVAILABLE",
+        "availableNumber": 0,
+        "couponDesc": "满30-20 说明",
+        "couponMoney": 20,
+        "couponName": "益丰精选券模版2",
+        "couponRuleDesc": "YFJX_5742 使用",
+        "couponTakeStartDate": 1509033601000,
+        "couponTakeStopDate": 1512057599000,
+        "couponTitle": "满30-20 名称",
+        "couponType": "ALL",
+        "maxValidityDate": 3,
+        "maxValidityDateType": "MONTH",
+        "scopeList": [
+            "YFJX,YFJX_CS,YFJX_5742"
+        ],
+        "takeEffectType": "RIGHTNOW",
+        "templateStartDate": 1509033601000,
+        "templateStopDate": 1512057599000,
+        "useCondition": 30,
+        "uuid": "59f2f0454f89b21ae9ded24e"
+    },
+    {
+        "availableCouponStatus": "AVAILABLE",
+        "availableNumber": 0,
+        "couponDesc": "益丰精选 满30-20",
+        "couponMoney": 20,
+        "couponName": "益丰精选券模版1",
+        "couponRuleDesc": "满30-20 全渠道通用",
+        "couponTakeStartDate": 1509033601000,
+        "couponTakeStopDate": 1511971199000,
+        "couponTitle": "益丰精选 满30-20 1",
+        "couponType": "ALL",
+        "maxValidityDate": 3,
+        "maxValidityDateType": "MONTH",
+        "scopeList": [
+            "YFJX,YFJX_CS,YFJX_5742"
+        ],
+        "takeEffectType": "RIGHTNOW",
+        "templateStartDate": 1509033601000,
+        "templateStopDate": 1512057599000,
+        "useCondition": 32,
+        "uuid": "59f2a8e84f89b21ae9ded24d"
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 5. 【券】订单可用券  
+
+- **接口描述**  
+订单信息查询可用券  
+
+- **接口信息**  
+> **接口地址：** /coupon/useCouponService/listCouponByOrderInfo  
+> **提交方式：** POST  
+> **方法名称：** listCouponByOrderInfo  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerCode|string|是|会员编号|
+|channelPath|string|YFJX,YFJX_CS,YFJX_CSZD|渠道路径|
+|goodsList|array|是|订单商品列表|
+|goodsList[i].goodsCode|string||商品编码|
+|goodsList[i].quantity|number||订单商品数量|
+|goodsList[i].price|number||订单商品单价|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|beginDate|number|1509033601000|开始日期|
+|expireDate|number|1512057599000|过期日期|
+|code|string|300135566398|券编码|
+|couponMoney|number|20|券值|
+|createDate|number|1509075398000|创建时间|
+|title|string|益丰精选 满30-20|标题|
+|type|string|ALL|全部|
+|ruleDesc|string|满30-20 全渠道通用|券规则描述|
+|desc|string|益丰精选 满30-20|券描述|
+|status|string|AVAILABLE,USED,EXPIRED,LOCKED|状态 待用 已用 过期 锁定|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"customerCode":"3daa789d5165408f84fa706a5fd24c64",
+	"channelPath":"YFJX,YFJX_CS,YFJX_5742",
+	"goodsList":[{
+		"goodsCode":"1000013",
+		"quantity":3,
+		"price":13.3
+	}]
+}
+```
+
+返回结果
+```json
+[
+    {
+        "beginDate": 1509033601000,
+        "code": "300135566398",
+        "couponMoney": 20,
+        "createDate": 1509075398000,
+        "desc": "益丰精选 满30-20",
+        "expireDate": 1512057599000,
+        "ruleDesc": "满30-20 全渠道通用",
+        "status": "AVAILABLE",
+        "title": "益丰精选 满30-20 1",
+        "type": "ALL"
+    },
+    {
+        "beginDate": 1509033601000,
+        "code": "301382552066",
+        "couponMoney": 20,
+        "createDate": 1509093462000,
+        "desc": "满30-20 说明",
+        "expireDate": 1512057599000,
+        "ruleDesc": "YFJX_5742 使用",
+        "status": "AVAILABLE",
+        "title": "满30-20 名称",
+        "type": "ALL"
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 6. 【券】商品可领券  
+
+- **接口描述**  
+商品信息查询可领取的券  
+
+- **接口信息**  
+> **接口地址：** /coupon/couponCaseService/listCouponCaseByGoods   
+> **提交方式：** POST  
+> **方法名称：** listCouponCaseByGoods  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerCode|string|是|会员编号|
+|channelPath|string|YFJX,YFJX_CS,YFJX_CSZD|渠道路径|
+|goodsCode|string|是|商品编码|
+|page|object|是|分页对象|
+|page.page|int|是|当前页|
+|page.pageNum|int|是|每页大小|
+|sortList|array|是|[""],可为null|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|availableCouponStatus|string|AVAILABLE,UNAVAILABLE,NONE|可用券状态 可领 已领 已领完|
+|availableNumber|number||可用数量|
+|couponDesc|string||券面描述|
+|couponMoney|number||券面值|
+|couponName|string||方案名称|
+|couponRuleDesc|string||券规则描述|
+|couponTakeStartDate|string||券领取开始时间|
+|couponTakeStopDate|string||券领取结束时间|
+|couponTitle|string||券面名称|
+|couponType|string||券类型|
+|maxValidityDate|number||券有效期|
+|maxValidityDateType|string||时间类型|
+|takeEffectType|string||生效方式|
+|templateStartDate|number||模板生效开始时间|
+|templateStopDate|number||模板生效结束时间|
+|useCondition|string||满减条件|
+|uuid|string||券模板编码|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"customerCode":"3daa789d5165408f84fa706a5fd24c64",
+	"channelPath":"YFJX,YFJX_CS,YFJX_5742",
+	"goodsCode":"1000013",
+	"page":{
+		"page":1,
+		"pageNum":10
+	},
+	"sortList":["COUPON_AMOUNT_DESC","CRT_TIME_DESC"]
+}
+```
+
+返回结果
+```json
+[
+    {
+        "availableCouponStatus": "AVAILABLE",
+        "availableNumber": 0,
+        "couponDesc": "满30-20 说明",
+        "couponMoney": 20,
+        "couponName": "益丰精选券模版2",
+        "couponRuleDesc": "YFJX_5742 使用",
+        "couponTakeStartDate": 1509033601000,
+        "couponTakeStopDate": 1512057599000,
+        "couponTitle": "满30-20 名称",
+        "couponType": "ALL",
+        "maxValidityDate": 3,
+        "maxValidityDateType": "MONTH",
+        "takeEffectType": "RIGHTNOW",
+        "templateStartDate": 1509033601000,
+        "templateStopDate": 1512057599000,
+        "useCondition": 30,
+        "uuid": "59f2f0454f89b21ae9ded24e"
+    },
+    {
+        "availableCouponStatus": "AVAILABLE",
+        "availableNumber": 0,
+        "couponDesc": "益丰精选 满30-20",
+        "couponMoney": 20,
+        "couponName": "益丰精选券模版1",
+        "couponRuleDesc": "满30-20 全渠道通用",
+        "couponTakeStartDate": 1509033601000,
+        "couponTakeStopDate": 1511971199000,
+        "couponTitle": "益丰精选 满30-20 1",
+        "couponType": "ALL",
+        "maxValidityDate": 3,
+        "maxValidityDateType": "MONTH",
+        "takeEffectType": "RIGHTNOW",
+        "templateStartDate": 1509033601000,
+        "templateStopDate": 1512057599000,
+        "useCondition": 32,
+        "uuid": "59f2a8e84f89b21ae9ded24d"
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 7. 【券】商品可用券  
+
+- **接口描述**  
+商品信息查询可用券  
+
+- **接口信息**  
+> **接口地址：** /coupon/myCouponService/listCouponPageByGoods  
+> **提交方式：** POST  
+> **方法名称：** listCouponPageByGoods  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerCode|string|是|会员编号|
+|channelPath|string|YFJX,YFJX_CS,YFJX_CSZD|渠道路径|
+|goodsCode|string|是|商品编码|
+|page|object|是|分页对象|
+|page.page|int|是|当前页|
+|page.pageNum|int|是|每页大小|
+|sortList|array|是|[""],可为null|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|beginDate|number|1509033601000|开始日期|
+|expireDate|number|1512057599000|过期日期|
+|code|string|300135566398|券编码|
+|couponMoney|number|20|券值|
+|createDate|number|1509075398000|创建时间|
+|title|string|益丰精选 满30-20|标题|
+|type|string|ALL|全部|
+|ruleDesc|string|满30-20 全渠道通用|券规则描述|
+|desc|string|益丰精选 满30-20|券描述|
+|status|string|AVAILABLE,USED,EXPIRED,LOCKED|状态 待用 已用 过期 锁定|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"customerCode":"3daa789d5165408f84fa706a5fd24c64",
+	"channelPath":"YFJX,YFJX_CS,YFJX_5742",
+	"goodsCode":"1000013",
+	"page":{
+		"page":1,
+		"pageNum":10
+	},
+	"sortList":["COUPON_AMOUNT_DESC","CRT_TIME_DESC"]
+}
+```
+
+返回结果
+```json
+[
+    {
+        "beginDate": 1509033601000,
+        "code": "300135566398",
+        "couponMoney": 20,
+        "createDate": 1509075398000,
+        "desc": "益丰精选 满30-20",
+        "expireDate": 1512057599000,
+        "ruleDesc": "满30-20 全渠道通用",
+        "status": "AVAILABLE",
+        "title": "益丰精选 满30-20 1",
+        "type": "ALL"
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+---  
+ 
+## 【silk-road】-rest 益丰精选服务  
+
+### 1. 【短信】发送短信  
+
+- **接口描述**  
+发送短信  
+
+- **接口信息**  
+> **接口地址：** /user/userService/sendCode  
+> **提交方式：** POST  
+> **方法名称：** sendCode  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|phone|string|是|手机号码|
 
 
 - **响应结果**
@@ -3296,16 +4321,100 @@ drugCategory
 
 入参示例:  
 ```json
-
+{
+	"phone":"15116451260"
+}
 ```
 
 返回结果
 ```json
-
+null
 ```
 
  **NOTICE**  
 无
 
- 
----
+---  
+
+
+### 2. 【用户】绑定或者注册会员  
+
+- **接口描述**  
+发送短信  
+
+- **接口信息**  
+> **接口地址：** /user/userService/login  
+> **提交方式：** POST  
+> **方法名称：** login  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|code|string|是|验证码|
+|user|object|是|注册绑定用户对象|
+|user.phone|string|是|手机号码|
+|user.openId|string|是|微信openId|
+|user.unionId|string|是|微信unionId|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|customerCode|string||会员编号|
+|cardCode|string||会员卡号|
+|phone|string||手机号码|
+|openId|string||会员微信openId|
+|unionId|string||会员微信unionId|
+|name|string||姓名 未知相当于空|
+|state|string|EFC|正常:EFC 冻结:FST 冻结:CNL|
+|sex|string||性别|
+|birthday|string||出生日期|
+|age|int||年龄|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"user":{
+		"phone":"15116451260",
+		"openId":"o3F_q0FWoE-wQFRvvbDTtx88XsGU",
+		"unionId":"oXZ0xwUEgUFZDfegCyjAd17_CYf0"
+	},
+	"code":"124625"
+}
+```
+
+返回结果
+```json
+{
+    "cardCode": "M171031142852489",
+    "customerCode": "ac1bf6b19ddf40619b9a4fc54d428153",
+    "name": "未知",
+    "openId": "o3F_q0FWoE-wQFRvvbDTtx88XsGU",
+    "phone": "15116451260",
+    "state": "EFC",
+    "unionId": "oXZ0xwUEgUFZDfegCyjAd17_CYf0"
+}
+```
+
+ **NOTICE**  
+无
+
+--- 
