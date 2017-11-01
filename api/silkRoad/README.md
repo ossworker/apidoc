@@ -1345,8 +1345,127 @@ drugCategory
 
 ---
 
+### 11. 【商品】查询可用库存
 
-### 10. 【物流】根据渠道查询可用物流方式
+- **接口描述**  
+渠道编码和商品列表查询可用库存
+
+- **接口信息**  
+> **接口地址：** /openx/query/goodsQueryService/listUsableStock    
+> **提交方式：** POST  
+> **方法名称：** listUsableStock  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channelCode|string|是|门店渠道 YFJX_5742|
+|cityChannelCode|string|是|城市渠道/价格渠道 YFJX_CS|
+|goodsCodeList|array|是|[""]|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|[i].channelCode|string|XINGREN_6369|渠道编码|
+|[i].channelGoodsCode|string|1011252|渠道商品编码|
+|[i].channelGoodsName|string|奥美拉唑肠溶胶囊|渠道商品名称|
+|[i].channelGoodsStatus|string|ON_LINE|渠道商品状态|
+|[i].channelPrice|number|17.8|渠道商品价格|
+|[i].commonName|string|奥美拉唑肠溶胶囊|通用名|
+|[i].drugCategory|string|Y01010301|类目|
+|[i].effect|string|适应用于胃溃疡|功能主治|
+|[i].goodsCode|string|1011252|商品编码|
+|[i].goodsName|string|奥美拉唑肠溶胶囊|商品名称|
+|[i].goodsMark|string||商品角标|
+|[i].guidePrice|number|17.8|原价|
+|[i].imageUrl|array||商品图片|
+|[i].stock|number|0|商品库存|
+|[i].manufacturer|string||生产厂家|
+|[i].recommendIndex|int||推荐指数|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channelCode":"YFJX_5742",
+	"cityChannelCode":"YFJX_CS",
+	"goodsCodeList":["1000013","1000001"]
+}
+```
+
+返回结果
+```json
+[
+    {
+        "channelCode": "YFJX_CS",
+        "channelGoodsCode": "YF1000001",
+        "channelGoodsName": "大写的药品名",
+        "channelGoodsStatus": "ON_LINE",
+        "channelPrice": 3.6,
+        "commonName": "阿莫西林分散片",
+        "drugCategory": "1",
+        "effect": "抗生素，其抗菌谱与氨苄青霉素相同，\r\n对敏感的革兰氏阳性球菌和杆菌及革兰氏阴性菌均有明显的抑制作用。适用于敏感菌所致呼吸道感染、尿路感染、胃肠道感染、败血症、皮肤及软组织感染等症。",
+        "goodsCode": "1000001",
+        "goodsMark": "角标66",
+        "goodsName": "阿莫西林分散片 (阿林新) 0.25克*12片 石药集团中诺药业(石家庄)有限公",
+        "guidePrice": 3.8,
+        "imageUrl": [
+            "https://img.yifengx.com/product/1000001/1000001a1.jpg!f120",
+            "https://img.yifengx.com/product/1000001/1000001a2.jpg!f120",
+            "https://img.yifengx.com/product/1000001/1000001a3.jpg!f120"
+        ],
+        "manufacturer": "石药集团中诺药业(石家庄)有限公司(石药集团欧意药业有限公司",
+        "recommendIndex": 2,
+        "stock": 989
+    },
+    {
+        "channelCode": "YFJX_CS",
+        "channelGoodsCode": "YF10000013",
+        "channelGoodsName": "小写的药品名",
+        "channelGoodsStatus": "ON_LINE",
+        "channelPrice": 13.3,
+        "commonName": "阿莫西林胶囊",
+        "drugCategory": "Y01010101",
+        "effect": "阿莫西林适用于敏感菌(不产β内酰胺酶菌株)所致的下列感染：1. 溶血链球菌、肺炎链球菌、葡萄球菌或流感嗜血杆菌所致中耳炎、鼻窦炎、咽炎、扁桃体炎等上呼吸道感染。2. 大肠埃希菌、奇异变形杆菌或粪肠球菌所致的泌尿生殖道感染。3. 溶血链球菌、葡萄球菌或大肠埃希菌所致的皮肤软组织感染。4. 溶血链球菌、肺炎链球菌、葡萄球菌或流感嗜血杆菌所致急性支气管炎、肺炎等下呼吸道感染。5. 急性单纯性淋病。6. 本品尚可用于治疗伤寒、伤寒带菌者及钩端螺旋体病;阿莫西林亦可与克拉霉素、兰索拉唑三联用药根除胃、十二指肠幽门螺杆菌，降低消化道溃疡复发率。",
+        "goodsCode": "1000013",
+        "goodsName": "阿莫西林胶囊 0.25克*24粒 海口奇力制药股份有限公司",
+        "guidePrice": 2.5,
+        "imageUrl": [
+            "https://img.yifengx.com/product/1000013/1000013a1.jpg!f120",
+            "https://img.yifengx.com/product/1000013/1000013a2.jpg!f120",
+            "https://img.yifengx.com/product/1000013/1000013a3.jpg!f120"
+        ],
+        "manufacturer": "海口奇力制药股份有限公司",
+        "stock": 985
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+---
+
+
+### 12. 【物流】根据渠道查询可用物流方式
 
 - **接口描述**  
 根据收发城市信息及渠道信息、获取可用的物流信息  规则：①、在未拆单的情况下，直接去load可用物流信息。 ②、拆单情况下获取可用物流取2个城市的并集信息中价格最低物流。
@@ -1430,7 +1549,7 @@ drugCategory
 ---
 
 
-### 11. 【物流】订单编号查询物流节点信息
+### 13. 【物流】订单编号查询物流节点信息
 
 - **接口描述**  
 订单编号查询物流跟踪信息
@@ -1562,7 +1681,7 @@ drugCategory
 ---
 
 
-### 12. 【物流】查询物流收货人信息
+### 14. 【物流】查询物流收货人信息
 
 - **接口描述**  
 订单编号查询收货人信息
@@ -1647,7 +1766,7 @@ drugCategory
 
 
 
-### 13. 【订单】统计订单数目
+### 15. 【订单】统计订单数目
 
 - **接口描述**  
 根据顶级渠道和用户编码查询各状态下的订单数目
@@ -1740,7 +1859,7 @@ drugCategory
  
 ---
 
-### 14. 【订单】查询所有订单
+### 16. 【订单】查询所有订单
 
 - **接口描述**  
 查询所有订单
@@ -2201,7 +2320,7 @@ drugCategory
 ---
 
 
-### 15. 【订单】查询订单状态下订单
+### 17. 【订单】查询订单状态下订单
 
 - **接口描述**  
 查询各状态下订单
@@ -2633,7 +2752,7 @@ drugCategory
  
 ---
 
-### 16. 【订单】查询订单详情
+### 18. 【订单】查询订单详情
 
 - **接口描述**  
 查询订单详情
@@ -4417,4 +4536,66 @@ null
  **NOTICE**  
 无
 
---- 
+---  
+
+### 3. 【公众号】jscode转session  
+
+- **接口描述**  
+小程序jscode 转换 session 获取 openId 和 unionId  
+
+- **接口信息**  
+> **接口地址：** /wechat/wechatService/jscode2session  
+> **提交方式：** POST  
+> **方法名称：** jscode2session  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|code|string|是|小程序login 获取jscode|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|openId|string||会员微信openId|
+|unionId|string||会员微信unionId|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"code":"021cgu6d0rBeCv1Ulj4d0JFk6d0cgu6z"
+}
+```
+
+返回结果
+```json
+{
+    "openId": "o3F_q0FWoE-wQFRvvbDTtx88XsGU",
+    "unionId": "oXZ0xwUEgUFZDfegCyjAd17_CYf0"
+}
+```
+
+ **NOTICE**  
+无
+
+
