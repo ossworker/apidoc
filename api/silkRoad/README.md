@@ -15,18 +15,21 @@ version 1.0.0
 |开发环境|query|http://192.168.7.67:9060|http://192.168.7.41:9020/proxy|
 |开发环境|trade|http://192.168.7.68:9020|http://192.168.7.41:9020/proxy|
 |开发环境|coupon|http://192.167.7.62:8081|http://192.168.7.41:9020/proxy|
+|开发环境|customer|http://192.168.7.40:8090|http://192.168.7.41:9020/proxy|
 |  |  |  |  |
-|测试环境|silk-road|||
-|测试环境|member-open|||
-|测试环境|query|||
-|测试环境|trade|||
-|测试环境|coupon|111||
+|测试环境|silk-road|http://silk-road-te.yifengx.com|http://silk-road-te.yifengx.com/rest|
+|测试环境|member-open|http://member-open-te.yifengx.com|http://silk-road-te.yifengx.com/proxy|
+|测试环境|query|http://ecp-query-te.yifengx.com|http://silk-road-te.yifengx.com/proxy|
+|测试环境|trade|http://ecp-trade-te.yifengx.com|http://silk-road-te.yifengx.com/proxy|
+|测试环境|coupon|http://coupon-te.yifengx.com|http://silk-road-te.yifengx.com/proxy|
+|测试环境|customer|http://customer-te.yifengx.com|http://silk-road-te.yifengx.com/proxy|
 |  |  |  |  |
 |生产环境|silk-road|||
 |生产环境|member-open|||
 |生产环境|query|||
 |生产环境|trade|||
 |生产环境|coupon|111|111|
+|生产环境|customer|111|111|
 
 
 ---
@@ -747,7 +750,7 @@ version 1.0.0
 
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
-|channelCode|string|是|顶级渠道编码|
+|channelCode|string|是|城市渠道编码|
 |range|number|是|周边距离单位m|
 |location|object|是|经纬度|
 |location.longitude|number|是|经度|
@@ -4598,4 +4601,111 @@ null
  **NOTICE**  
 无
 
+---
 
+### 4. 【券】获取新人券模版   
+
+- **接口描述**  
+获取新人券模版    
+
+- **接口信息**  
+> **接口地址：** /coupon/couponService/getCouponTemplateForNewUser  
+> **提交方式：** POST  
+> **方法名称：** getCouponTemplateForNewUser  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerCode|string|是|会员编号|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|availableCouponStatus|string|AVAILABLE,UNAVAILABLE,NONE|可用券状态 可领 已领 已领完|
+|availableNumber|number||可用数量|
+|couponDesc|string||券面描述|
+|couponMoney|number||券面值|
+|couponName|string||方案名称|
+|couponRuleDesc|string||券规则描述|
+|couponTakeStartDate|string||券领取开始时间|
+|couponTakeStopDate|string||券领取结束时间|
+|couponTitle|string||券面名称|
+|couponType|string||券类型|
+|maxValidityDate|number||券有效期|
+|maxValidityDateType|string||时间类型|
+|scopeList|string||券适用范围|
+|takeEffectType|string||生效方式|
+|templateStartDate|number||模板生效开始时间|
+|templateStopDate|number||模板生效结束时间|
+|useCondition|string||满减条件|
+|uuid|string||券模板编码|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"customerCode":"3daa789d5165408f84fa706a5fd24c64"
+}
+```
+
+返回结果
+```json
+[
+    {
+        "availableCouponStatus": "AVAILABLE",
+        "availableNumber": 0,
+        "couponDesc": "新人券 50-20 desc",
+        "couponMoney": 20,
+        "couponName": "益丰精选新人券",
+        "couponRuleDesc": "满50-20 益丰精选新人",
+        "couponTakeStartDate": 1509552001000,
+        "couponTakeStopDate": 1512057599000,
+        "couponTitle": "新人券 50-20",
+        "couponType": "ALL",
+        "templateStartDate": 1509552001000,
+        "templateStopDate": 1512057599000,
+        "useCondition": 50,
+        "uuid": "59fa596b4f89b21ae9ded250"
+    },
+    {
+        "availableCouponStatus": "AVAILABLE",
+        "availableNumber": 0,
+        "couponDesc": "新人券 50-20 desc",
+        "couponMoney": 20,
+        "couponName": "益丰精选新人券",
+        "couponRuleDesc": "满50-20 益丰精选新人",
+        "couponTakeStartDate": 1509552001000,
+        "couponTakeStopDate": 1512057599000,
+        "couponTitle": "新人券 50-20",
+        "couponType": "ALL",
+        "templateStartDate": 1509552001000,
+        "templateStopDate": 1512057599000,
+        "useCondition": 50,
+        "uuid": "59fa59564f89b21ae9ded24f"
+    }
+]
+```
+
+ **NOTICE**  
+无
