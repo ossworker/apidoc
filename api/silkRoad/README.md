@@ -4739,10 +4739,10 @@ null
 
 ---
 
-### 4. 【券】获取新人券模版   
+### 4. 【券】获取新人券模版ID   
 
 - **接口描述**  
-获取新人券模版    
+获取新人券模版ID    
 
 - **接口信息**  
 > **接口地址：** /coupon/couponService/getCouponTemplateForNewUser  
@@ -4764,24 +4764,7 @@ null
 
 |名称|类型|示例值|描述|
 |:----|:----:|:----|:----|
-|availableCouponStatus|string|AVAILABLE,UNAVAILABLE,NONE|可用券状态 可领 已领 已领完|
-|availableNumber|number||可用数量|
-|couponDesc|string||券面描述|
-|couponMoney|number||券面值|
-|couponName|string||方案名称|
-|couponRuleDesc|string||券规则描述|
-|couponTakeStartDate|string||券领取开始时间|
-|couponTakeStopDate|string||券领取结束时间|
-|couponTitle|string||券面名称|
-|couponType|string||券类型|
-|maxValidityDate|number||券有效期|
-|maxValidityDateType|string||时间类型|
-|scopeList|string||券适用范围|
-|takeEffectType|string||生效方式|
-|templateStartDate|number||模板生效开始时间|
-|templateStopDate|number||模板生效结束时间|
-|useCondition|string||满减条件|
-|uuid|string||券模板编码|
+||array|["59fa596b4f89b21ae9ded250","59fa59564f89b21ae9ded24f","59a7b8da4742236bf5368000"]|券模版ID|
 
 
 
@@ -4807,40 +4790,7 @@ null
 
 返回结果
 ```json
-[
-    {
-        "availableCouponStatus": "AVAILABLE",
-        "availableNumber": 0,
-        "couponDesc": "新人券 50-20 desc",
-        "couponMoney": 20,
-        "couponName": "益丰精选新人券",
-        "couponRuleDesc": "满50-20 益丰精选新人",
-        "couponTakeStartDate": 1509552001000,
-        "couponTakeStopDate": 1512057599000,
-        "couponTitle": "新人券 50-20",
-        "couponType": "ALL",
-        "templateStartDate": 1509552001000,
-        "templateStopDate": 1512057599000,
-        "useCondition": 50,
-        "uuid": "59fa596b4f89b21ae9ded250"
-    },
-    {
-        "availableCouponStatus": "AVAILABLE",
-        "availableNumber": 0,
-        "couponDesc": "新人券 50-20 desc",
-        "couponMoney": 20,
-        "couponName": "益丰精选新人券",
-        "couponRuleDesc": "满50-20 益丰精选新人",
-        "couponTakeStartDate": 1509552001000,
-        "couponTakeStopDate": 1512057599000,
-        "couponTitle": "新人券 50-20",
-        "couponType": "ALL",
-        "templateStartDate": 1509552001000,
-        "templateStopDate": 1512057599000,
-        "useCondition": 50,
-        "uuid": "59fa59564f89b21ae9ded24f"
-    }
-]
+["59fa596b4f89b21ae9ded250","59fa59564f89b21ae9ded24f","59a7b8da4742236bf5368000"]
 ```
 
  **NOTICE**  
