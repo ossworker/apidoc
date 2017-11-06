@@ -309,13 +309,14 @@ version 1.0.0
 
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
-|customerId|string|是|会员编号|
-|deliverySource|string|是|收货地址来源 顶级渠道名称 YFJX|
-|province|string|是|省编码|
-|city|string|是|市编码|
+|deliveryAddr|object|是|对象|
+|deliveryAddr.customerId|string|是|会员编号|
+|deliveryAddr.deliverySource|string|是|收货地址来源 顶级渠道名称 YFJX|
+|deliveryAddr.province|string|是|省编码|
+|deliveryAddr.city|string|是|市编码|
 |district|string|是|区编码|
-|linkPerson|string|是|联系人姓名|
-|linkPhone|string|是|联系人电话|
+|deliveryAddr.linkPerson|string|是|联系人姓名|
+|deliveryAddr.linkPhone|string|是|联系人电话|
 
 
 - **响应结果**
@@ -369,6 +370,141 @@ version 1.0.0
  
 ---
 
+
+### 4. 【收货地址】删除会员收货地址  
+
+- **接口描述**  
+> 删除会员收货地址
+
+- **接口信息**  
+> **接口地址：** /openx/memberopen/deliveryAddressService/deleteAddress  
+> **提交方式：** POST  
+> **方法名称：** deleteAddress  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|id|string|是|收货人信息id|
+
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||string|3db822fd8dc24cd49e8b2d40bbd3aab2|删除的id|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"id":"3db822fd8dc24cd49e8b2d40bbd3aab2"
+}
+```
+
+返回结果
+```json
+"3db822fd8dc24cd49e8b2d40bbd3aab2"
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 5. 【收货地址】修改会员收货地址  
+
+- **接口描述**  
+> 修改会员收货地址
+
+- **接口信息**  
+> **接口地址：** /openx/memberopen/deliveryAddressService/updateAddress  
+> **提交方式：** POST  
+> **方法名称：** updateAddress  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|deliveryAddr|object|是|对象|
+|deliveryAddr.uuid|string|是|收货人信息id|
+|deliveryAddr.customerId|string|是|会员编号|
+|deliveryAddr.deliverySource|string|是|收货地址来源 顶级渠道名称 YFJX|
+|deliveryAddr.province|string|是|省编码|
+|deliveryAddr.city|string|是|市编码|
+|district|string|是|区编码|
+|deliveryAddr.linkPerson|string|是|联系人姓名|
+|deliveryAddr.linkPhone|string|是|联系人电话|
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"deliveryAddr":{
+		"uuid":"974440810cd049fd8a33f93d7612aece",
+		 "address": "杜鹃路12",
+    	"city": "430100",
+    	"customerId": "647958c21f03445a9bb8fbcadfc82f30",
+    	"deliverySource": "WX",
+    	"district": "430104",
+    	"linkPerson": "张三1111",
+    	"linkPhone": "13725578963",
+    	"province": "430000"
+	}
+   
+}
+```
+
+返回结果
+```json
+
+```
+
+ **NOTICE**  
+无
+
+ 
+---
 
 
 ## 【query】-proxy query服务    
