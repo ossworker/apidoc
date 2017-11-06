@@ -507,6 +507,93 @@ version 1.0.0
 ---
 
 
+### 6. 【收货地址】会员默认收货地址  
+
+- **接口描述**  
+> 会员默认收货地址 
+
+- **接口信息**  
+> **接口地址：** /openx/memberopen/deliveryAddressService/getDefaultAddress  
+> **提交方式：** POST  
+> **方法名称：** getDefaultAddress  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerId|string|是|会员id|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|uuid|string|是|收货人信息id|
+|customerId|string|是|会员编号|
+|deliverySource|string|是|收货地址来源 顶级渠道名称 YFJX|
+|province|string|是|省编码|
+|city|string|是|市编码|
+|district|string|是|区编码|
+|linkPerson|string|是|联系人姓名|
+|linkPhone|string|是|联系人电话|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"customerId":"647958c21f03445a9bb8fbcadfc82f30"
+}
+```
+
+返回结果
+```json
+{
+    "address": "岳麓区hahaha",
+    "city": "430100",
+    "cityName": "长沙市",
+    "createDate": 1505289916000,
+    "customerId": "647958c21f03445a9bb8fbcadfc82f30",
+    "deliverySource": "O2O",
+    "district": "430104",
+    "districtName": "岳麓区",
+    "idCard": "130523197610281210",
+    "isDefault": "1",
+    "latitude": 39.96583,
+    "linkPerson": "xx",
+    "linkPhone": "18075389282",
+    "longitude": 116.391621,
+    "province": "430000",
+    "provinceName": "湖南省",
+    "storeCode": "XINGREN_6369",
+    "streetName": "OTO",
+    "streetNumber": "12343",
+    "uuid": "419338db9358438ab59a7243bed3969c"
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
 ## 【query】-proxy query服务    
 
 ### 1. 【搜索】联想词  
@@ -4536,6 +4623,129 @@ true
 无
 
 ---  
+
+## 【配置中心】-proxy 配置中心服务
+
+### 1. 【查询配置】查询配置  
+
+- **接口描述**  
+> 查询配置  
+
+- **接口信息**  
+> **接口地址：** /conf/apps/conf/ConfManageService/query  
+> **提交方式：** POST  
+> **方法名称：** sendCode  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|appId|string|是|应用id silk-road|
+|stage|string|是|阶段 develop testing product|
+|verNo|string|是|版本 1.0|
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"appId":"silk-road",
+	"stage":"testing",
+	"verNo":"1.0"
+}
+```
+
+返回结果
+```json
+{
+    "appId": "silk-road",
+    "id": "5a0040974a63900a8a2bf788",
+    "items": [
+        {
+            "confId": "5a0040974a63900a8a2bf788",
+            "id": "5a0040974a63900a8a2bf789",
+            "key": "const.couponNewUser",
+            "lastModify": 1509965975000,
+            "value": "59feb37947422372661b142b"
+        },
+        {
+            "confId": "5a0040974a63900a8a2bf788",
+            "id": "5a0040974a63900a8a2bf78f",
+            "key": "const.serverCityCode",
+            "lastModify": 1509965975000,
+            "value": "430100,430200,430300,430400,430500,430600,430700,430800,430900,431000,431100,431200,431300,420100,320100,310100,360000"
+        },
+        {
+            "confId": "5a0040974a63900a8a2bf788",
+            "id": "5a0040974a63900a8a2bf78a",
+            "key": "proxy.rule",
+            "lastModify": 1509965975000,
+            "value": "[{\"pattern\":\"/openx/geohash/GeoService/*\",\"host\":\"http://tss-lbs.yifengx.com\",\"desc\":\"geohash 服务\"},{\"pattern\":\"/openx/memberopen/**\",\"host\":\"http://member-open-te.yifengx.com\",\"desc\":\"member-open\"},{\"pattern\":\"/openx/query/**\",\"host\":\"http://ecp-query-te.yifengx.com\",\"desc\":\"query 查询服务\"},{\"pattern\":\"/openx/trade/**\",\"host\":\"http://ecp-trade-te.yifengx.com\",\"desc\":\"trade 交易服务\"},{\"pattern\":\"/openx/customer/shopcartService/*\",\"host\":\"http://customer-te.yifengx.com\",\"desc\":\"个人中心 购物车\"},{\"pattern\":\"/coupon/**\",\"host\":\"http://coupon-te.yifengx.com\",\"desc\":\"券系统\"},{\"pattern\":\"/lbs/RegionService/**\",\"host\":\"https://lbs.talkyun.com:9981\",\"desc\":\"lbs\"},{\"pattern\":\"/conf/apps/conf/**\",\"host\":\"https://next.yifengx.com\",\"desc\":\"conf 配置中心\"}]"
+        },
+        {
+            "confId": "5a0040974a63900a8a2bf788",
+            "id": "5a0040974a63900a8a2bf78b",
+            "key": "rest.memeberPreServiceUrl",
+            "lastModify": 1509965975000,
+            "remark": "batch import",
+            "value": "http://member-open-te.yifengx.com/openx/"
+        },
+        {
+            "confId": "5a0040974a63900a8a2bf788",
+            "id": "5a0040974a63900a8a2bf78c",
+            "key": "sms.url",
+            "lastModify": 1509965975000,
+            "remark": "batch import",
+            "value": "https://sms-tss.yifengx.com"
+        },
+        {
+            "confId": "5a0040974a63900a8a2bf788",
+            "id": "5a0040974a63900a8a2bf78d",
+            "key": "wechat.appId",
+            "lastModify": 1509965975000,
+            "remark": "batch import",
+            "value": "wx422fef2fa3820229"
+        },
+        {
+            "confId": "5a0040974a63900a8a2bf788",
+            "id": "5a0040974a63900a8a2bf78e",
+            "key": "wechat.appSecret",
+            "lastModify": 1509965975000,
+            "remark": "batch import",
+            "value": "2b6e3ae73b739a783013d7357b43f207"
+        }
+    ],
+    "lastModify": 1509965975000,
+    "revNo": 7,
+    "stage": "testing",
+    "verNo": "1.0"
+}
+```
+
+ **NOTICE**  
+无
+
+--- 
+
  
 ## 【silk-road】-rest 益丰精选服务  
 
@@ -4764,7 +4974,7 @@ null
 
 |名称|类型|示例值|描述|
 |:----|:----:|:----|:----|
-||array|["59fa596b4f89b21ae9ded250","59fa59564f89b21ae9ded24f","59a7b8da4742236bf5368000"]|券模版ID|
+||array|["59fa596b4f89b21ae9ded250"]|券模版ID|
 
 
 
