@@ -3519,7 +3519,7 @@ drugCategory
 |orderRequest.order.invoice.content|string|是|发票内容|
 |orderRequest.couponCodes|array|否|券编码列表[""]|
 |orderRequest.logisticInfo|object|是|物流对象|
-|orderRequest.logisticInfo.deliveryType|string|是|物流类型|
+|orderRequest.logisticInfo.deliveryType|string|是|物流类型 NORMAL:普通快递 SELF_PICK:自提|
 |orderRequest.logisticInfo.receiver|object|是|收货人信息|
 |orderRequest.logisticInfo.receiver.name|string|是|收货人姓名|
 |orderRequest.logisticInfo.receiver.phone|string|是|收货人电话|
@@ -3530,6 +3530,10 @@ drugCategory
 |orderRequest.logisticInfo.receiver.districtCode|string|是|收货人地区编码|
 |orderRequest.logisticInfo.receiver.districtName|string|是|收货人地区名称|
 |orderRequest.logisticInfo.receiver.detailAddress|string|是|收货人详细地址|
+|orderRequest.logisticInfo.receiver.location|object|是|收货人地址经纬度|
+|orderRequest.logisticInfo.receiver.location.latitude|number|是|收货人地址纬度|
+|orderRequest.logisticInfo.receiver.location.longitude|number|是|收货人地址经度|
+
 
 
 - **响应结果**
@@ -3571,7 +3575,11 @@ drugCategory
                 "name": "测试",
                 "phone": "13392460103",
                 "provinceCode": "430000",
-                "provinceName": "湖南省"
+                "provinceName": "湖南省",
+                "location": {
+                    "latitude": 20.12121,
+                    "longitude": 34.890808
+                 }
             }
         },
         "order": {
@@ -3633,7 +3641,7 @@ drugCategory
 ```
 
  **NOTICE**  
-无
+ > 物流类型 deliveryType：SELF_PICK 费用无运费
 
  
 ---
