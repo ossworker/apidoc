@@ -887,6 +887,8 @@ version 1.0.0
  **NOTICE**  
 无
 
+--- 
+
 
 ### 3. 【渠道】 区域编码获取城市渠道 
 
@@ -934,6 +936,78 @@ version 1.0.0
 ```json
 {
 	"channelCode":"YFJX",
+	"regionCode":"430100"
+}
+```
+
+返回结果
+```json
+{
+    "address": "",
+    "cashOnDelivery": false,
+    "channelCode": "YFJX_CS",
+    "customerPickUp": false,
+    "location": {},
+    "name": "益丰精选长沙",
+    "parentCode": "YFJX",
+    "serviceTime": "",
+    "warehouseCode": "VWC6369"
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 3. 【渠道】 区域编码获取b2c渠道 
+
+- **接口描述**  
+根据城市编码获取城市渠道
+
+- **接口信息**  
+> **接口地址：** /openx/query/channelQueryService/getB2cChannelByRegionCode   
+> **提交方式：** POST  
+> **方法名称：** getB2cChannelByRegionCode 
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|topChannelCode|string|是|顶级渠道编码|
+|regionCode|string|是|城市编码 必填|
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|name|string|益丰精选长沙城市渠道|城市渠道名称|
+|channelCode|string|YFJX_CS|城市渠道渠道编码|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"topChannelCode":"YFJX",
 	"regionCode":"430100"
 }
 ```
@@ -1045,6 +1119,100 @@ version 1.0.0
     "status": "ENABLE",
     "type": "OWNED"
 }
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 4. 【渠道】 查询附近渠道列表
+
+- **接口描述**  
+顶级渠道编码 经纬度 范围 过滤渠道
+
+- **接口信息**  
+> **接口地址：** /openx/query/channelQueryService/locateChannelByLocation    
+> **提交方式：** POST  
+> **方法名称：** locateChannelByLocation  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|topChannelCode|string|是|顶级渠道编码|
+|range|number|是|周边距离单位m|
+|location|object|是|经纬度|
+|location.longitude|number|是|经度|
+|location.latitude|number|是|纬度|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|[i].name|string|益丰精选长沙城市渠道|城市渠道名称|
+|[i].channelCode|string|YFJX_CSZD|城市渠道渠道编码|
+|[i].status|string|ENABLE|状态|
+|[i].type|string|OWNED|自营|
+|[i].location|object|{}|经纬度|
+|[i].location.longitude|112.88512|是|经度|
+|[i].location.latitude|28.2267|是|纬度|
+|[i].address|string||地址|
+|[i].cashOnDelivery|boolean|false|货到付款|
+|[i].customerPickUp|boolean|false|自提|
+|[i].remark|string||备注|
+|[i].serviceModel|string||服务模式 O2O B2C|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+    "topChannelCode": "YFJX",
+    "location": {
+        "longitude": "112.88512",
+        "latitude": "28.2267"
+    },
+    "range": "30000"
+}
+```
+
+返回结果
+```json
+[{
+    "address": "益丰精选长沙城市渠道1",
+    "cashOnDelivery": false,
+    "channelCode": "YFJX_CSZD",
+    "customerPickUp": false,
+    "location": {
+        "latitude": 28.2267,
+        "longitude": 112.88512
+    },
+    "name": "益丰精选长沙城市渠道",
+    "parentCode": "YFJX_CS",
+    "remark": "益丰精选长沙城市渠道",
+    "serviceModel": "O2O",
+    "status": "ENABLE",
+    "type": "OWNED"
+}]
 ```
 
  **NOTICE**  

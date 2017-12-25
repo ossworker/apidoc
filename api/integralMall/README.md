@@ -21,7 +21,7 @@ version 1.1.0
 > 通过渠道编码分页查询商品列表
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/goods/integralGoodsService/queryGoods  
+> **接口地址：** {serviceUrl}/rest/goods/integralGoodsService/queryGoods  
 > **提交方式：** POST  
 > **方法名称：** queryGoods 
 
@@ -107,7 +107,7 @@ version 1.1.0
 > 通过渠道编码分页查询商品列表
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/goods/integralGoodsService/queryGoodsDetail  
+> **接口地址：** {serviceUrl}/rest/goods/integralGoodsService/queryGoodsDetail  
 > **提交方式：** POST  
 > **方法名称：** queryGoodsDetail 
 
@@ -191,7 +191,7 @@ version 1.1.0
 > 分页查询券列表 不过滤库存 不实时过滤状态
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/coupon/integralCouponService/queryCoupons  
+> **接口地址：** {serviceUrl}/rest/coupon/integralCouponService/queryCoupons  
 > **提交方式：** POST  
 > **方法名称：** queryCoupons  
 
@@ -339,7 +339,7 @@ version 1.1.0
 > 根据规则id和会员编号查询券详细信息
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/coupon/integralCouponService/queryCouponDetail   
+> **接口地址：** {serviceUrl}/rest/coupon/integralCouponService/queryCouponDetail   
 > **提交方式：** POST  
 > **方法名称：** queryCouponDetail  
 
@@ -424,7 +424,7 @@ version 1.1.0
 > 根据商品编码数量，渠道和会员检查积分和库存
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/order/integralOrderService/calcPointsAndStock  
+> **接口地址：** {serviceUrl}/rest/order/integralOrderService/calcPointsAndStock  
 > **提交方式：** POST,GET  
 > **方法名称：** calcPointsAndStock 
 
@@ -496,7 +496,7 @@ version 1.1.0
 > 创建订单
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/order/integralOrderService/createGoodsOrder  
+> **接口地址：** {serviceUrl}/rest/order/integralOrderService/createGoodsOrder  
 > **提交方式：** POST  
 > **方法名称：** createGoodsOrder 
 
@@ -505,27 +505,26 @@ version 1.1.0
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
 |order|object|是|订单对象|
+|order.topChannelCode|string|是|顶级渠道编码|
 |order.channelCode|string|是|渠道编码|
-|order.channelServiceMode|string|是|服务模式 B2C O2O|
 |order.customerCode|string|是|会员编号|
-|order.deliveryArea|string|否|服务模式B2C 必填 配送区域 COUNTRY：全国；O2O:self:自提|
-|order.deliveryType|string|否|服务模式B2C 必填 配送方式公司 ytoexpress|
 |order.freightAmount|string|否|服务模式B2C 必填 运费|
-|order.orderNote|string|否|订单备注|
+|order.remark|string|否|订单备注|
 |order.goodsList|array|是|订单商品列表|
 |order.goodsList[i].ruleId|string|是|订单商品规则id|
 |order.goodsList[i].quantity|number|是|商品数量|
-|order.contact|object|否|服务模式B2C 收货人信息|
-|order.contact.name|string|是|收货人姓名|
-|order.contact.phone|string|是|收货人手机号码|
-|order.contact.address|object|是|收货人地址|
-|order.contact.address.address|string|是|收货人详细地址|
-|order.contact.address.provinceCode|string|是|收货人地址省编码|
-|order.contact.address.provinceName|string|是|收货人地址省名称|
-|order.contact.address.cityCode|string|是|收货人地址市编码|
-|order.contact.address.cityName|string|是|收货人地址市名称|O2O:
-|order.contact.address.districtCode|string|是|收货人地址区编码|
-|order.contact.address.districtName|string|是|收货人地址区名称|
+|order.logisticInfo|object|是|物流信息|
+|order.logisticInfo.deliveryType|string|是|物流类型NORMAL普通 URGENT加急 REAL_TIME实时 SELF_PICK自提  |
+|order.logisticInfo.name|string|是|收货人姓名|
+|order.logisticInfo.phone|string|是|收货人手机号码|
+|order.logisticInfo|object|是|收货人地址|
+|order.logisticInfo.detailAddress|string|是|收货人详细地址|
+|order.logisticInfo.provinceCode|string|是|收货人地址省编码|
+|order.logisticInfo.provinceName|string|是|收货人地址省名称|
+|order.logisticInfo.cityCode|string|是|收货人地址市编码|
+|order.logisticInfo.cityName|string|是|收货人地址市名称|
+|order.logisticInfo.districtCode|string|是|收货人地址区编码|
+|order.logisticInfo.districtName|string|是|收货人地址区名称|
 
 
 -  **响应结果**
@@ -554,17 +553,15 @@ version 1.1.0
 ```json
 {
 	"order":{
+		"topChannelCode":"JFM",
 		"channelCode":"JFM_6369",
-		"channelServiceMode":"B2C",
 		"customerCode":"647958c21f03445a9bb8fbcadfc82f30",
-		"deliveryArea":"country",
-		"deliveryType":"ytoexpress",
 		"freightAmount":0.00,
-		"contact": {
-            "name": "蒋玲娥",
+		"logisticInfo": {
+			"deliveryType":"NORMAL",
+            "name": "蒋玲娥1",
             "phone": "18673107936",
-            "address": {
-                "address": "中房F联邦",
+                "detailAddress": "中房F联邦",
                 "provinceCode": "430000",
                 "provinceName": "湖南省",
                 "cityCode": "430100",
@@ -575,7 +572,7 @@ version 1.1.0
                     "latitude": 0,
                     "longitude": 0
                 }
-            }
+            
         },
         "goodsList": [
             {
@@ -583,7 +580,7 @@ version 1.1.0
                 "quantity": 1
             }
         ],
-        "orderNote":"222"
+        "remark":"222"
 	}
 }
 ```
@@ -606,7 +603,7 @@ version 1.1.0
 > 创建积分兑券订单（不实际创建订单）
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/order/integralOrderService/createCouponOrder  
+> **接口地址：** {serviceUrl}/rest/order/integralOrderService/createCouponOrder  
 > **提交方式：** POST  
 > **方法名称：** createCouponOrder 
 
@@ -674,15 +671,15 @@ version 1.1.0
 
 ## 历史记录
 
-### 1. 【商品】查询兑换记录 
+### 1. 【兑换列表】查询兑换记录 
 
 - **接口描述**  
-> 通过会员编号和凭证编码查询兑换记录
+> 通过会员编号查询兑换记录
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/exchange/integralExchangeHistoryService/queryCustomerExchangeDataByVoucherNumbers  
+> **接口地址：** {serviceUrl}/rest/history/integralHistoryService/queryHistoryDataPage  
 > **提交方式：** POST  
-> **方法名称：** queryCustomerExchangeDataByVoucherNumbers 
+> **方法名称：** queryHistoryDataPage 
 
 
 - **请求参数**
@@ -690,7 +687,8 @@ version 1.1.0
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
 |customerCode|string|是|会员编号|
-|voucherNumbers[i]|string|是|订单编号或者券编号|
+|pageNo|int|是|页码|
+|pageSize|int|是|每页大小|
 
 
 -  **响应结果** 
@@ -700,7 +698,14 @@ version 1.1.0
 
 |名称|类型|示例值|描述|
 |:----|:----:|:----|:----|
-||string|true|正常的返回结果|
+|[i].channelCode|string||渠道编号|
+|[i].costMoney|number||消耗金钱|
+|[i].costPoints|number||消耗积分|
+|[i].createTime|number||创建时间|
+|[i].exchangeType|string|EXCHANGE_COUPON,EXCHANGE_COUPON,PRIZE_GOODS,PRIZE_COUPON,PRIZE_POINTS,PRIZE_VIRTUAL|兑换类型|
+|[i].id|string||历史记录id|
+|[i].quantity|number|1|数目|
+|[i].voucherumber|string|||
 
 
  异常
@@ -718,10 +723,9 @@ version 1.1.0
 入参示例: 
 ```json
 {
-	"customerCode":"647958c21f03445a9bb8fbcadfc82f30",
-	"voucherNumbers":[
-		"JFM20170815636903100001"
-		]
+	"pageNo":1,
+	"pageSize":10,
+	"customerCode":"647958c21f03445a9bb8fbcadfc82f30"
 }
 ```
 
@@ -730,13 +734,103 @@ version 1.1.0
 [
     {
         "channelCode": "JFM_6369",
-        "code": "1000971",
-        "createTime": 1502792807000,
-        "points": 101,
-        "price": 7.5,
+        "costMoney": 0,
+        "costPoints": 30,
+        "createTime": 1503126770000,
+        "exchangeType": "EXCHANGE_COUPON",
+        "id": "5997e4f16b46692a059e2b20",
         "quantity": 1,
-        "ruleType": 0,
-        "voucherumber": "JFM20170815636903100001"
+        "voucherumber": "309128139662"
+    },
+    {
+        "channelCode": "JFM_6369",
+        "costMoney": 0,
+        "costPoints": 30,
+        "createTime": 1503125833000,
+        "exchangeType": "EXCHANGE_COUPON",
+        "id": "5997e1496b46692a059e2b1f",
+        "quantity": 1,
+        "voucherumber": "307658905047"
+    },
+    {
+        "channelCode": "JFM_5857",
+        "costMoney": 0,
+        "costPoints": 30,
+        "createTime": 1503115630000,
+        "exchangeType": "EXCHANGE_COUPON",
+        "id": "5997b96dcff77321d8d4fd85",
+        "quantity": 1,
+        "voucherumber": "307658905046"
+    },
+    {
+        "channelCode": "JFM_5857",
+        "costMoney": 0,
+        "costPoints": 30,
+        "createTime": 1503115403000,
+        "exchangeType": "EXCHANGE_COUPON",
+        "id": "5997b88bcff77321d8d4fd84",
+        "quantity": 1,
+        "voucherumber": "304702931525"
+    },
+    {
+        "channelCode": "JFM_6369",
+        "costMoney": 0.1,
+        "costPoints": 5,
+        "createTime": 1503113414000,
+        "exchangeType": "EXCHANGE_GOODS",
+        "id": "5997b0c56b46694c6ec17c52",
+        "quantity": 1,
+        "voucherumber": "JFM20170819636903100008"
+    },
+    {
+        "channelCode": "JFM_6369",
+        "costMoney": 0.1,
+        "costPoints": 5,
+        "createTime": 1503112666000,
+        "exchangeType": "EXCHANGE_GOODS",
+        "id": "5997add96b46694c6ec17c51",
+        "quantity": 1,
+        "voucherumber": "JFM20170819636903100007"
+    },
+    {
+        "channelCode": "JFM_6369",
+        "costMoney": 0.1,
+        "costPoints": 5,
+        "createTime": 1503106924000,
+        "exchangeType": "EXCHANGE_GOODS",
+        "id": "5997976b6b46694c6ec17c50",
+        "quantity": 1,
+        "voucherumber": "JFM20170819636903100006"
+    },
+    {
+        "channelCode": "JFM_6369",
+        "costMoney": 2,
+        "costPoints": 9,
+        "createTime": 1502939169000,
+        "exchangeType": "EXCHANGE_GOODS",
+        "id": "599508216b4669362978a5ff",
+        "quantity": 1,
+        "voucherumber": "JFM20170817636903100001"
+    },
+    {
+        "channelCode": "JFM_6369",
+        "costMoney": 2,
+        "costPoints": 9,
+        "createTime": 1502879636000,
+        "exchangeType": "EXCHANGE_GOODS",
+        "id": "59941f936b4669362978a5fe",
+        "quantity": 1,
+        "voucherumber": "JFM20170816636903100006"
+    },
+    {
+        "channelCode": "JFM_6369",
+        "costMoney": 2,
+        "costPoints": 9,
+        "createTime": 1502872547000,
+        "exchangeType": "EXCHANGE_GOODS",
+        "id": "5993f578cff7732cd895b6be",
+        "quantity": 1,
+        "voucherumber": "JFM20170816636903100005"
     }
 ]
 ```
@@ -748,15 +842,15 @@ version 1.1.0
 ---
 
 
-### 2. 【券】查询兑换记录 
+### 2. 【兑换详情】查询兑换记录 
 
 - **接口描述**  
 > 通过会员编号查询券兑换记录
 
 - **接口信息**  
-> **接口地址：** {serviceUrl}/exchange/integralExchangeHistoryService/queryCouponExchangeHistory  
+> **接口地址：** {serviceUrl}/rest/history/integralHistoryService/queryHistoryDetail  
 > **提交方式：** POST  
-> **方法名称：** queryCouponExchangeHistory  
+> **方法名称：** queryHistoryDetail  
 
 
 - **请求参数**
@@ -764,8 +858,7 @@ version 1.1.0
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
 |customerCode|string|是|会员编号|
-|page|int|是|当前页|
-|size|int|是|每页大小|
+|id|string|是|兑换记录id|
 
 
 
@@ -857,3 +950,210 @@ version 1.1.0
 ---
 
 
+## 活动
+
+### 1. 【抽奖】抽奖活动查询 
+
+- **接口描述**  
+> 通过活动id查抽奖活动
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/rest/activity/lotteryService/queryLottery   
+> **提交方式：** POST  
+> **方法名称：** queryLottery 
+
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|actId|string|否|不填写则为最新活动|
+
+
+-  **响应结果** 
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|actId|string||活动id|
+|actName|string||活动名称|
+|actDesc|string||活动描述|
+|actType|string||NINE_GRID九宫格|
+|costPoints|number||消耗积分/次|
+|limitNum|number||限制次数|
+|limitType|string||限制类别 DAY,MONTH,ALL|
+|createTime|number||创建时间|
+|prizeList[i].id|string||奖品id|
+|prizeList[i].imgUrl|string||奖品图片|
+|prizeList[i].prizeType|string|PRIZE_GOODS,PRIZE_COUPON,PRIZE_POINTS,PRIZE_VIRTUAL|奖品类型|
+|prizeList[i].prizeName|string||奖品名称|
+|prizeList[i].prizeDesc|string||奖品描述|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+{
+	"actId":null
+}
+```
+
+返回结果
+```json
+{
+    "actDesc": "1.送阿的房价阿凡达啊飞 \n 2.Daod fad fda aldfld ",
+    "actId": "5a39bc106b46692b454eda35",
+    "actName": "九宫格抽奖活动",
+    "actType": "NINE_GRID",
+    "costPoints": 5,
+    "createTime": 1510329600000,
+    "endTime": 1514649540000,
+    "limitNum": 3,
+    "limitType": "DAY",
+    "prizeList": [
+        {
+            "id": "11111",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品1描述",
+            "prizeName": "奖品1",
+            "prizeType": "PRIZE_GOODS"
+        },
+        {
+            "id": "22222",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品2描述",
+            "prizeName": "奖品2",
+            "prizeType": "PRIZE_COUPON"
+        },
+        {
+            "id": "33333",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品3描述",
+            "prizeName": "奖品3",
+            "prizeType": "PRIZE_POINTS",
+            "prizeValue": 10
+        },
+        {
+            "id": "44444",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品4描述",
+            "prizeName": "奖品4",
+            "prizeType": "PRIZE_GOODS"
+        },
+        {
+            "id": "55555",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品5描述",
+            "prizeName": "谢谢参与",
+            "prizeType": "PRIZE_SYSTEM"
+        },
+        {
+            "id": "66666",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品6描述",
+            "prizeName": "奖品6",
+            "prizeType": "PRIZE_GOODS"
+        },
+        {
+            "id": "77777",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品5描述",
+            "prizeName": "奖品5",
+            "prizeType": "PRIZE_VIRTUAL"
+        },
+        {
+            "id": "88888",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品8描述",
+            "prizeName": "谢谢参与",
+            "prizeType": "PRIZE_SYSTEM"
+        }
+    ],
+    "startTime": 1510329600000
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 2. 【抽奖】抽奖 
+
+- **接口描述**  
+> 会员抽奖
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/rest/activity/lotteryService/lottery   
+> **提交方式：** POST  
+> **方法名称：** lottery 
+
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|actId|string|是|活动id|
+|customerCode|string|是|会员编号|
+
+
+-  **响应结果** 
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|prizeId|string||中奖奖品id|
+|winning|boolean||是否中奖|
+|code|string||中奖后返回商品编码/券编码/虚拟商品兑换码|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+{
+	"actId":"5a39bc106b46692b454eda35",
+	"customerCode":"647958c21f03445a9bb8fbcadfc82f30"
+}
+```
+
+返回结果
+```json
+{
+    "code": "ABCDE111111",
+    "prizeId": "44444",
+    "winning": true
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
