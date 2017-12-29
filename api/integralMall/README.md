@@ -987,7 +987,8 @@ version 1.1.0
 |createTime|number||创建时间|
 |prizeList[i].id|string||奖品id|
 |prizeList[i].imgUrl|string||奖品图片|
-|prizeList[i].prizeType|string|PRIZE_GOODS,PRIZE_COUPON,PRIZE_POINTS,PRIZE_VIRTUAL|奖品类型|
+|prizeList[i].prizeType|string|PRIZE_GOODS,PRIZE_COUPON,\n PRIZE_POINTS,PRIZE_VIRTUAL|奖品类型|
+|prizeList[i].prizePrice|number||奖品渠道价|
 |prizeList[i].prizeName|string||奖品名称|
 |prizeList[i].prizeDesc|string||奖品描述|
 
@@ -1150,6 +1151,244 @@ version 1.1.0
     "prizeId": "44444",
     "winning": true
 }
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 3. 【抽奖】中奖商品 完善订单信息  
+
+- **接口描述**  
+> 完善订单信息 收货人信息
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/rest/activity/lotteryService/fillReceiver   
+> **提交方式：** POST  
+> **方法名称：** fillReceiver 
+
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|customerCode|string|是|会员编号|
+|orderCode|string|是|订单编号|
+|logisticInfo.name|string|是|收货人姓名|
+|logisticInfo.phone|string|是|收货人手机号码|
+|logisticInfo|object|是|收货人地址|
+|logisticInfo.detailAddress|string|是|收货人详细地址|
+|logisticInfo.provinceCode|string|是|收货人地址省编码|
+|logisticInfo.provinceName|string|是|收货人地址省名称|
+|logisticInfo.cityCode|string|是|收货人地址市编码|
+|logisticInfo.cityName|string|是|收货人地址市名称|
+|logisticInfo.districtCode|string|是|收货人地址区编码|
+|logisticInfo.districtName|string|是|收货人地址区名称|
+|remark|string|是|订单备注 可为空|
+
+
+-  **响应结果** 
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+{
+    "customerCode": "647958c21f03445a9bb8fbcadfc82f30",
+    "orderCode":"JFM2017122501100034",
+    "logisticInfo": {
+        "name": "蒋玲娥1",
+        "phone": "18673107936",
+        "detailAddress": "中房F联邦",
+        "provinceCode": "430000",
+        "provinceName": "湖南省",
+        "cityCode": "430100",
+        "cityName": "长沙市",
+        "districtName": "岳麓区",
+        "districtCode": "430104",
+        "location": {
+            "latitude": 0,
+            "longitude": 0
+        }
+    },
+    "remark": "周末请不要送货"
+}
+```
+
+返回结果
+```json
+
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 4. 【抽奖】抽奖剩余次数 
+
+- **接口描述**  
+> 会员抽奖
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/rest/activity/lotteryService/lotteryLeftTimes   
+> **提交方式：** POST  
+> **方法名称：** lotteryLeftTimes 
+
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|actId|string|是|活动id|
+|customerCode|string|是|会员编号|
+
+
+-  **响应结果** 
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||number||剩余抽奖次数|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+{
+	"actId":"5a39bc106b46692b454eda35",
+	"customerCode":"647958c21f03445a9bb8fbcadfc82f30"
+}
+```
+
+返回结果
+```json
+1
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+### 5. 【抽奖】最新中奖记录 
+
+- **接口描述**  
+> 会员抽奖
+
+- **接口信息**  
+> **接口地址：** {serviceUrl}/rest/activity/lotteryService/queryLatestWinning   
+> **提交方式：** POST  
+> **方法名称：** queryLatestWinning 
+
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|actId|string|是|活动id|
+|customerCode|string|是|会员编号|
+
+
+-  **响应结果** 
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|[i].name|string||中奖人姓名|
+|[i].lotteryTime|number||中奖时间|
+|[i].prize|object||中奖奖品|
+|[i].prize.id|string||奖品id|
+|[i].prize.imgUrl|string||奖品url|
+|[i].prize.prizeDesc|string||奖品描述|
+|[i].prize.prizeName|string||奖品名称|
+|[i].prize.prizeType|string||奖品类型|
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+| code | String | 11000000 |  |
+| message | String | |异常信息|
+
+
+
+
+- **示例**
+
+入参示例: 
+```json
+{
+	"actId":"5a39bc106b46692b454eda35",
+	"lastTime":null
+}
+```
+
+返回结果
+```json
+[
+    {
+        "lotteryTime": 1514445369811,
+        "name": "张**",
+        "prize": {
+            "id": "77777",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品5描述",
+            "prizeName": "奖品5",
+            "prizeType": "PRIZE_VIRTUAL"
+        }
+    },
+    {
+        "lotteryTime": 1514445540880,
+        "name": "张**",
+        "prize": {
+            "id": "11111",
+            "imgUrl": "http://yf-base.oss-cn-shenzhen.aliyuncs.com/product/1000001/1000001a1.jpg",
+            "prizeDesc": "奖品1描述",
+            "prizeName": "奖品1",
+            "prizePrice": 0.1,
+            "prizeType": "PRIZE_GOODS"
+        }
+    }
+]
 ```
 
  **NOTICE**  
