@@ -4998,8 +4998,10 @@ null
 |code|string|是|验证码|
 |user|object|是|注册绑定用户对象|
 |user.phone|string|是|手机号码|
-|user.openId|string|是|微信openId|
-|user.unionId|string|是|微信unionId|
+|user.openId|string|否|微信openId|
+|user.unionId|string|否|微信unionId|
+|user.comeFrom|string|是|顶级渠道|
+|user.refComeFrom|string|否|MINIPG:小程序 WX 默认WX|
 
 
 - **响应结果**
@@ -5039,9 +5041,10 @@ null
 	"user":{
 		"phone":"15116451260",
 		"openId":"o3F_q0FWoE-wQFRvvbDTtx88XsGU",
-		"unionId":"oXZ0xwUEgUFZDfegCyjAd17_CYf0"
+		"unionId":"oXZ0xwUEgUFZDfegCyjAd17_CYf0",
+		"comeFrom":"WXM"
 	},
-	"code":"124625"
+	"code":"244553"
 }
 ```
 
