@@ -6,6 +6,7 @@
   - [益丰精选](api/silkRoad/)
   - [领券中心](api/couponCenter/)
   - [积分商城](api/integralMall/)
+  - [限时抢购](api/flashSale/)
 
 - o2o-wms
   - [wms对接](api/wms/)   
