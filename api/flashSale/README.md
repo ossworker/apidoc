@@ -69,12 +69,27 @@ version 1.0.0
 
 入参示例:  
 ```json
-
+{
+	"flashGoodsId":"1111",
+	"customerCode":"0c40eae2319842bf802788da69ea8336",
+	"pageNo":1,
+	"pageSize":10
+}
 ```
 
 返回结果
 ```json
-
+[
+    {
+        "comeFrom": "MSM_YFJX",
+        "createTime": 1521684691000,
+        "flashGoodsId": "1111",
+        "id": "5ab310d3cff7732a08649cf9",
+        "starHeadImg": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLTM4hZsQ4qhnAqJpWrbsY4VZBoBzia9NR34E2S8jic8CGHu4XliawiboUqMbmeXgQElRlyoT5OXGn86g/132",
+        "starSource": "0c40eae2319842bf802788da69ea8336",
+        "starTarget": "0c40eae2319842bf802788da69ea8336"
+    }
+]
 ```
 
  **NOTICE**  
@@ -94,19 +109,19 @@ version 1.0.0
 > 新增点亮记录
 
 - **接口信息**  
-> **接口地址：** /openx/memberopen/customerInfoService/getCustomerByRefId  
+> **接口地址：** /star/flashStarService/addGoodsStar    
 > **提交方式：** POST  
-> **方法名称：** getCustomerByRefId 
+> **方法名称：** addGoodsStar 
 
 - **请求参数**
 
 |名称|类型|是否必须|描述|
 |:----|:----:|:----:|:----|
-|comeFrom|string|是|会员来源，对应业务中的顶级渠道|
-|relateFrom|string|是|MINIPG|
-|refId|string|是|关联ID，微信中对应为openid，杏仁为患者ID|
-|refId2|string|否|unionid|
-
+|flashGoodsId|string|是|被点亮商品id|
+|starSource|string|是|点亮操作人|
+|starTarget|string|是|被点亮人|
+|starHeadImg|string|是|点亮人头像地址|
+|comeFrom|string|是|来源  MSM_YFJX, MSM_WXM,|
 
 
 - **响应结果**
@@ -116,14 +131,7 @@ version 1.0.0
 
 |名称|类型|示例值|描述|
 |:----|:----:|:----|:----|
-|customerId|string|598bc0f542559b20787e62e6|会员编号，唯一标识|
-|name|string|李四|会员姓名|
-|cardCode|string|W123456985|卡号|
-|mobile|string|13725579628|手机号码|
-|birthday|number|20174566666|出生日期|
-|sex|string|男,女|性别|
-|status|string|EFC,FST,CNL|状态：正常,冻结,冻结|
-|statusName|string|正常,冻结,冻结|状态名|
+|||||
 
 
 
@@ -141,12 +149,20 @@ version 1.0.0
 
 入参示例:  
 ```json
-
+{
+    "record": {
+        "comeFrom": "MSM_YFJX",
+        "flashGoodsId": "1111",
+        "starHeadImg": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLTM4hZsQ4qhnAqJpWrbsY4VZBoBzia9NR34E2S8jic8CGHu4XliawiboUqMbmeXgQElRlyoT5OXGn86g/132",
+        "starSource": "0c40eae2319842bf802788da69ea8336",
+        "starTarget": "0c40eae2319842bf802788da69ea8336"
+    }
+}
 ```
 
 返回结果
 ```json
-
+null
 ```
 
  **NOTICE**  
@@ -160,8 +176,176 @@ version 1.0.0
 
 ### 1. 【goods】查询抢购活动段  
 
+- **接口描述**  
+> 根据渠道查询时间段
+
+- **接口信息**  
+> **接口地址：** /goods/flashGoodsService/queryActivity    
+> **提交方式：** POST  
+> **方法名称：** queryActivity 
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channel|string|是|渠道 MSM_YFJX|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|activities|array||活动列表|
+|activities[i].flashTimePeriod|int||时间段|
+|activities[i].status|string||状态 COMING:未开始 IN:活动中 FINISH:结束|
+|nowTime|number||当前时间|
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"channel":"MSM_YFJX"
+}
+```
+
+返回结果
+```json
+{
+    "activities": [
+        {
+            "flashTimePeriod": 6,
+            "status": "FINISH"
+        },
+        {
+            "flashTimePeriod": 9,
+            "status": "FINISH"
+        },
+        {
+            "flashTimePeriod": 15,
+            "status": "IN"
+        }
+    ],
+    "nowTime": 1521702396907
+}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
 
 ### 2. 【goods】分页查询某时段抢购商品  
+
+- **接口描述**  
+> 根据渠道查询时间段
+
+- **接口信息**  
+> **接口地址：** /goods/flashGoodsService/queryGoodsPage    
+> **提交方式：** POST  
+> **方法名称：** queryGoodsPage 
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|goods|object|是|商品对象|
+|goods.flashTimePeriod|int|15|秒杀时间段|
+|channel|string|MSM_YFJX|渠道编号|
+|pageNo|int|是|页码 |
+|pageSize|int|是|每页大小|
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|[i].availableStock|int||可用库存|
+|[i].id|string||id|
+|[i].goodsCode|string||商品编码|
+|[i].goodsName|string||商品名称|
+|[i].flashPrice|string||商品秒杀价格|
+|[i].flashTimePeriod|string||时段|
+|[i].flashStartTime|string||开始时间|
+|[i].flashEndTime|string||结束时间|
+|[i].flashLimitMin|string||最小限购|
+|[i].flashLimitMax|string||最多限购|
+|[i].flashPrivilegeNum|string||需要点亮人数|
+|[i].status|string||状态 ENABLE DISABLE|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"goods":{
+		"flashTimePeriod":15
+	},
+	"channel":"MSM_YFJX",
+	"pageNo":1,
+	"pageSize":10
+}
+```
+
+返回结果
+```json
+[
+    {
+        "availableStock": 60,
+        "flashCycleDay": 3,
+        "flashEndTime": 1521993599000,
+        "flashLimitAccount": "THIRD",
+        "flashLimitMax": 5,
+        "flashLimitMin": 2,
+        "flashLimitTimes": 3,
+        "flashPrice": 0.5,
+        "flashPrivilegeNum": 5,
+        "flashStartTime": 1521648013000,
+        "flashTimePeriod": 15,
+        "goodsCode": "1014791",
+        "goodsName": "开塞露 20毫升 安徽新和成皖南药业有",
+        "id": "3333",
+        "status": "ENABLE"
+    }
+]
+```
+
+ **NOTICE**  
+无
+
+ 
+---
 
 
 ### 3. 【goods】查询抢购商品详细信息  

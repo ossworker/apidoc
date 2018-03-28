@@ -1859,7 +1859,80 @@ drugCategory
 ---
 
 
-### 12. 【物流】根据渠道查询可用物流方式
+
+### 12. 【商品】查询商品详情大图
+
+- **接口描述**  
+查询商品详情大图
+
+- **接口信息**  
+> **接口地址：** /openx/query/goodsQueryService/listGoodsDetailImagesUrl    
+> **提交方式：** POST  
+> **方法名称：** listGoodsDetailImagesUrl  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|goodsCode|string|是|门店编号|
+
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"goodsCode":"1003162"
+}
+```
+
+返回结果
+```json
+[
+    "https://img.yifengx.com/product/1003162/detail/d1.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d10.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d11.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d12.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d13.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d2.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d3.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d4.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d5.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d6.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d7.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d8.jpg",
+    "https://img.yifengx.com/product/1003162/detail/d9.jpg"
+]
+```
+
+ **NOTICE**  
+无
+
+---
+
+
+### 13. 【物流】根据渠道查询可用物流方式
 
 - **接口描述**  
 根据收发城市信息及渠道信息、获取可用的物流信息  规则：①、在未拆单的情况下，直接去load可用物流信息。 ②、拆单情况下获取可用物流取2个城市的并集信息中价格最低物流。
@@ -1943,7 +2016,7 @@ drugCategory
 ---
 
 
-### 13. 【物流】订单编号查询物流节点信息
+### 14. 【物流】订单编号查询物流节点信息
 
 - **接口描述**  
 订单编号查询物流跟踪信息
@@ -2075,7 +2148,7 @@ drugCategory
 ---
 
 
-### 14. 【物流】查询物流收货人信息
+### 15. 【物流】查询物流收货人信息
 
 - **接口描述**  
 订单编号查询收货人信息
@@ -2160,7 +2233,7 @@ drugCategory
 
 
 
-### 15. 【订单】统计订单数目
+### 16. 【订单】统计订单数目
 
 - **接口描述**  
 根据顶级渠道和用户编码查询各状态下的订单数目
@@ -2253,7 +2326,7 @@ drugCategory
  
 ---
 
-### 16. 【订单】查询所有订单
+### 17. 【订单】查询所有订单
 
 - **接口描述**  
 查询所有订单
@@ -2714,7 +2787,7 @@ drugCategory
 ---
 
 
-### 17. 【订单】查询订单状态下订单
+### 18. 【订单】查询订单状态下订单
 
 - **接口描述**  
 查询各状态下订单
@@ -3146,7 +3219,7 @@ drugCategory
  
 ---
 
-### 18. 【订单】查询订单详情
+### 19. 【订单】查询订单详情
 
 - **接口描述**  
 查询订单详情
