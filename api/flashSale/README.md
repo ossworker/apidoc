@@ -98,10 +98,71 @@ version 1.0.0
  
 ---
 
+### 2. 【star】查询会员某商品点亮数  
+
+- **接口描述**  
+> 查询会员某商品点亮数  
+
+- **接口信息**  
+> **接口地址：** /star/flashStarService/countGoodsStar  
+> **提交方式：** POST  
+> **方法名称：** countGoodsStar  
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|channel|string|是|渠道编号|
+|flashGoodsIds|array|是|商品id列表|
+|flashGoodsIds[i]|string|是|商品id|
+|customerCode|string|是|会员编号 |
 
 
 
-### 2. 【star】点亮会员某商品
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+|{id}|string||map[id]|
+|{stock}|int||map[value]|
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+    "channel":"",
+    "flashGoodsIds":["0000","3333","1111"],
+    "customerCode":"0c40eae2319842bf802788da69ea8336"
+}
+```
+
+返回结果
+```json
+{"0000":0,"3333":1,"1111":0}
+```
+
+ **NOTICE**  
+无
+
+ 
+---
+
+
+### 3. 【star】点亮会员某商品
 
 
 
@@ -356,5 +417,96 @@ null
 
 ### 1. 【order】创建抢购商品订单  
 
+- **接口描述**  
+> 创建抢购商品订单  
 
+- **接口信息**  
+> **接口地址：** /order/flashOrderService/createOrder    
+> **提交方式：** POST  
+> **方法名称：** createOrder   
+
+- **请求参数**
+
+|名称|类型|是否必须|描述|
+|:----|:----:|:----:|:----|
+|order|object|是|订单数据|
+|order.flashGoodsId|string|是|商品id|
+|order.quantity|int|是|购买数量|
+|order.receiver|object|是|收货人信息|
+|order.receiver.name|string|是|收货人姓名|
+|order.receiver.phone|string|是|收货人手机|
+|order.receiver.provinceCode|string|是|收货人省编码|
+|order.receiver.provinceName|string|是|收货人省名称|
+|order.receiver.cityCode|string|是|收货人市编码|
+|order.receiver.cityName|string|是|收货人市名称|
+|order.receiver.districtCode|string|是|收货人区编码|
+|order.receiver.districtName|string|是|收货人区名称|
+|order.receiver.latitude|number|是|收货人纬度|
+|order.receiver.longitude|number|是|收货人经度|
+|account|object|是|账户相关信息|
+|account.comeFrom|string|是|渠道来源  MSM_YFJX|
+|account.customerCode|string|是|会员编号|
+|account.openId|string|是|微信openId 或者 支付宝uid|
+
+- **响应结果**
+
+
+ 正常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----|:----|
+||string||订单编号|
+
+
+
+
+ 异常
+
+|名称|类型|示例值|描述|
+|:----|:----:|:----:|:----:|
+|code|string|11000000|错误编码|
+|message|string||异常信息|
+
+
+
+
+- **示例**
+
+入参示例:  
+```json
+{
+	"order":{
+		"flashGoodsId":"3333",
+		"quantity":3.0,
+		"receiver":{
+			"cityCode":"430100",
+			"cityName":"长沙市",
+			"districtCode":"430104",
+			"districtName":"岳麓区",
+			"latitude":28.36121,
+			"longitude":112.8179,
+			"name":"张三",
+			"phone":"15116451261",
+			"provinceCode":"430000",
+			"provinceName":"湖南省"
+		}
+	},
+	"account":{
+		"comeFrom":"MSM_YFJX",
+		"customerCode":"ccf2874dc5fb496da4d1e363a7aa67e3",
+		"openId":"o3F_q0FWoE-wQFRvvbDTtx88XsGU"
+	}
+}
+```
+
+返回结果
+```json
+
+```
+
+ **NOTICE**  
+无
+
+ 
+---
 
